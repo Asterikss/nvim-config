@@ -63,10 +63,43 @@ k("n", "N", "Nzz", opts)
 
 -- --terminal--
 k("t", "<Ecs>", "<C-/><C-n>", opts)
-k("t", "<A-[", "<Esc>", opts)
+k("t", "<A-[>", "<Esc>", opts)
 k("t", "<A-l>", "<C-/><C-n>gt", opts)
 k("t", "<A-h>", "<C-/><C-n>gT", opts)
-k("t", "<C-h", "<C-/><C-n><C-w>h", opts)
-k("t", "<C-k", "<C-/><C-n><C-w>k", opts)
-k("t", "<C-u", "<C-/><C-n><C-u>", opts)
+k("t", "<C-h>", "<C-/><C-n><C-w>h", opts)
+k("t", "<C-k>", "<C-/><C-n><C-w>k", opts)
+k("t", "<C-u>", "<C-/><C-n><C-u>", opts)
 
+k("n", "<C-t>", ":tabnew ", opts)
+--k("n", "<C-t>", ":tabnew<Space>", opts)
+-- k("n", "<C-T>", ":tabnew<CR>", opts)
+-- <C-t> has something to do with TagStack
+-- Possible to put for instance .cpp at the end
+-- inoremap <C-t> <Esc>:tabnew<CR>
+
+k("n", "go", "o<Esc>k", opts)
+k("n", "gO", "O<Esc>j", opts)
+-- <A-k> <A-j> does not work. Maby alt first, then...
+
+-- --windows--
+k("n", "<Down>",  ":resize -2<CR>", opts)
+k("n", "<Up>",    ":resize +2<CR>", opts)
+k("n", "<Left>",  ":vertival resize +2<CR>", opts)
+k("n", "<Right>", ":vertival resize -1<CR>", opts)
+
+
+k("n", "<C-h>", "<C-w>h", opts)
+k("n", "<C-j>", "<C-w>j", opts)
+k("n", "<C-k>", "<C-w>k", opts)
+k("n", "<C-l>", "<C-w>l", opts)
+
+k("n", "<A-h>", "gT", opts)
+k("n", "<A-l>", "gt", opts)
+
+k("i", "<C-a>", "<Esc>A", opts)
+k("i", "<C-e>", "<Esc>I", opts)
+
+k("x", "<A-j>", ":m '>+1<CR>gv", opts)
+k("x", "<A-k>", ":m '<-2<CR>gv", opts)
+
+k("v", "p", "\"_dP", opts)
