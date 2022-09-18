@@ -8,4 +8,6 @@ require "mine.options"
 require "mine.plugins"
 require "mine.colorscheme"
 
-vim.cmd[[colorscheme melange]]
+require "mine.conf-plugs.cmp"
+require "mine.conf-plugs.snips"
+
