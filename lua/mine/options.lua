@@ -20,6 +20,8 @@ o.splitright = true
 o.lazyredraw = true				-- not redraw while exec macros
 o.wildmenu = true
 o.textwidth = 0
+o.ruler = false
+o.showmode = false
 vim.cmd('syntax on')
 -- set noswapfile
 -- set nobackup

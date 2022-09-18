@@ -103,3 +103,6 @@ k("x", "<A-j>", ":m '>+1<CR>gv", opts)
 k("x", "<A-k>", ":m '<-2<CR>gv", opts)
 
 k("v", "p", "\"_dP", opts)
+
+k("n", "<Leader>e", ":Lex 25<CR>", opts)
+
