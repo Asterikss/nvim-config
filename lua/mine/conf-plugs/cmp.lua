@@ -48,7 +48,7 @@ cmp.setup{
       { name = 'nvim_lsp' },
       { name = 'luasnip' },
       { name = 'path' },
-	  
+
     }, {
       { name = 'buffer', keyword_length = 4 },
     }),
@@ -57,7 +57,7 @@ cmp.setup{
       expand = function(args)
 		  require('luasnip').lsp_expand(args.body)
 		end,
-	},		
+	},
 
 	experimental = {
 		ghost_text = true,
@@ -67,9 +67,9 @@ cmp.setup{
 		entries = {name = 'custom', selection_order = 'near_cursor' } 
 	},                                                                ]]
 
-	view = {            
+	view = {
 		entries = "custom" -- can be "custom", "wildmenu" or "native"
-	}, 
+	},
 
 	window = {
 		documentation = cmp.config.window.bordered(),

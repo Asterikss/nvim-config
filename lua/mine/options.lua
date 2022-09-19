@@ -1,15 +1,15 @@
-local o = vim.opt 
+local o = vim.opt
 --local g = vim.g
 
 
-o.number = true 
+o.number = true
 o.relativenumber = true
 o.background = "dark"
 o.clipboard = "unnamedplus"			-- Copy paste between nvim and everything else
 o.hlsearch = false
 o.incsearch = true
 o.scrolloff = 8
-o.tabstop = 4 
+o.tabstop = 4
 o.softtabstop = 4
 o.shiftwidth = 4
 o.smartindent = true
@@ -22,6 +22,9 @@ o.wildmenu = true
 o.textwidth = 0
 o.ruler = false
 o.showmode = false
+o.sidescroll = 2
+o.signcolumn = "yes"
+-- o.numberwidth = 4
 vim.cmd('syntax on')
 -- set noswapfile
 -- set nobackup
