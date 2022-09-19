@@ -104,5 +104,5 @@ k("x", "<A-k>", ":m '<-2<CR>gv", opts)
 
 k("v", "p", "\"_dP", opts)
 
-k("n", "<Leader>e", ":Lex 25<CR>", opts)
+k("n", "<Leader>l", ":Lex 25<CR>", opts)
 
