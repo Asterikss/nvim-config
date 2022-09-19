@@ -49,6 +49,8 @@ return packer.startup(function(use)
 	}
 	--LSP
 	use "neovim/nvim-lspconfig"
+	use "williamboman/mason-lspconfig.nvim"
+	use "williamboman/mason.nvim"
 
 	--Completion
 	use "hrsh7th/nvim-cmp"
@@ -57,6 +59,7 @@ return packer.startup(function(use)
 	use "saadparwaiz1/cmp_luasnip"
 
 	use "hrsh7th/cmp-nvim-lsp"
+
 	
 	--Snippets
 	use "L3MON4D3/LuaSnip"

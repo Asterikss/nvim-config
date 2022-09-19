@@ -1,16 +1,13 @@
 -- local lsp = require("lspconfig")
-require("lspconfig").
+local lsp = require("lspconfig")
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap = true, silent = true }
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+-- local opts = { noremap = true, silent = true }
 
 local on_attach = function(client, bufnr)
-	local bufopts = { noremap=true, silent=true, buffer=bufnr--[[ =0  ]]}
+	-- local bufopts = { noremap=true, silent=true, buffer=bufnr--[[ =0  ]]}
+	local bufopts = { noremap=true, silent=true, buffer=bufnr }
 	-- -v- Enable completion triggered by <c-x><c-o>
 	-- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 	
@@ -30,7 +27,12 @@ end
 
 -- cmp_nvim_lsp.update_capabilities(capabilities)
 
-require('lspconfig')['pyright'].setup{
+lsp['sumneko_lua'].setup{
+    on_attach = on_attach,
+    -- flags = lsp_flags,
+}
+
+lsp['pyright'].setup{
     on_attach = on_attach,
     -- flags = lsp_flags,
 }
