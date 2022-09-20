@@ -17,7 +17,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
 	vim.cmd [[packadd packer.nvim]]
 end
 
---Autocommand that reloads neovim whenever you save the plugins.lua file
+-- Autocommand that reloads neovim whenever you save the plugins.lua file
 vim.cmd [[
 	augroup packer_user_config
 		autocmd!
@@ -25,7 +25,7 @@ vim.cmd [[
 	augroup end
 ]]
 
---Use a proteceted call so there is no error during the first use
+-- Use a proteceted call so there is no error during the first use
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
 	print "\"require packer failed\""
@@ -34,25 +34,25 @@ end
 
 
 return packer.startup(function(use)
-	--use {"wbthomas/packer.nvim", opt = true}
+	-- use {"wbthomas/packer.nvim", opt = true}
 	use {"wbthomason/packer.nvim"}
 
-	--colorscheme
+	-- Colorscheme
 	use "savq/melange"
 
-	--comments (requires nvim 0.7+)
+	-- Comments (requires nvim 0.7+)
 	use {
 		'numToStr/Comment.nvim',
 		config = function()
 			require('Comment').setup()
 		end
 	}
-	--LSP
+	-- LSP
 	use "neovim/nvim-lspconfig"
 	use "williamboman/mason-lspconfig.nvim"
 	use "williamboman/mason.nvim"
 
-	--Completion
+	-- Completion
 	use "hrsh7th/nvim-cmp"
 	use "hrsh7th/cmp-buffer"
 	use "hrsh7th/cmp-path"
@@ -64,7 +64,7 @@ return packer.startup(function(use)
 	use "L3MON4D3/LuaSnip"
 	use "rafamadriz/friendly-snippets"
 
-	-- Telescope
+	----- Telescope
 
 	use {
 		'nvim-telescope/telescope.nvim', tag = '0.1.0',
@@ -88,6 +88,18 @@ return packer.startup(function(use)
 	-- Using 1 option. For 2 option -> 
 	-- use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 	use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+
+	-- sharkdp/fd is another external dependency that improves smth. Check :checkhealf telescope
+	--
+	-- "Note that the binary is called fdfind as the binary name fd is already
+	-- used by another package. It is recommended that after installation, you
+	-- add a link to fd by executing command ln -s $(which fdfind)
+	-- ~/.local/bin/fd, in order to use fd in the same way as in this
+	-- documentation. Make sure that $HOME/.local/bin is in your $PATH."
+	--
+	-- Did not do this -^-
+
+	-----
 
 	--Autommaticly set up your configuration after cloning packer.nvim
 	--Put this at the end after all plugins

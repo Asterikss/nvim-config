@@ -18,6 +18,8 @@ local lsp = require("lspconfig")
 	},
 } ]]
 
+-- https://github.com/neovim/nvim-lspconfig#Suggested-configuration
+
 -- might not do that on attach later
 local on_attach = function(_--[[ _client ,]], bufnr)
 	local bufopts = { noremap=true, silent=true, buffer=bufnr }

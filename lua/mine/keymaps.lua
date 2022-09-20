@@ -12,9 +12,9 @@ vim.g.maplocalleader = " "
 -- m("n", "<Space>", "<Leader>") -- does not work
 
 if not vim.fn.has('wsl') then
-	m("n", "<Leader>ve", ":e ~/AppData/Local/nvim/init.vim<CR>")
-	m("n", "<Leader>vr", ":source ~/AppData/Local/nvim/init.vim<CR>")
-	m("n", "<Leader>s", ":w C:/Users/lono8/Desktop/.txt<Left><Left><Left><Left>")
+	m("n", "<Leader>ve", "<cmd>e ~/AppData/Local/nvim/init.vim<CR>")
+	m("n", "<Leader>vr", "<cmd>source ~/AppData/Local/nvim/init.vim<CR>")
+	m("n", "<Leader><Leader>s", "<cmd>w C:/Users/lono8/Desktop/.txt<Left><Left><Left><Left>")
 	m("n", "<C-z>", "<Nop>")
 	m("i", "<C-z>", "<Nop>")
 	m("t", "<C-z>", "<Nop>")
@@ -51,8 +51,8 @@ m("n", "X", "\"_X")
 m("v", ">", ">gv")
 m("v", "<", "<gv")
 
-m("n", "<Leader>g", "gqap")
-m("v", "<Leader>g", "gq")
+m("n", "<Leader>w", "gqap")
+m("v", "<Leader>w", "gq")
 
 m("n", "n", "nzz")
 m("n", "n", "nzz")
@@ -78,6 +78,8 @@ m("n", "go", "o<Esc>k")
 m("n", "gO", "O<Esc>j")
 -- <A-m> <A-j> does not work. Maby alt first, then...
 
+-- different clippboard then using d?
+
 -- --windows--
 m("n", "<Down>",  "<cmd>resize -2<CR>")
 m("n", "<Up>",    "<cmd>resize +2<CR>")
@@ -93,15 +95,35 @@ m("n", "<C-l>", "<C-w>l")
 m("n", "<A-h>", "gT")
 m("n", "<A-l>", "gt")
 
-m("i", "<C-a>", "<Esc>A")
-m("i", "<C-e>", "<Esc>I")
+m("i", "<C-e>", "<Esc>A")
+m("i", "<C-a>", "<Esc>I")
 
 m("x", "<A-j>", "<cmd>m '>+1<CR>gv")
 m("x", "<A-k>", "<cmd>m '<-2<CR>gv")
 
 m("v", "p", "\"_dP")
+m("v", "<Leader>p", "p") -- There might be a better way
 
 m("n", "<Leader>l", "<cmd>Lex 25<CR>")
+m("n", "<Leader>p", "<cmd>Tex<CR>")
 
+------ Telescope
+m("n", "<Leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false}))<CR>")
+m("n", "<Leader><Leader>f", "<cmd>lua require'telescope.builtin'.find_files()<CR>")
+m("n", "<Leader>d", "<cmd>lua require'telescope.builtin'.buffers()<CR>")
+m("n", "<Leader>gg", "<cmd>lua require'telescope.builtin'.live_grep()<CR>")
+m("n", "<Leader>gh", "<cmd>lua require('telescope.builtin').help_tags()<CR>")
+-- :Telescope grep_string search=abcd -- fuzzy find over results 
+-- :Telescope find_files cwd=~/.config/ smth or /code 
+
+-- I dont know what windblend does. e.g windblend = 10. I see no change
+-- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes
+-- https://github.com/nvim-telescope/telescope.nvim#default-mappings or use ? in normal mode inside Telescope
+-- maby change slelection from <CR> to <C-k> or smth
+-- if I am in normal mode I can use e.g. CTRL-j to leave
+
+------
+
+-- Reference. "Bedore nvim 0.7"
 -- local opts = { noremap = true, silent = false }
 -- local k = vim.api.nvim_set_keymap
