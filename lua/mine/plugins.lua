@@ -64,6 +64,31 @@ return packer.startup(function(use)
 	use "L3MON4D3/LuaSnip"
 	use "rafamadriz/friendly-snippets"
 
+	-- Telescope
+
+	use {
+		'nvim-telescope/telescope.nvim', tag = '0.1.0',
+		-- or                            , branch = '0.1.x',
+		requires = { {'nvim-lua/plenary.nvim'} }
+	}
+
+	-- use "nvim-telescope/telescope.nvim"
+	-- BurntSushi/ripgrep is required for live_grep and grep_string and is the first priority for find_files
+	-- Debian/Ubuntu -> $ curl -LO https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb
+	-- $ sudo dpkg -i ripgrep_13.0.0_amd64.deb
+	-- Windows -> choco install ripgrep
+
+	-- native telescope sorter to significantly improve sorting performance
+	-- requirements:
+	-- 1. With Make (Linux, MacOS, Windows with MinGW):
+	-- gcc or clang and make
+	-- 2. With CMake (Windows, Linux, MacOS):
+	--	a) CMake, and the Microsoft C++ Build Tools on Windows
+	--	b) CMake, make, and GCC or Clang on Linux and MacOS
+	-- Using 1 option. For 2 option -> 
+	-- use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+	use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+
 	--Autommaticly set up your configuration after cloning packer.nvim
 	--Put this at the end after all plugins
 	if PACKER_BOOTSTRAP then

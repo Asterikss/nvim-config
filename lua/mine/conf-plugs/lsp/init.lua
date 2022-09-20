@@ -1,3 +1,9 @@
+local capabilities_setup = vim.lsp.protocol.make_client_capabilities()
+local cmp_nvim_lsp = require("cmp_nvim_lsp")
+-- cmp_nvim_lsp.update_capabilities(capabilities_setup)
+local capabilities = cmp_nvim_lsp.update_capabilities(capabilities_setup)
+
+
 local lsp = require("lspconfig")
 
 -- :h lsp-handlers		for some reason -v- does not work. I put it in the setup directly
@@ -12,8 +18,7 @@ local lsp = require("lspconfig")
 	},
 } ]]
 
--- Might put that like that later - handler = handler ( in .setup)
--- might not do that on on attach later
+-- might not do that on attach later
 local on_attach = function(_--[[ _client ,]], bufnr)
 	local bufopts = { noremap=true, silent=true, buffer=bufnr }
 	-- -v- Enable completion triggered by <c-x><c-o>
@@ -59,6 +64,9 @@ end
 -- :h vim.diagnostic.*
 
 lsp['sumneko_lua'].setup{
+
+	capabilities = capabilities,
+
     on_attach = on_attach,
 
 	settings = {
@@ -77,6 +85,7 @@ lsp['sumneko_lua'].setup{
 
 		}
 	},
+
 
 	-- I moved this setup to the bottom of the file (Should be global now)
 	-- Disabling virtual_text works, but I cannot change float specifications
@@ -116,7 +125,7 @@ lsp['pyright'].setup{
     -- flags = lsp_flags,
 }
 
--- I didn't override previous vim.diagnostic configs in my testing. Might do that though. .setup does that
+-- I didn't override previous vim.diagnostic configs in my testing. Might do that though. .setup{} does that
 vim.diagnostic.config({
   virtual_text = false,
   float = {
@@ -137,7 +146,4 @@ vim.diagnostic.config({
 	}
 }) ]]
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-local cmp_nvim_lsp = require("cmp_nvim_lsp")
-cmp_nvim_lsp.update_capabilities(capabilities)
 

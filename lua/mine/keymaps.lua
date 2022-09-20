@@ -1,30 +1,27 @@
-local opts = { noremap = true, silent = false } 
-local k = vim.api.nvim_set_keymap
-
--- nvim v 07 needed
-local function map(m, k, v)
-	vim.keymap.set(m, k, v, { noremap = true })
+-- nvim v 0.7+
+local function m(a, b, v)
+	vim.keymap.set(a, b, v, { noremap = true })
 end
---vim.cmd("noremap <Space> <Nop>")
---map("n", "<Space>", "<Nop>")
---map("", "<Space>", "<Nop>")
---map("", "<Leander>", "<Space>")
 
-k("n", "<Space>", "<Nop>", opts)
+m("n", "<Space>", "<Nop>")
+--m("", "<Space>", "<Nop>")
+--vim.cmd("noremap <Space> <Nop>")
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+-- m("n", "<Space>", "<Leader>") -- does not work
 
 if not vim.fn.has('wsl') then
-	k("n", "<Leader>ve", ":e ~/AppData/Local/nvim/init.vim<CR>", opts)
-	k("n", "<Leader>vr", ":source ~/AppData/Local/nvim/init.vim<CR>", opts)
-	k("n", "<Leader>s", ":w C:/Users/lono8/Desktop/.txt<Left><Left><Left><Left>", opts)
-	k("n", "<C-z>", "<Nop>", opts)
-	k("i", "<C-z>", "<Nop>", opts)
-	k("t", "<C-z>", "<Nop>", opts)
-	k("v", "<C-z>", "<Nop>", opts)
+	m("n", "<Leader>ve", ":e ~/AppData/Local/nvim/init.vim<CR>")
+	m("n", "<Leader>vr", ":source ~/AppData/Local/nvim/init.vim<CR>")
+	m("n", "<Leader>s", ":w C:/Users/lono8/Desktop/.txt<Left><Left><Left><Left>")
+	m("n", "<C-z>", "<Nop>")
+	m("i", "<C-z>", "<Nop>")
+	m("t", "<C-z>", "<Nop>")
+	m("v", "<C-z>", "<Nop>")
 else
-	k("n", "<Leader>ve", ":e ~/.config/nvim/init.lua<CR>", opts)
-	k("n", "<Leader>vr", ":source ~/.config/nvim/init.lua<CR>", opts)
+	m("n", "<Leader>ve", "<cmd>e ~/.config/nvim/init.lua<CR>")
+	m("n", "<Leader>vr", "<cmd>source ~/.config/nvim/init.lua<CR>")
 end
 
 --https://github.com/neovim/neovim/issues/12642
@@ -37,72 +34,74 @@ end
 --endfunction
 
 
-k("i", "kj", "<Esc>", opts)
+m("i", "kj", "<Esc>")
 
-k("n", "Y", "yy", opts)
-k("v", "y", "myy`y", opts)
+m("n", "Y", "yy")
+m("v", "y", "myy`y")
 
-k("n", ";", ":", opts)
-k("v", ";", ":", opts)
+m("n", ";", ":")
+m("v", ";", ":")
 
-k("n", ":", ";", opts)
+m("n", ":", ";")
 
 -- Prevent x from overwriting y's
-k("n", "x", "\"_x", opts)
-k("n", "X", "\"_X", opts)
- 
-k("v", ">", ">gv", opts)
-k("v", "<", "<gv", opts)
+m("n", "x", "\"_x")
+m("n", "X", "\"_X")
 
-k("n", "<Leader>g", "gqap", opts)
-k("v", "<Leader>g", "gq", opts)
+m("v", ">", ">gv")
+m("v", "<", "<gv")
 
-k("n", "n", "nzz", opts)
-k("n", "N", "Nzz", opts)
+m("n", "<Leader>g", "gqap")
+m("v", "<Leader>g", "gq")
+
+m("n", "n", "nzz")
+m("n", "n", "nzz")
 
 
 -- --terminal--
-k("t", "<Ecs>", "<C-/><C-n>", opts)
-k("t", "<A-[>", "<Esc>", opts)
-k("t", "<A-l>", "<C-/><C-n>gt", opts)
-k("t", "<A-h>", "<C-/><C-n>gT", opts)
-k("t", "<C-h>", "<C-/><C-n><C-w>h", opts)
-k("t", "<C-k>", "<C-/><C-n><C-w>k", opts)
-k("t", "<C-u>", "<C-/><C-n><C-u>", opts)
+m("t", "<Ecs>", "<C-/><C-n>")
+m("t", "<A-[>", "<Esc>")
+m("t", "<A-l>", "<C-/><C-n>gt")
+m("t", "<A-h>", "<C-/><C-n>gT")
+m("t", "<C-h>", "<C-/><C-n><C-w>h")
+m("t", "<C-k>", "<C-/><C-n><C-w>k")
+m("t", "<C-u>", "<C-/><C-n><C-u>")
 
-k("n", "<C-t>", ":tabnew ", opts)
+m("n", "<C-t>", "<cmd>tabnew ")
 --k("n", "<C-t>", ":tabnew<Space>", opts)
 -- k("n", "<C-T>", ":tabnew<CR>", opts)
 -- <C-t> has something to do with TagStack
 -- Possible to put for instance .cpp at the end
 -- inoremap <C-t> <Esc>:tabnew<CR>
 
-k("n", "go", "o<Esc>k", opts)
-k("n", "gO", "O<Esc>j", opts)
--- <A-k> <A-j> does not work. Maby alt first, then...
+m("n", "go", "o<Esc>k")
+m("n", "gO", "O<Esc>j")
+-- <A-m> <A-j> does not work. Maby alt first, then...
 
 -- --windows--
-k("n", "<Down>",  ":resize -2<CR>", opts)
-k("n", "<Up>",    ":resize +2<CR>", opts)
-k("n", "<Left>",  ":vertival resize +2<CR>", opts)
-k("n", "<Right>", ":vertival resize -1<CR>", opts)
+m("n", "<Down>",  "<cmd>resize -2<CR>")
+m("n", "<Up>",    "<cmd>resize +2<CR>")
+m("n", "<Left>",  "<cmd>vertival resize +2<CR>")
+m("n", "<Right>", "<cmd>vertival resize -1<CR>")
 
 
-k("n", "<C-h>", "<C-w>h", opts)
-k("n", "<C-j>", "<C-w>j", opts)
-k("n", "<C-k>", "<C-w>k", opts)
-k("n", "<C-l>", "<C-w>l", opts)
+m("n", "<C-h>", "<C-w>h")
+m("n", "<C-j>", "<C-w>j")
+m("n", "<C-k>", "<C-w>k")
+m("n", "<C-l>", "<C-w>l")
 
-k("n", "<A-h>", "gT", opts)
-k("n", "<A-l>", "gt", opts)
+m("n", "<A-h>", "gT")
+m("n", "<A-l>", "gt")
 
-k("i", "<C-a>", "<Esc>A", opts)
-k("i", "<C-e>", "<Esc>I", opts)
+m("i", "<C-a>", "<Esc>A")
+m("i", "<C-e>", "<Esc>I")
 
-k("x", "<A-j>", ":m '>+1<CR>gv", opts)
-k("x", "<A-k>", ":m '<-2<CR>gv", opts)
+m("x", "<A-j>", "<cmd>m '>+1<CR>gv")
+m("x", "<A-k>", "<cmd>m '<-2<CR>gv")
 
-k("v", "p", "\"_dP", opts)
+m("v", "p", "\"_dP")
 
-k("n", "<Leader>l", ":Lex 25<CR>", opts)
+m("n", "<Leader>l", "<cmd>Lex 25<CR>")
 
+-- local opts = { noremap = true, silent = false }
+-- local k = vim.api.nvim_set_keymap
