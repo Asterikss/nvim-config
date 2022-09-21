@@ -24,8 +24,8 @@ o.ruler = false
 o.showmode = false
 o.sidescroll = 2
 o.signcolumn = "yes"
--- o.numberwidth = 4
 vim.cmd('syntax on')
+-- o.numberwidth = 4
 -- set noswapfile
 -- set nobackup
 -- set nohidden					-- Unloads abandoned buffers. Still present
@@ -43,3 +43,12 @@ vim.cmd('syntax on')
 -- set noshowcmd  -- to stop last command from displaying
 -- set shortmess+=F get rid of the file name. Do not use now
 -- Neovim0.8 set cmdheight=0 - make it a toggle later
+
+
+
+aa
+a
+a
+a
+a
+a

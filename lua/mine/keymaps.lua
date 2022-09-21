@@ -78,8 +78,6 @@ m("n", "go", "o<Esc>k")
 m("n", "gO", "O<Esc>j")
 -- <A-m> <A-j> does not work. Maby alt first, then...
 
--- different clippboard then using d?
-
 -- --windows--
 m("n", "<Down>",  "<cmd>resize -2<CR>")
 m("n", "<Up>",    "<cmd>resize +2<CR>")
@@ -101,16 +99,27 @@ m("i", "<C-a>", "<Esc>I")
 m("x", "<A-j>", "<cmd>m '>+1<CR>gv")
 m("x", "<A-k>", "<cmd>m '<-2<CR>gv")
 
-m("v", "p", "\"_dP")
-m("v", "<Leader>p", "p") -- There might be a better way
+m("x", "p", "\"_dP")	 -- Without trashing the clippboard
+m("x", "<A-p>", "p") -- There might be a better way
+
+m("n", "<Leader>y", "\"ay")
+m("v", "<Leader>y", "\"ay")
+m("n", "<Leader>p", "\"aP")  -- old p here. Changes the clippboard
+m("v", "<Leader>p", "\"aP")	 -- not sure know how change that
+
+m("n", "<A-d>", "\"_d")  -- Without trashing the clippboard
+m("v", "<A-d>", "\"_d")
+
+m("n", "<Leader>d", "ddO<Esc>")  -- does not pick up gO
 
 m("n", "<Leader>l", "<cmd>Lex 25<CR>")
-m("n", "<Leader>p", "<cmd>Tex<CR>")
+m("n", "<Leader><Leader>l", "<cmd>Tex<CR>")
+
 
 ------ Telescope
 m("n", "<Leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false}))<CR>")
 m("n", "<Leader><Leader>f", "<cmd>lua require'telescope.builtin'.find_files()<CR>")
-m("n", "<Leader>d", "<cmd>lua require'telescope.builtin'.buffers()<CR>")
+m("n", "<Leader>s", "<cmd>lua require'telescope.builtin'.buffers()<CR>")
 m("n", "<Leader>gg", "<cmd>lua require'telescope.builtin'.live_grep()<CR>")
 m("n", "<Leader>gh", "<cmd>lua require('telescope.builtin').help_tags()<CR>")
 -- :Telescope grep_string search=abcd -- fuzzy find over results 
@@ -121,7 +130,6 @@ m("n", "<Leader>gh", "<cmd>lua require('telescope.builtin').help_tags()<CR>")
 -- https://github.com/nvim-telescope/telescope.nvim#default-mappings or use ? in normal mode inside Telescope
 -- maby change slelection from <CR> to <C-k> or smth
 -- if I am in normal mode I can use e.g. CTRL-j to leave
-
 ------
 
 -- Reference. "Bedore nvim 0.7"
