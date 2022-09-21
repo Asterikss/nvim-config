@@ -25,6 +25,17 @@ o.showmode = false
 o.sidescroll = 2
 o.signcolumn = "yes"
 vim.cmd('syntax on')
+o.ruler = false			-- no ruler - 17,26-49	TOP
+o.showmode = false		-- no --Insert--
+o.laststatus = 1
+-- set statusline=0
+-- set noshowcmd  " not sure what this does
+-- set shortmess+=F " get rid of the file name.
+-- Neovim0.8 set cmdheight=0 - toggle
+vim.cmd [[ augroup cmdline
+    autocmd!
+    autocmd CmdlineLeave : echo ''
+augroup end ]]
 -- o.numberwidth = 4
 -- set noswapfile
 -- set nobackup
@@ -46,9 +57,3 @@ vim.cmd('syntax on')
 
 
 
-aa
-a
-a
-a
-a
-a
