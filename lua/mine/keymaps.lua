@@ -115,6 +115,8 @@ m("n", "<Leader>d", "ddO<Esc>")  -- does not pick up gO
 m("n", "<Leader>l", "<cmd>Lex 25<CR>")
 m("n", "<Leader><Leader>l", "<cmd>Tex<CR>")
 
+m("n", "<Leader>a", "g'\"")	-- <Leader>r is very slow for some reason
+
 
 ------ Telescope
 m("n", "<Leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false}))<CR>")

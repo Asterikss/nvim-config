@@ -25,7 +25,7 @@ o.showmode = false
 o.sidescroll = 2
 o.signcolumn = "yes"
 vim.cmd('syntax on')
-o.ruler = false			-- no ruler - 17,26-49	TOP
+o.ruler = false			-- no ruler - e.g. 17,26-49	TOP
 o.showmode = false		-- no --Insert--
 o.laststatus = 1
 -- set statusline=0
@@ -35,7 +35,7 @@ o.laststatus = 1
 vim.cmd [[ augroup cmdline
     autocmd!
     autocmd CmdlineLeave : echo ''
-augroup end ]]
+augroup end ]]	-- you can use :mess to show them or : and arrows
 -- o.numberwidth = 4
 -- set noswapfile
 -- set nobackup
@@ -48,12 +48,27 @@ augroup end ]]
 -- set listchars=tab:>\ ,trail:.
 -- set guicursor=				-- A square even if in an insert moden
 
--- set noru			-- no ruler - 17,26-49	TOP
--- set noshowmode		-- no --Insert--
--- set statusline=0	
--- set noshowcmd  -- to stop last command from displaying
--- set shortmess+=F get rid of the file name. Do not use now
--- Neovim0.8 set cmdheight=0 - make it a toggle later
+vim.api.nvim_create_autocmd('TextYankPost', {
+  -- group = vim.api.nvim_create_augroup('highlight_yank'), -- does not work
+  -- desc = 'Hightlight selection on yank',
+  pattern = '*',
+  callback = function()
+    vim.highlight.on_yank { higroup = 'IncSearch', timeout = 100 }
+  end,
+})
+
+-- same as above
+-- vim.cmd [[ augroup highlight_yank
+--     autocmd!
+-- 	au textYankPost * silent! lua vim.highlight.on_yank({"IncSearch", 500})
+-- augroup END ]] 
 
 
-
+--[[ augroup line_return
+	autocmd!
+	autocmd BufReadPost *
+			\ if line("'\'") > 0 && line("'\'") <= line("$") |
+			\ execute 'normal! g'"zvzz' |
+			\ endif
+	augroup END
+]]
