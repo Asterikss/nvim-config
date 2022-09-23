@@ -110,12 +110,25 @@ m("v", "<Leader>p", "\"aP")	 -- not sure know how change that
 m("n", "<A-d>", "\"_d")  -- Without trashing the clippboard
 m("v", "<A-d>", "\"_d")
 
-m("n", "<Leader>d", "ddO<Esc>")  -- does not pick up gO
+m("n", "<Leader>d", "ddO<Esc>")
 
 m("n", "<Leader>l", "<cmd>Lex 25<CR>")
 m("n", "<Leader><Leader>l", "<cmd>Tex<CR>")
 
 m("n", "<Leader>a", "g'\"")	-- <Leader>r is very slow for some reason
+
+m("n", "<Leader>o", "o<C-w>")
+m("n", "<Leader>O", "O<C-w>")
+
+m("n", "<A-y>", "Yp")
+
+-- m("n", "<A-j>", ":tabm -1<CR>")
+-- m("n", "<A-k>", ":tabm +1<CR>")
+
+-- Enable spel checking, z=
+-- map <leader>s :getlocal spell! spelllang=en_us<CR>
+
+
 
 
 ------ Telescope

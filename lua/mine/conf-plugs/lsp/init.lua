@@ -93,6 +93,7 @@ lsp['sumneko_lua'].setup{
 	-- I moved this setup to the bottom of the file (Should be global now)
 	-- Disabling virtual_text works, but I cannot change float specifications
 	-- Works in the vim.diagnostic.config though (down there)
+
 	-- handlers = {
 
 		--[[ ["textDocument/publishDiagnostics"] = vim.lsp.with(
@@ -127,6 +128,15 @@ lsp['pyright'].setup{
     on_attach = on_attach,
     -- flags = lsp_flags,
 }
+
+-- :h lspconfig-root-detection
+lsp['jdtls'].setup{
+    on_attach = on_attach,
+    -- flags = lsp_flags,
+}
+-- -^- might use that later -> "mfussenegger/nvim-jdtls" a better one
+-- https://www.youtube.com/watch?v=0q_MKUynUck
+-- https://www.youtube.com/watch?v=94IU4cBdhfM
 
 -- I didn't override previous vim.diagnostic configs in my testing. Might do that though. .setup{} does that
 vim.diagnostic.config({

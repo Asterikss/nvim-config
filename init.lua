@@ -1,6 +1,6 @@
+require "mine.plugins"
 require "mine.keymaps"
 require "mine.options"
-require "mine.plugins"
 require "mine.colorscheme"
 
 require "mine.conf-plugs.mason"

@@ -32,19 +32,18 @@ o.laststatus = 1
 -- set noshowcmd  " not sure what this does
 -- set shortmess+=F " get rid of the file name.
 -- Neovim0.8 set cmdheight=0 - toggle
+
 vim.cmd [[ augroup cmdline
     autocmd!
     autocmd CmdlineLeave : echo ''
 augroup end ]]	-- you can use :mess to show them or : and arrows
+
 -- o.numberwidth = 4
 -- set noswapfile
 -- set nobackup
 -- set nohidden					-- Unloads abandoned buffers. Still present
 -- set path=.,,**				-- Search the dir ur in and recursively all children .Tabf
 -- set cursorline
--- Status bar
--- set laststatus=2
--- set list
 -- set listchars=tab:>\ ,trail:.
 -- set guicursor=				-- A square even if in an insert moden
 
@@ -56,11 +55,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank { higroup = 'IncSearch', timeout = 100 }
   end,
 })
-
--- same as above
+-- ~ same as above
 -- vim.cmd [[ augroup highlight_yank
 --     autocmd!
--- 	au textYankPost * silent! lua vim.highlight.on_yank({"IncSearch", 500})
+-- 	au textYankPost * silent! lua vim.highlight.on_yank({"IncSearch", 100})
 -- augroup END ]] 
 
 
