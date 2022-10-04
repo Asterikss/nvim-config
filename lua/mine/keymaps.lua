@@ -36,7 +36,6 @@ end
 
 m("i", "kj", "<Esc>")
 
-m("n", "Y", "yy")
 m("v", "y", "myy`y")
 
 m("n", ";", ":")
@@ -121,6 +120,14 @@ m("n", "<Leader>o", "o<C-w>")
 m("n", "<Leader>O", "O<C-w>")
 
 m("n", "<A-y>", "Yp")
+
+m("n", "D", "dd")
+m("n", "dd", "D")
+
+m("n", "Y", "yy")
+m("n", "yy", "y$")
+
+m("i", "q[", " {}<Left><CR><Esc>O")
 
 -- m("n", "<A-j>", ":tabm -1<CR>")
 -- m("n", "<A-k>", ":tabm +1<CR>")

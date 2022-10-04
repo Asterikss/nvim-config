@@ -132,13 +132,20 @@ lsp['pyright'].setup{
 -- :h lspconfig-root-detection
 lsp['jdtls'].setup{
     on_attach = on_attach,
-    -- flags = lsp_flags,
 }
--- -^- might use that later -> "mfussenegger/nvim-jdtls" a better one
+-- -^- might use that later -> "mfussenegger/nvim-jdtls" "a better one"
 -- https://www.youtube.com/watch?v=0q_MKUynUck
 -- https://www.youtube.com/watch?v=94IU4cBdhfM
 
--- I didn't override previous vim.diagnostic configs in my testing. Might do that though. .setup{} does that
+lsp['rust_analyzer'].setup{
+    on_attach = on_attach,
+}
+
+-- for TOML files
+lsp['taplo'].setup{
+    on_attach = on_attach,
+}
+-- It didn't override previous vim.diagnostic configs in my testing. Might do that though. .setup{} does that
 vim.diagnostic.config({
   virtual_text = false,
   float = {
