@@ -8,5 +8,6 @@ require "mine.conf-plugs.cmp"
 require "mine.conf-plugs.snips"
 require "mine.conf-plugs.lsp"
 require "mine.conf-plugs.telescope"
+require "mine.conf-plugs.treesitter"
 -- gd works on them
 

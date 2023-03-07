@@ -66,7 +66,8 @@ m("t", "<C-h>", "<C-/><C-n><C-w>h")
 m("t", "<C-k>", "<C-/><C-n><C-w>k")
 m("t", "<C-u>", "<C-/><C-n><C-u>")
 
-m("n", "<C-t>", "<cmd>tabnew ")
+-- not a <cmd> command; must end with <CR>
+m("n", "<C-t>", ":tabnew ")
 --k("n", "<C-t>", ":tabnew<Space>", opts)
 -- k("n", "<C-T>", ":tabnew<CR>", opts)
 -- <C-t> has something to do with TagStack
@@ -99,7 +100,7 @@ m("x", "<A-j>", "<cmd>m '>+1<CR>gv")
 m("x", "<A-k>", "<cmd>m '<-2<CR>gv")
 
 m("x", "p", "\"_dP")	 -- Without trashing the clippboard
-m("x", "<A-p>", "p") -- There might be a better way
+m("x", "<A-p>", "p")	 -- There might be a better way
 
 m("n", "<Leader>y", "\"ay")
 m("v", "<Leader>y", "\"ay")
@@ -120,6 +121,7 @@ m("n", "<Leader>o", "o<C-w>")
 m("n", "<Leader>O", "O<C-w>")
 
 m("n", "<A-y>", "Yp")
+m("n", "<Leader><A-y>", "YI//<Esc>p")
 
 m("n", "D", "dd")
 m("n", "dd", "D")
@@ -128,6 +130,7 @@ m("n", "Y", "yy")
 m("n", "yy", "y$")
 
 m("i", "q[", " {}<Left><CR><Esc>O")
+
 
 -- m("n", "<A-j>", ":tabm -1<CR>")
 -- m("n", "<A-k>", ":tabm +1<CR>")

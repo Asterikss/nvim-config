@@ -1,7 +1,8 @@
 local capabilities_setup = vim.lsp.protocol.make_client_capabilities()
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 -- cmp_nvim_lsp.update_capabilities(capabilities_setup)
-local capabilities = cmp_nvim_lsp.update_capabilities(capabilities_setup)
+--local capabilities = cmp_nvim_lsp.update_capabilities(capabilities_setup)
+local capabilities = cmp_nvim_lsp.default_capabilities(capabilities_setup)
 
 
 local lsp = require("lspconfig")
@@ -66,7 +67,8 @@ end
 -- :h lspconfig-global-defaults
 -- :h vim.diagnostic.*
 
-lsp['sumneko_lua'].setup{
+--lsp['sumneko_lua'].setup{
+lsp['lua_ls'].setup{
 
 	capabilities = capabilities,
 
@@ -132,6 +134,13 @@ lsp['pyright'].setup{
 -- :h lspconfig-root-detection
 lsp['jdtls'].setup{
     on_attach = on_attach,
+	-- root_dir = util.root_pattern('.classpath'),
+							root_dir = lsp.util.root_pattern('.classpath', '.git'),
+	--[[ root_dir =  {
+
+	} ]]
+	-- does it work like that?
+	capabilities = capabilities,
 }
 -- -^- might use that later -> "mfussenegger/nvim-jdtls" "a better one"
 -- https://www.youtube.com/watch?v=0q_MKUynUck
@@ -139,11 +148,13 @@ lsp['jdtls'].setup{
 
 lsp['rust_analyzer'].setup{
     on_attach = on_attach,
+	capabilities = capabilities,
 }
 
 -- for TOML files
 lsp['taplo'].setup{
     on_attach = on_attach,
+	capabilities = capabilities,
 }
 -- It didn't override previous vim.diagnostic configs in my testing. Might do that though. .setup{} does that
 vim.diagnostic.config({
