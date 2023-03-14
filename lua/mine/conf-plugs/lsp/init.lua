@@ -126,6 +126,10 @@ lsp['lua_ls'].setup{
 
 }
 
+-- local function m(a, b, v)
+-- 	vim.keymap.set(a, b, v, { noremap = true })
+-- end
+
 lsp['pyright'].setup{
     on_attach = on_attach,
     -- flags = lsp_flags,

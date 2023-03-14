@@ -1,7 +1,6 @@
 local o = vim.opt
 --local g = vim.g
 
-
 o.number = true
 o.relativenumber = true
 o.background = "dark"

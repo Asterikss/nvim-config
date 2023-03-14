@@ -121,7 +121,7 @@ m("n", "<Leader>o", "o<C-w>")
 m("n", "<Leader>O", "O<C-w>")
 
 m("n", "<A-y>", "Yp")
-m("n", "<Leader><A-y>", "YI//<Esc>p")
+-- m("n", "<Leader><A-y>", "YI//<Esc>p") for every filetype
 
 m("n", "D", "dd")
 m("n", "dd", "D")
