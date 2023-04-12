@@ -5,5 +5,5 @@ end
 -- could be global(from an import)
 -- local map = require("utils").map
 
-m("n", "<Leader><A-y>", "YI#<Esc>p")
+m("n", "<Leader><A-y>", "YI#<Space><Esc>p")
 

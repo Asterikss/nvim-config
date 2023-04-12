@@ -50,8 +50,8 @@ m("n", "X", "\"_X")
 m("v", ">", ">gv")
 m("v", "<", "<gv")
 
-m("n", "<Leader>w", "gqap")
-m("v", "<Leader>w", "gq")
+m("n", "<Leader>q", "gqap")
+m("v", "<Leader>q", "gq")
 
 m("n", "n", "nzz")
 m("n", "n", "nzz")
@@ -125,6 +125,8 @@ m("n", "<A-y>", "Yp")
 
 m("n", "D", "dd")
 m("n", "dd", "D")
+m("n", "C", "cc")
+m("n", "cc", "C")
 
 m("n", "Y", "yy")
 m("n", "yy", "y$")

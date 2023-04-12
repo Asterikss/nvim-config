@@ -1,9 +1,12 @@
-local capabilities_setup = vim.lsp.protocol.make_client_capabilities()
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+-- ^ saw that one line somewhere. No idea if its needed
+--
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
--- cmp_nvim_lsp.update_capabilities(capabilities_setup)
---local capabilities = cmp_nvim_lsp.update_capabilities(capabilities_setup)
-local capabilities = cmp_nvim_lsp.default_capabilities(capabilities_setup)
-
+local capabilities_setup = cmp_nvim_lsp.default_capabilities(capabilities)
+-- not sure which one is better and what is the difference. Both work.
+-- I will investigate it later. For now using kinda both. Does not change
+-- startup time really
 
 local lsp = require("lspconfig")
 
@@ -36,12 +39,11 @@ local on_attach = function(_--[[ _client ,]], bufnr)
 	vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, bufopts)
 	vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, bufopts)
 	vim.keymap.set('n', ']d', vim.diagnostic.goto_next, bufopts)
-	vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, bufopts)
+	vim.keymap.set('n', '<space><space>q', vim.diagnostic.setloclist, bufopts)
 	vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
 	-- vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
 	-- vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
 	-- https://github.com/neovim/nvim-lspconfig#Suggested-configuration
-
 
 	-- an example
 
@@ -58,7 +60,6 @@ local on_attach = function(_--[[ _client ,]], bufnr)
     end ]]
 
 	--
-
 end
 
 -- :h lspconfig-setup
@@ -67,19 +68,14 @@ end
 -- :h lspconfig-global-defaults
 -- :h vim.diagnostic.*
 
---lsp['sumneko_lua'].setup{
 lsp['lua_ls'].setup{
-
-	capabilities = capabilities,
-
+	capabilities = capabilities_setup,
     on_attach = on_attach,
-
 	settings = {
 		Lua = {
 			diagnostics = {
 				globals = { "vim" },
 			},
-
 			-- this does not work here (For future reference)
 			--[[ float = {
 				style = "minimal",
@@ -87,10 +83,8 @@ lsp['lua_ls'].setup{
 				header = "",
 				prefix = "",
 			}, ]]
-
 		}
 	},
-
 
 	-- I moved this setup to the bottom of the file (Should be global now)
 	-- Disabling virtual_text works, but I cannot change float specifications
@@ -111,7 +105,7 @@ lsp['lua_ls'].setup{
 			}
 		}), ]]
 
-		-- this does not work I am not sure what to put inside the ""
+		-- this does not work. I am not sure what to put inside the [""]
 		--[[ ["window/showMessage"] = vim.lsp.with(
 		vim.diagnostic.open_float, {
 			float = {
@@ -126,12 +120,9 @@ lsp['lua_ls'].setup{
 
 }
 
--- local function m(a, b, v)
--- 	vim.keymap.set(a, b, v, { noremap = true })
--- end
-
 lsp['pyright'].setup{
     on_attach = on_attach,
+	capabilities = capabilities_setup,
     -- flags = lsp_flags,
 }
 
@@ -144,22 +135,21 @@ lsp['jdtls'].setup{
 
 	} ]]
 	-- does it work like that?
-	capabilities = capabilities,
+	-- capabilities = capabilities,
+	capabilities = capabilities_setup,
 }
--- -^- might use that later -> "mfussenegger/nvim-jdtls" "a better one"
--- https://www.youtube.com/watch?v=0q_MKUynUck
--- https://www.youtube.com/watch?v=94IU4cBdhfM
 
 lsp['rust_analyzer'].setup{
     on_attach = on_attach,
-	capabilities = capabilities,
+	capabilities = capabilities_setup,
 }
 
 -- for TOML files
 lsp['taplo'].setup{
     on_attach = on_attach,
-	capabilities = capabilities,
+	capabilities = capabilities_setup,
 }
+
 -- It didn't override previous vim.diagnostic configs in my testing. Might do that though. .setup{} does that
 vim.diagnostic.config({
   virtual_text = false,
