@@ -9,10 +9,10 @@ local kind_icons = {
   Text = "t",
   Method = "m",
   Function = "f",
-  Constructor = "contr",
+  Constructor = "constr",
   Field = "",
-  Variable = "v",
-  Class = "c",
+  Variable = "var",
+  Class = "cl",
   Interface = "i",
   Module = "mod",
   Property = "ﰠ",
@@ -22,9 +22,9 @@ local kind_icons = {
   Keyword = "",
   Snippet = "",
   Color = "",
-  File = "fil",
+  File = "file",
   Reference = "",
-  Folder = "fol",
+  Folder = "fold",
   EnumMember = "",
   Constant = "",
   Struct = "",
@@ -50,7 +50,7 @@ cmp.setup{
       { name = 'path' },
 
     }, {
-      { name = 'buffer', keyword_length = 4 },
+      { name = 'buffer', keyword_length = 3 },
     }),
 
     snippet = {

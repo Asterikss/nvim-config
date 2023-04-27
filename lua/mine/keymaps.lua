@@ -24,14 +24,15 @@ else
 	m("n", "<Leader>vr", "<cmd>source ~/.config/nvim/init.lua<CR>")
 end
 
---https://github.com/neovim/neovim/issues/12642
---function! Is_WSL() abort
---let proc_version = '/proc/version'
---return filereadable(proc_version)
---	  \  ? !empty(filter(
---	  \    readfile(proc_version, '', 1), { _, val -> val =~? 'microsoft' }))
---	  \  : v:false
---endfunction
+-- for future reference
+-- https://github.com/neovim/neovim/issues/12642
+-- function! Is_WSL() abort
+-- let proc_version = '/proc/version'
+-- return filereadable(proc_version)
+--   \  ? !empty(filter(
+--   \    readfile(proc_version, '', 1), { _, val -> val =~? 'microsoft' }))
+--   \  : v:false
+-- endfunction
 
 
 m("i", "kj", "<Esc>")
@@ -50,8 +51,8 @@ m("n", "X", "\"_X")
 m("v", ">", ">gv")
 m("v", "<", "<gv")
 
-m("n", "<Leader>q", "gqap")
-m("v", "<Leader>q", "gq")
+m("n", "<Leader><Leader>q", "gqap")
+m("v", "<Leader><Leader>q", "gq")
 
 m("n", "n", "nzz")
 m("n", "n", "nzz")
@@ -120,6 +121,9 @@ m("n", "<Leader>a", "g'\"")	-- <Leader>r is very slow for some reason
 m("n", "<Leader>o", "o<C-w>")
 m("n", "<Leader>O", "O<C-w>")
 
+m("n", "<c-d>", "<c-d>zz")
+m("n", "<c-u>", "<c-u>zz")
+
 m("n", "<A-y>", "Yp")
 -- m("n", "<Leader><A-y>", "YI//<Esc>p") for every filetype
 
@@ -140,13 +144,15 @@ m("i", "q[", " {}<Left><CR><Esc>O")
 -- Enable spel checking, z=
 -- map <leader>s :getlocal spell! spelllang=en_us<CR>
 
-
-
+-- for future reference
+-- vim.api.nvim_buf_set_keymap(bufnr, "n", "gdt", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>", opts)
+-- m("n", "ggt", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>")
+m("n", "gd", "<cmd>vsp | lua vim.lsp.buf.definition()<CR>")
 
 ------ Telescope
 m("n", "<Leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false}))<CR>")
 m("n", "<Leader><Leader>f", "<cmd>lua require'telescope.builtin'.find_files()<CR>")
-m("n", "<Leader>s", "<cmd>lua require'telescope.builtin'.buffers()<CR>")
+m("n", "<Leader>b", "<cmd>lua require'telescope.builtin'.buffers()<CR>")
 m("n", "<Leader>gg", "<cmd>lua require'telescope.builtin'.live_grep()<CR>")
 m("n", "<Leader>gh", "<cmd>lua require('telescope.builtin').help_tags()<CR>")
 -- :Telescope grep_string search=abcd -- fuzzy find over results 
