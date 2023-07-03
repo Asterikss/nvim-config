@@ -6,4 +6,7 @@ end
 -- local map = require("utils").map
 
 m("n", "<Leader><A-y>", "YI#<Space><Esc>p")
+m("i", "qp", "print(\"\")<left><left>")
+m("i", "<c-q>p", "print()<left>")
+
 

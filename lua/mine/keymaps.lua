@@ -37,7 +37,7 @@ end
 
 m("i", "kj", "<Esc>")
 
-m("v", "y", "myy`y")
+m("v", "y", "myy`y") -- keeps the position of the cursor after v yank
 
 m("n", ";", ":")
 m("v", ";", ":")
@@ -67,23 +67,18 @@ m("t", "<C-h>", "<C-/><C-n><C-w>h")
 m("t", "<C-k>", "<C-/><C-n><C-w>k")
 m("t", "<C-u>", "<C-/><C-n><C-u>")
 
--- not a <cmd> command; must end with <CR>
 m("n", "<C-t>", ":tabnew ")
---k("n", "<C-t>", ":tabnew<Space>", opts)
--- k("n", "<C-T>", ":tabnew<CR>", opts)
 -- <C-t> has something to do with TagStack
--- Possible to put for instance .cpp at the end
--- inoremap <C-t> <Esc>:tabnew<CR>
 
 m("n", "go", "o<Esc>k")
 m("n", "gO", "O<Esc>j")
 -- <A-m> <A-j> does not work. Maby alt first, then...
 
 -- --windows--
-m("n", "<Down>",  "<cmd>resize -2<CR>")
-m("n", "<Up>",    "<cmd>resize +2<CR>")
-m("n", "<Left>",  "<cmd>vertival resize +2<CR>")
-m("n", "<Right>", "<cmd>vertival resize -1<CR>")
+m("n", "<Down>",  "<c-w>-")
+m("n", "<Up>",    "<c-w>+")
+m("n", "<Left>",  "<c-w>>")
+m("n", "<Right>", "<c-w><")
 
 
 m("n", "<C-h>", "<C-w>h")
@@ -116,7 +111,7 @@ m("n", "<Leader>d", "ddO<Esc>")
 m("n", "<Leader>l", "<cmd>Lex 25<CR>")
 m("n", "<Leader><Leader>l", "<cmd>Tex<CR>")
 
-m("n", "<Leader>a", "g'\"")	-- <Leader>r is very slow for some reason
+m("n", "<Leader>a", "g'\"")
 
 m("n", "<Leader>o", "o<C-w>")
 m("n", "<Leader>O", "O<C-w>")
@@ -137,6 +132,7 @@ m("n", "yy", "y$")
 
 m("i", "q[", " {}<Left><CR><Esc>O")
 
+m("n", "<a-w>", "ZQ")
 
 -- m("n", "<A-j>", ":tabm -1<CR>")
 -- m("n", "<A-k>", ":tabm +1<CR>")
