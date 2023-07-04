@@ -142,11 +142,23 @@ m("n", "<a-w>", "ZQ")
 m("n", "gd", "<cmd>vsp | lua vim.lsp.buf.definition()<CR>")
 
 ------ Telescope
+-- :Telescope builtin
 m("n", "<Leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false}))<CR>")
 m("n", "<Leader><Leader>f", "<cmd>lua require'telescope.builtin'.find_files()<CR>")
 m("n", "<Leader>b", "<cmd>lua require'telescope.builtin'.buffers()<CR>")
 m("n", "<Leader>gg", "<cmd>lua require'telescope.builtin'.live_grep()<CR>")
 m("n", "<Leader>gh", "<cmd>lua require('telescope.builtin').help_tags()<CR>")
+
+-- m("n", "<Leader>?", require("telescope.builtin").oldfiles)
+-- m("n", "<Leader>sd", require("telescope.builtin").diagnostics)
+-- m("n", "<Leader>sw", require("telescope.builtin").grep_stringk)
+-- m("n", "<Leader>/", function ()
+-- 	require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
+-- 		windblend = 10,
+-- 		previewer = false,
+-- 	})
+-- end)
+
 -- :Telescope grep_string search=abcd -- fuzzy find over results 
 -- :Telescope find_files cwd=~/.config/ smth or /code 
 
