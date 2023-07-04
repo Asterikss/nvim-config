@@ -4,12 +4,8 @@ local function m(a, b, v)
 end
 
 m("n", "<Space>", "<Nop>")
---m("", "<Space>", "<Nop>")
---vim.cmd("noremap <Space> <Nop>")
-
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
--- m("n", "<Space>", "<Leader>") -- does not work
 
 if not vim.fn.has('wsl') then
 	m("n", "<Leader>ve", "<cmd>e ~/AppData/Local/nvim/init.vim<CR>")

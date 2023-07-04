@@ -7,37 +7,36 @@ o.background = "dark"
 o.clipboard = "unnamedplus"			-- Copy paste between nvim and everything else
 o.hlsearch = false
 o.incsearch = true
+o.ignorcase = true
+o.smartcase = true
 o.scrolloff = 8
 o.wrap = false
 o.termguicolors = true				-- set t_Co=256  set term=xterm-256color
 o.splitbelow = true
 o.splitright = true
-o.lazyredraw = true				    -- no redraw while exec macros
+o.lazyredraw = true				-- no redraw while exec macros
 o.wildmenu = true
 o.textwidth = 0
-o.ruler = false
-o.showmode = false
-o.sidescroll = 2
+o.sidescroll = 3
 o.signcolumn = "yes"
-o.ruler = false			            -- no ruler - e.g. 17,26-49	TOP
-o.showmode = false		            -- no --Insert--
-o.laststatus = 1
-o.syntax = "on" -- vim.cmd('syntax on') -- couses problems with treesitter
+o.syntax = "on"
+o.fileencoding = "UTF-8"
 
--- tabs stuff (I hate python)
+o.ruler = false			            	-- no ruler - e.g. 17,26-49	TOP
+o.cmdheight = 1
+o.showmode = false		            	-- no --Insert--
+o.laststatus = 0
+-- nvim 9.0+ o.showcmdloc = last
+
+-- tab stuff (I hate python)
+o.smarttab = true
 -- o.tabstop = 4
 -- o.softtabstop = 4
 -- o.shiftwidth = 4
--- o.expandtab = true					-- enter spaces when tab is pressed
+-- o.expandtab = true				-- enter spaces when tab is pressed
 -- currently I don't see a difference
 -- o.autoindent = true
 -- o.smartindent = true
-o.smarttab = true
---
--- set statusline=0
--- set noshowcmd  " not sure what this does
--- set shortmess+=F " get rid of the file name.
--- Neovim0.8+ set cmdheight=0 - toggle
 
 -- vim.cmd [[ augroup cmdline
 --     autocmd!
@@ -45,6 +44,8 @@ o.smarttab = true
 -- augroup end ]]	-- you can use :mess to show them or : and arrows
 
 -- o.numberwidth = 4
+-- o.breakindent = true
+-- o.undofile = true
 -- set noswapfile
 -- set nobackup
 -- set nohidden					-- Unloads abandoned buffers. Still present
