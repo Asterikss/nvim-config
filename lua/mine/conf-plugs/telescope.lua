@@ -1,10 +1,6 @@
--- local _ = require "plenary.async"	-- not sure if needed
-require("plenary.async")	-- not sure if needed
-
-local telescope = require("telescope")
 local actions = require("telescope.actions")
 
-telescope.setup{
+require("telescope").setup{
 	defaults = {
 		mappings = {
 
@@ -12,14 +8,13 @@ telescope.setup{
 				["<Esc>"] = actions.close,
 				-- For now I will do it like that
 				-- I wanted to use the same key for both i and n
-				-- and continueto switch to insert with <C-j>
+				-- and continue to switch to insert with <C-j>
 				-- but it stops working with this remap. 
 				-- Can't get to normal now. Can't press ?
-				-- Can't use <C-c> for both. Does not work
+				-- Can't use <C-c> for both.
 				["<C-K>"] = actions.select_default,
 				["<C-h>"] = actions.cycle_history_next,
 				-- -^- or _prev. Used to be <C-k> (or <C-j> idk)
-				-- I can't trigger it anyway
 			},
 
 			n  = {
@@ -43,11 +38,9 @@ telescope.setup{
 		} ]]
 }
 
--- :Telescope grep_string search=abcd -- fuzzy find over results 
 -- :Telescope find_files cwd=~/.config/ smth or /code 
-
 
 -- To get fzf loaded and working with telescope, you need to call
 -- load_extension, somewhere after setup function:
-telescope.load_extension('fzf')
+pcall(require('telescope').load_extension, 'fzf')
 

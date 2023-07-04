@@ -1,4 +1,3 @@
--- nvim v 0.7+
 local function m(a, b, v)
 	vim.keymap.set(a, b, v, { noremap = true })
 end
@@ -40,8 +39,7 @@ m("v", ";", ":")
 
 m("n", ":", ";")
 
--- Prevent x from overwriting y's
-m("n", "x", "\"_x")
+m("n", "x", "\"_x") -- Prevent x from overwriting y's
 m("n", "X", "\"_X")
 
 m("v", ">", ">gv")
@@ -63,8 +61,7 @@ m("t", "<C-h>", "<C-/><C-n><C-w>h")
 m("t", "<C-k>", "<C-/><C-n><C-w>k")
 m("t", "<C-u>", "<C-/><C-n><C-u>")
 
-m("n", "<C-t>", ":tabnew ")
--- <C-t> has something to do with TagStack
+m("n", "<C-t>", ":tabnew ") -- <C-t> has something to do with TagStack
 
 m("n", "go", "o<Esc>k")
 m("n", "gO", "O<Esc>j")
@@ -96,10 +93,10 @@ m("x", "<A-p>", "p")	 -- There might be a better way
 
 m("n", "<Leader>y", "\"ay")
 m("v", "<Leader>y", "\"ay")
-m("n", "<Leader>p", "\"aP")  -- old p here. Changes the clippboard
-m("v", "<Leader>p", "\"aP")	 -- not sure know how change that
+m("n", "<Leader>p", "\"aP")	--  <- old p here. Changes the clippboard
+m("v", "<Leader>p", "\"aP")	-- not sure know how change that
 
-m("n", "<A-d>", "\"_d")  -- Without trashing the clippboard
+m("n", "<A-d>", "\"_d")		-- Without trashing the clippboard
 m("v", "<A-d>", "\"_d")
 
 m("n", "<Leader>d", "ddO<Esc>")
@@ -116,7 +113,6 @@ m("n", "<c-d>", "<c-d>zz")
 m("n", "<c-u>", "<c-u>zz")
 
 m("n", "<A-y>", "Yp")
--- m("n", "<Leader><A-y>", "YI//<Esc>p") for every filetype
 
 m("n", "D", "dd")
 m("n", "dd", "D")
@@ -141,34 +137,36 @@ m("n", "<a-w>", "ZQ")
 -- m("n", "ggt", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>")
 m("n", "gd", "<cmd>vsp | lua vim.lsp.buf.definition()<CR>")
 
+
 ------ Telescope
+m("n", "<Leader>f", function ()
+	require("telescope.builtin").find_files(require('telescope.themes').get_dropdown {
+		previewer = false})
+end)
+m("n", "<Leader>/", function ()
+	require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
+		windblend = 10,
+		previewer = false,
+	})
+end)
+m("n", "<Leader><Leader>f", require("telescope.builtin").find_files)
+m("n", "<Leader>b", require("telescope.builtin").buffers)
+m("n", "<Leader>gg", require("telescope.builtin").live_grep)
+m("n", "<Leader>gh", require("telescope.builtin").help_tags)
+m("n", "<Leader>?", require("telescope.builtin").oldfiles)
+m("n", "<Leader>sd", require("telescope.builtin").diagnostics)
+m("n", "<Leader>sw", require("telescope.builtin").grep_string)
+
+----- Diagnostic keymaps
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+
 -- :Telescope builtin
-m("n", "<Leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false}))<CR>")
-m("n", "<Leader><Leader>f", "<cmd>lua require'telescope.builtin'.find_files()<CR>")
-m("n", "<Leader>b", "<cmd>lua require'telescope.builtin'.buffers()<CR>")
-m("n", "<Leader>gg", "<cmd>lua require'telescope.builtin'.live_grep()<CR>")
-m("n", "<Leader>gh", "<cmd>lua require('telescope.builtin').help_tags()<CR>")
-
--- m("n", "<Leader>?", require("telescope.builtin").oldfiles)
--- m("n", "<Leader>sd", require("telescope.builtin").diagnostics)
--- m("n", "<Leader>sw", require("telescope.builtin").grep_stringk)
--- m("n", "<Leader>/", function ()
--- 	require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
--- 		windblend = 10,
--- 		previewer = false,
--- 	})
--- end)
-
+-- m("n", "<Leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false}))<CR>")
 -- :Telescope grep_string search=abcd -- fuzzy find over results 
 -- :Telescope find_files cwd=~/.config/ smth or /code 
 
--- I dont know what windblend does. e.g windblend = 10. I see no change
 -- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes
 -- https://github.com/nvim-telescope/telescope.nvim#default-mappings or use ? in normal mode inside Telescope
--- maby change slelection from <CR> to <C-k> or smth
--- if I am in normal mode I can use e.g. CTRL-j to leave
-------
-
--- Reference. "Bedore nvim 0.7"
--- local opts = { noremap = true, silent = false }
--- local k = vim.api.nvim_set_keymap

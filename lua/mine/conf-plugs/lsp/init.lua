@@ -36,10 +36,12 @@ local on_attach = function(_--[[ _client ,]], bufnr)
 	vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
 	vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
 	vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+
 	vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, bufopts)
 	vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, bufopts)
 	vim.keymap.set('n', ']d', vim.diagnostic.goto_next, bufopts)
 	vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, bufopts)
+
 	-- vim.keymap.set('n', '<space>z', vim.diagnostic.get(bufnr, {severity = vim.diagnostic.severity.INFO}).setloclist, bufopts)
 	vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
 	-- vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)

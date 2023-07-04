@@ -21,19 +21,26 @@ o.sidescroll = 3
 o.signcolumn = "yes"
 o.syntax = "on"
 o.fileencoding = "UTF-8"
+vim.o.completeopt = 'menuone,noselect,preview'
 
 o.ruler = false			            	-- no ruler - e.g. 17,26-49	TOP
 o.cmdheight = 1
 o.showmode = false		            	-- no --Insert--
 o.laststatus = 0
--- nvim 9.0+ o.showcmdloc = last
+o.showcmdloc = "last"
+
+
+-- Decrease update time
+-- vim.o.updatetime = 250
+-- vim.o.timeout = true
+-- vim.o.timeoutlen = 300
 
 -- tab stuff (I hate python)
 o.smarttab = true
+o.expandtab = true				-- enter spaces when tab is pressed
 -- o.tabstop = 4
 -- o.softtabstop = 4
 -- o.shiftwidth = 4
--- o.expandtab = true				-- enter spaces when tab is pressed
 -- currently I don't see a difference
 -- o.autoindent = true
 -- o.smartindent = true

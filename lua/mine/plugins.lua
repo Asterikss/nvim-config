@@ -67,15 +67,24 @@ return packer.startup(function(use)
 
 	-- Telescope
 	use {
-		'nvim-telescope/telescope.nvim', tag = '0.1.0',
-		-- or                            , branch = '0.1.x',
+		'nvim-telescope/telescope.nvim',
+		-- , tag = '0.1.0',
+		-- or
+		branch = '0.1.x',
 		requires = { {'nvim-lua/plenary.nvim'} }
 	}
 
 	-- Treesitter 
 	use {
 		'nvim-treesitter/nvim-treesitter',
-		run = ':TSUpdate'
+		run = ':TSUpdate',
+		-- requires = { {'nvim-treesitter/nvim-treesitter-textobjects'} }
+		--
+		-- use({
+		-- 	"nvim-treesitter/nvim-treesitter-textobjects",
+		-- 	after = "nvim-treesitter",
+		-- 	requires = "nvim-treesitter/nvim-treesitter",
+		-- })
 	}
 
 	-- use "nvim-telescope/telescope.nvim"
@@ -93,7 +102,8 @@ return packer.startup(function(use)
 	--	b) CMake, make, and GCC or Clang on Linux and MacOS
 	-- Using 1 option. For 2 option -> 
 	-- use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
-	use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1}
+	-- use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1}
+	use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
 
 	-- sharkdp/fd is another external dependency that improves smth. Check :checkhealf telescope
 	--
@@ -113,4 +123,5 @@ return packer.startup(function(use)
 		require("packer").sync()
 	end
 end)
+
 
