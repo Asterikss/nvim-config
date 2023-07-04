@@ -99,7 +99,7 @@ m("v", "<Leader>p", "\"aP")	-- not sure know how change that
 m("n", "<A-d>", "\"_d")		-- Without trashing the clippboard
 m("v", "<A-d>", "\"_d")
 
-m("n", "<Leader>d", "ddO<Esc>")
+m("n", "<Leader><Leader>d", "ddO<Esc>")
 
 m("n", "<Leader>l", "<cmd>Lex 25<CR>")
 m("n", "<Leader><Leader>l", "<cmd>Tex<CR>")

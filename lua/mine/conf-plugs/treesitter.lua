@@ -1,3 +1,5 @@
+-- TODO incremental selection
+-- https://www.youtube.com/watch?v=stqUbv-5u2s&t=66s
 require("nvim-treesitter.configs").setup {
   -- A list of parser names, or "all" (the four listed parsers should always be installed)
   ensure_installed = {"python", "rust", "c", "cpp", "lua"},

@@ -1,159 +1,89 @@
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
--- ^ saw that one line somewhere. No idea if its needed
---
-local cmp_nvim_lsp = require("cmp_nvim_lsp")
-local capabilities_setup = cmp_nvim_lsp.default_capabilities(capabilities)
--- not sure which one is better and what is the difference. Both work.
--- I will investigate it later. For now using kinda both. Does not change
--- startup time really
-
-local lsp = require("lspconfig")
-
--- :h lsp-handlers		for some reason -v- does not work. I put it in the setup directly
---[[ vim.lsp.start_client {
-	-- ..., Other configuration omitted.
-	handlers = {
-		["textDocument/publishDiagnostics"] = vim.lsp.with(
-		vim.lsp.diagnostic.on_publish_diagnostics, {
-			-- Disable virtual_text
-			virtual_text = false,
-		})
-	},
-} ]]
-
--- https://github.com/neovim/nvim-lspconfig#Suggested-configuration
-
--- might not do that on attach later
 local on_attach = function(_--[[ _client ,]], bufnr)
-	local bufopts = { noremap=true, silent=true, buffer=bufnr }
-	-- -v- Enable completion triggered by <c-x><c-o>
-	-- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+        local nmap = function(keys, func, desc)
+                if desc then
+                        desc = 'LSP: ' .. desc
+                end
 
-	-- -v- see h: deprecated
-	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-	vim.keymap.set('n', 'gt', vim.lsp.buf.definition, bufopts)
-	vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-	vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-	vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+                vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+        end
 
-	vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, bufopts)
-	vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, bufopts)
-	vim.keymap.set('n', ']d', vim.diagnostic.goto_next, bufopts)
-	vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, bufopts)
+        nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+        nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
-	-- vim.keymap.set('n', '<space>z', vim.diagnostic.get(bufnr, {severity = vim.diagnostic.severity.INFO}).setloclist, bufopts)
-	vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-	-- vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-	-- vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-	-- https://github.com/neovim/nvim-lspconfig#Suggested-configuration
+        nmap('gt', vim.lsp.buf.definition, '[G]oto [D]efinition')
+        nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+        nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
+        nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
+        nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+        nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
-	-- an example
+        nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
+        nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
-		  --[[ local function organize_imports()
-			local params = {
-			  command = 'pyright.organizeimports',
-			  arguments = { vim.uri_from_bufnr(0) },
-			}
-			vim.lsp.buf.execute_command(params)
-		  end ]]
 
-    --[[ if client.name == "pyright" then
-      vim.api.nvim_create_user_command("PyrightOrganizeImports", organize_imports, {desc = 'Organize Imports'})
-    end ]]
+        -- Lesser used LSP functionality
+        nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+        -- nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
+        -- nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
+        -- nmap('<leader>wl', function()
+        --         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+        -- end, '[W]orkspace [L]ist Folders')
+
+        vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+                vim.lsp.buf.format()
+        end, { desc = 'Format current buffer with LSP' })
+
+
 
 	--
 end
 
--- :h lspconfig-setup
--- :h lspconfig
--- :h mason-lspconfig.setup()
--- :h lspconfig-global-defaults
--- :h vim.diagnostic.*
 
-lsp['lua_ls'].setup{
-	capabilities = capabilities_setup,
-    on_attach = on_attach,
-	settings = {
-		Lua = {
+local servers = {
+        lua_ls = {
+                Lua = {
+                        workspace = { checkThridParty = false },
+                        telemetry = { enable = false },
 			diagnostics = {
 				globals = { "vim" },
 			},
-			-- this does not work here (For future reference)
-			--[[ float = {
-				style = "minimal",
-				border = "rounded",
-				header = "",
-				prefix = "",
-			}, ]]
-		}
-	},
+                },
+        },
 
-	-- I moved this setup to the bottom of the file (Should be global now)
-	-- Disabling virtual_text works, but I cannot change float specifications
-	-- Works in the vim.diagnostic.config though (down there)
+        pyright = {},
 
-	-- handlers = {
+        rust_analyzer = {},
 
-		--[[ ["textDocument/publishDiagnostics"] = vim.lsp.with(
-		vim.lsp.diagnostic.on_publish_diagnostics, {
-		-- vim.lsp.diagnostic.config, { --  < this does not work
-			virtual_text = false,
-			-- -v- this does not work. Probably need to be in a different handler
-			float = {
-				style = "minimal",
-				border = "rounded",
-				header = "",
-				prefix = "",
-			}
-		}), ]]
+        taplo = {},
 
-		-- this does not work. I am not sure what to put inside the [""]
-		--[[ ["window/showMessage"] = vim.lsp.with(
-		vim.diagnostic.open_float, {
-			float = {
-				style = "minimal",
-				border = "rounded",
-				header = "",
-				prefix = "",
-			}
-		}), ]]
+        jdtls = {},
 
-	-- }
+        clangd = {},
 
 }
 
-lsp['pyright'].setup{
-    on_attach = on_attach,
-	capabilities = capabilities_setup,
-    -- flags = lsp_flags,
+-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+
+-- Ensure the servers above are installed
+local mason_lspconfig = require 'mason-lspconfig'
+
+mason_lspconfig.setup {
+  ensure_installed = vim.tbl_keys(servers),
 }
 
--- :h lspconfig-root-detection
-lsp['jdtls'].setup{
-    on_attach = on_attach,
-	-- root_dir = util.root_pattern('.classpath'),
-							root_dir = lsp.util.root_pattern('.classpath', '.git'),
-	--[[ root_dir =  {
-
-	} ]]
-	-- does it work like that?
-	-- capabilities = capabilities,
-	capabilities = capabilities_setup,
+mason_lspconfig.setup_handlers {
+  function(server_name)
+    require('lspconfig')[server_name].setup {
+      capabilities = capabilities,
+      on_attach = on_attach,
+      settings = servers[server_name],
+    }
+  end,
 }
 
-lsp['rust_analyzer'].setup{
-    on_attach = on_attach,
-	capabilities = capabilities_setup,
-}
-
--- for TOML files
-lsp['taplo'].setup{
-    on_attach = on_attach,
-	capabilities = capabilities_setup,
-}
-
--- It didn't override previous vim.diagnostic configs in my testing. Might do that though. .setup{} does that
+-- should it be here?
 vim.diagnostic.config({
   virtual_text = false,
   float = {
@@ -164,7 +94,11 @@ vim.diagnostic.config({
 	},
 })
 
--- does not work (for future reference)
+
+
+-- for future reference
+
+-- does not work as of now
 --[[ vim.diagnostic.open_float.config({
 	float = {
 		style = "minimal",
@@ -174,4 +108,25 @@ vim.diagnostic.config({
 	}
 }) ]]
 
+-- vim.keymap.set('n', '<space>z', vim.diagnostic.get(bufnr, {severity = vim.diagnostic.severity.INFO}).setloclist, bufopts)
 
+--[[ local function organize_imports()
+      local params = {
+        command = 'pyright.organizeimports',
+        arguments = { vim.uri_from_bufnr(0) },
+      }
+      vim.lsp.buf.execute_command(params)
+end ]]
+
+--[[ if client.name == "pyright" then
+vim.api.nvim_create_user_command("PyrightOrganizeImports", organize_imports, {desc = 'Organize Imports'})
+end ]]
+
+-- :h lspconfig-root-detection
+-- :h lspconfig-setup
+-- :h lspconfig
+-- :h mason-lspconfig.setup()
+-- :h lspconfig-global-defaults
+-- :h vim.diagnostic.*
+-- :h lsp-handlers
+-- https://github.com/neovim/nvim-lspconfig#Suggested-configuration
