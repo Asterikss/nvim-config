@@ -18,32 +18,29 @@ o.lazyredraw = true				-- no redraw while exec macros
 o.wildmenu = true
 o.textwidth = 0
 o.sidescroll = 3
+o.timeoutlen = 700
 o.signcolumn = "yes"
 o.syntax = "on"
 o.fileencoding = "UTF-8"
 vim.o.completeopt = 'menuone,noselect,preview'
 
+-- status line stuff
 o.ruler = false			            	-- no ruler - e.g. 17,26-49	TOP
 o.cmdheight = 1
 o.showmode = false		            	-- no --Insert--
 o.laststatus = 0
 o.showcmdloc = "last"
 
-
--- Decrease update time
--- vim.o.updatetime = 250
--- vim.o.timeout = true
--- vim.o.timeoutlen = 300
-
 -- tab stuff (I hate python)
 o.smarttab = true
-o.expandtab = true				-- enter spaces when tab is pressed
--- o.tabstop = 4
--- o.softtabstop = 4
--- o.shiftwidth = 4
+o.expandtab = true
+o.tabstop = 4
+o.softtabstop = 4
+o.shiftwidth = 4
+
 -- currently I don't see a difference
--- o.autoindent = true
--- o.smartindent = true
+o.autoindent = true
+o.smartindent = true -- default off - better for c style langs
 
 -- vim.cmd [[ augroup cmdline
 --     autocmd!

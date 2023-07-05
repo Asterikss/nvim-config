@@ -68,7 +68,6 @@ return packer.startup(function(use)
 	use "hrsh7th/cmp-buffer"
 	use "hrsh7th/cmp-path"
 	use "saadparwaiz1/cmp_luasnip"
-
 	use "hrsh7th/cmp-nvim-lsp"
 
 	-- Snippets
@@ -97,6 +96,8 @@ return packer.startup(function(use)
 	}
 
         -- use "tpope/vim-sleuth" Detect tabstop and shiftwidth automatically
+        -- mbbill/undotree
+        -- tpope/vim-fugitive
 
         --[[ { this setup is for "lazy"
                 -- Add indentation guides even on blank lines

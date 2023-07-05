@@ -59,7 +59,7 @@ cmp.setup{
 			vim_item.menu = ({
 				buffer = "[buf]",
 				nvim_lsp = "[LSP]",
-				luasnip = "[s]",
+				luasnip = "[lsnp]",
 				-- nvim_lua = "[Lua]",
 				-- latex_symbols = "[LaTeX]",
 			})[entry.source.name]
@@ -68,6 +68,7 @@ cmp.setup{
 	},
 
 	mapping = cmp.mapping.preset.insert {
+        --nice indent
       --[[ ['<C-b>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
       ['<C-Space>'] = cmp.mapping.complete(),
