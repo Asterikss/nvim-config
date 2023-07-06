@@ -1,5 +1,4 @@
 local o = vim.opt
---local g = vim.g
 
 o.number = true
 o.relativenumber = true
@@ -22,7 +21,7 @@ o.timeoutlen = 700
 o.signcolumn = "yes"
 o.syntax = "on"
 o.fileencoding = "UTF-8"
-vim.o.completeopt = 'menuone,noselect,preview'
+o.completeopt = 'menuone,noselect,preview' -- check the behaviour later
 
 -- status line stuff
 o.ruler = false			            	-- no ruler - e.g. 17,26-49	TOP
@@ -42,11 +41,8 @@ o.shiftwidth = 4
 o.autoindent = true
 o.smartindent = true -- default off - better for c style langs
 
--- vim.cmd [[ augroup cmdline
---     autocmd!
---     autocmd CmdlineLeave : echo ''
--- augroup end ]]	-- you can use :mess to show them or : and arrows
 
+-- o.breakindent = true
 -- o.numberwidth = 4
 -- o.breakindent = true
 -- o.undofile = true
@@ -56,7 +52,6 @@ o.smartindent = true -- default off - better for c style langs
 -- set path=.,,**				-- Search the dir ur in and recursively all children .Tabf
 -- set cursorline
 -- set listchars=tab:>\ ,trail:.
--- set guicursor=				-- A square even if in an insert mode
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   -- group = vim.api.nvim_create_augroup('highlight_yank'), -- does not work
@@ -72,6 +67,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- 	au textYankPost * silent! lua vim.highlight.on_yank({"IncSearch", 100})
 -- augroup END ]] 
 
+-- vim.cmd [[ augroup cmdline
+--     autocmd!
+--     autocmd CmdlineLeave : echo ''
+-- augroup end ]]	-- you can use :mess to show them or : and arrows
 
 --[[ augroup line_return
 	autocmd!

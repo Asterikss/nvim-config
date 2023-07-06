@@ -32,19 +32,19 @@ local kind_icons = {
 }
 
 cmp.setup{
-        snippet = {
-                expand = function(args)
-                        luasnip.lsp_expand(args.body)
-                end,
-        },
+    snippet = {
+        expand = function(args)
+            luasnip.lsp_expand(args.body)
+        end,
+    },
 
-	experimental = {
-		ghost_text = true,
-	},
+    experimental = {
+        ghost_text = true,
+    },
 
-	view = {
-		entries = "custom" -- can be "custom", "wildmenu" or "native". selection_order = 'near_cursor'
-	},
+    view = {
+        entries = "custom" -- can be "custom", "wildmenu" or "native". selection_order = 'near_cursor'
+    },
 
 	window = {
 		documentation = cmp.config.window.bordered(),
@@ -58,6 +58,7 @@ cmp.setup{
 			-- Source
 			vim_item.menu = ({
 				buffer = "[buf]",
+                path = "[path]",
 				nvim_lsp = "[LSP]",
 				luasnip = "[lsnp]",
 				-- nvim_lua = "[Lua]",
@@ -81,6 +82,7 @@ cmp.setup{
                 ['<C-p>'] = cmp.mapping.select_prev_item(),
                 ['<C-d>'] = cmp.mapping.scroll_docs(-4),
                 ['<C-f>'] = cmp.mapping.scroll_docs(4),
+                -- ['<C-j>'] = cmp.mapping.,  -- possible danger
                 ['<C-Space>'] = cmp.mapping.complete {},
                 ['<C-k>'] = cmp.mapping.confirm {
                         behavior = cmp.ConfirmBehavior.Replace,

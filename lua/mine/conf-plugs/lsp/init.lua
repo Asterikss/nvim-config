@@ -38,27 +38,26 @@ local on_attach = function(_--[[ _client ,]], bufnr)
 	--
 end
 
-
 local servers = {
-        lua_ls = {
-                Lua = {
-                        workspace = { checkThridParty = false },
-                        telemetry = { enable = false },
-			diagnostics = {
-				globals = { "vim" },
-			},
-                },
+    lua_ls = {
+        Lua = {
+            workspace = { checkThridParty = false },
+            telemetry = { enable = false },
+            diagnostics = {
+                globals = { "vim" },
+            },
         },
+    },
 
-        pyright = {},
+    pyright = {},
 
-        rust_analyzer = {},
+    rust_analyzer = {},
 
-        taplo = {},
+    taplo = {},
 
-        jdtls = {},
+    jdtls = {},
 
-        clangd = {},
+    clangd = {},
 
 }
 
@@ -85,13 +84,13 @@ mason_lspconfig.setup_handlers {
 
 -- should it be here?
 vim.diagnostic.config({
-  virtual_text = false,
-  float = {
-		style = "minimal",
-		border = "rounded",
-		header = "",
-		prefix = "",
-	},
+    virtual_text = false,
+    float = {
+        style = "minimal",
+        border = "rounded",
+        header = "",
+        prefix = "",
+    },
 })
 
 

@@ -2,7 +2,6 @@ local ls = require("luasnip")
 
 ls.config.set_config{
 	updateevents = "TextChanged, TextChangedI",
-
 }
 
 -- <C-k> expansion key
@@ -16,12 +15,11 @@ end, { silent = true })
 -- <C-j> jump backwards key
 -- always moves to the previous item in the snippet
 vim.keymap.set({ "i", "s" }, "<C-j>", function()
-	if ls.jumpable(-1) then
-		ls.jump(-1)
-	end
+    ls.jump(-1)
+	-- if ls.jumpable(-1) then
+	-- 	ls.jump(-1)
+	-- end
 end, { silent = true })
+-- vim.keymap.set({ "i", "s"}, "<C-j>", "<cmd>lua require'luasnip'.jump(-1)<Cr>")
 
 -- Choice nodes can be added
-
-
-

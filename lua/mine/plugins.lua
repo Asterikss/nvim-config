@@ -37,8 +37,9 @@ return packer.startup(function(use)
 	-- use {"wbthomas/packer.nvim", opt = true}
 	use {"wbthomason/packer.nvim"}
 
-	-- Colorscheme
+	-- Colorschemes
 	use "savq/melange"
+    use "folke/tokyonight.nvim"
 
 	-- Comments
 	use {
@@ -53,15 +54,15 @@ return packer.startup(function(use)
 	use "williamboman/mason-lspconfig.nvim"
 	use "williamboman/mason.nvim"
 
-        -- Useful status updates for LSP
-        -- NOTE for "lazy": `opts = {}` is the same as calling `require('fidget').setup({})`
-        use {
-                'j-hui/fidget.nvim',
-                tag = 'legacy',
-		config = function()
-			require("fidget").setup{}
-		end
-        }
+    -- Useful status updates for LSP
+    -- NOTE for "lazy": `opts = {}` is the same as calling `require('fidget').setup({})`
+    use {
+            'j-hui/fidget.nvim',
+            tag = 'legacy',
+            config = function()
+                require("fidget").setup{}
+            end,
+    }
 
 	-- Completion
 	use "hrsh7th/nvim-cmp"
@@ -71,8 +72,11 @@ return packer.startup(function(use)
 	use "hrsh7th/cmp-nvim-lsp"
 
 	-- Snippets
-	use "L3MON4D3/LuaSnip"
-	use "rafamadriz/friendly-snippets"
+	use {
+        "L3MON4D3/LuaSnip",
+        require = { { "rafamadriz/friendly-snippets"  } },
+    }
+	-- use "rafamadriz/friendly-snippets"
 
 	-- Telescope
 	use {
@@ -86,6 +90,7 @@ return packer.startup(function(use)
 	use {
 		'nvim-treesitter/nvim-treesitter',
 		run = ':TSUpdate',
+        -- don't care now
 		-- requires = { {'nvim-treesitter/nvim-treesitter-textobjects'} }
 		--
 		-- use({
@@ -95,20 +100,35 @@ return packer.startup(function(use)
 		-- })
 	}
 
-        -- use "tpope/vim-sleuth" Detect tabstop and shiftwidth automatically
-        -- mbbill/undotree
-        -- tpope/vim-fugitive
+    -- Unless you are still migrating, remove the deprecated commands from v1.x. run :Neotree
+    -- vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+    --
+    -- use {
+    --     "nvim-neo-tree/neo-tree.nvim",
+    --     branch = "v2.x",
+    --     requires = {
+    --         "nvim-lua/plenary.nvim",
+    --         -- "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+    --         "MunifTanjim/nui.nvim",
+    --     }
+    -- }
 
-        --[[ { this setup is for "lazy"
-                -- Add indentation guides even on blank lines
-                'lukas-reineke/indent-blankline.nvim',
-                -- Enable `lukas-reineke/indent-blankline.nvim`
-                -- See `:help indent_blankline.txt`
-                opts = {
-                        char = '┊',
-                        show_trailing_blankline_indent = false,
-                },
-        }, ]]
+    -- use "tpope/vim-sleuth" Detect tabstop and shiftwidth automatically
+    -- mbbill/undotree
+    -- tpope/vim-fugitive
+    -- nvim-neo-tree/neo-tree.nvim  /  vim-gitgutter  /  oil.nvim  /  harpoon
+    -- incorporate git stuff later https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua#LL248
+
+    --[[ { this setup is for "lazy"
+            -- Add indentation guides even on blank lines
+            'lukas-reineke/indent-blankline.nvim',
+            -- Enable `lukas-reineke/indent-blankline.nvim`
+            -- See `:help indent_blankline.txt`
+            opts = {
+                    char = '┊',
+                    show_trailing_blankline_indent = false,
+            },
+    }, ]]
 
 
 	-- for "nvim-telescope/telescope.nvim"

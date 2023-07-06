@@ -19,15 +19,6 @@ else
 	m("n", "<Leader>vr", "<cmd>source ~/.config/nvim/init.lua<CR>")
 end
 
--- for future reference
--- https://github.com/neovim/neovim/issues/12642
--- function! Is_WSL() abort
--- let proc_version = '/proc/version'
--- return filereadable(proc_version)
---   \  ? !empty(filter(
---   \    readfile(proc_version, '', 1), { _, val -> val =~? 'microsoft' }))
---   \  : v:false
--- endfunction
 
 
 m("i", "kj", "<Esc>")
@@ -48,7 +39,7 @@ m("v", "<", "<gv")
 m("n", "<Leader><Leader>q", "gqap")
 m("v", "<Leader><Leader>q", "gq")
 
-m("n", "n", "nzz")
+m("n", "n", "nzz") -- :h zw
 m("n", "n", "nzz")
 
 
@@ -65,7 +56,7 @@ m("n", "<C-t>", ":tabnew ") -- <C-t> has something to do with TagStack
 
 m("n", "go", "o<Esc>k")
 m("n", "gO", "O<Esc>j")
--- <A-m> <A-j> does not work. Maby alt first, then...
+-- <A-k> <A-j> does not work. Maby alt first, then...
 
 -- --windows--
 m("n", "<Down>",  "<c-w>-")
@@ -85,8 +76,8 @@ m("n", "<A-l>", "gt")
 m("i", "<C-e>", "<Esc>A")
 m("i", "<C-a>", "<Esc>I")
 
-m("x", "<A-j>", "<cmd>m '>+1<CR>gv")
-m("x", "<A-k>", "<cmd>m '<-2<CR>gv")
+m("x", "J", "<cmd>m '>+1<CR>gv=gv")
+m("x", "K", "<cmd>m '<-2<CR>gv=gv")
 
 m("x", "p", "\"_dP")	 -- Without trashing the clippboard
 m("x", "<A-p>", "p")	 -- There might be a better way
@@ -125,6 +116,9 @@ m("n", "yy", "y$")
 m("i", "q[", " {}<Left><CR><Esc>O")
 
 m("n", "<a-w>", "ZQ")
+
+
+m("n", "J", "mzJ'z")
 
 -- m("n", "<A-j>", ":tabm -1<CR>")
 -- m("n", "<A-k>", ":tabm +1<CR>")
@@ -170,3 +164,13 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 
 -- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes
 -- https://github.com/nvim-telescope/telescope.nvim#default-mappings or use ? in normal mode inside Telescope
+
+-- for future reference
+-- https://github.com/neovim/neovim/issues/12642
+-- function! Is_WSL() abort
+-- let proc_version = '/proc/version'
+-- return filereadable(proc_version)
+--   \  ? !empty(filter(
+--   \    readfile(proc_version, '', 1), { _, val -> val =~? 'microsoft' }))
+--   \  : v:false
+-- endfunction
