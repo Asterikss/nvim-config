@@ -131,6 +131,33 @@ m("n", "J", "mzJ'z")
 -- m("n", "ggt", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>")
 m("n", "gd", "<cmd>vsp | lua vim.lsp.buf.definition()<CR>")
 
+-- m("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+
+-- function FormatPython()
+--     -- vim.cmd("w")
+--     -- or vim.fn.expand('%:p') --  .. " >/dev/null 2>&1 &" can be added to the back, but silent makes no diff
+--     vim.cmd("silent ! black " .. vim.api.nvim_buf_get_name(0)) -- or vim.fn.expand('%:p')
+--     vim.defer_fn(function ()
+--         vim.cmd("e")
+--     end, 150)
+-- end
+
+-- m("n", "<Leader><Leader>n", ":lua FormatPython()")
+-- vim.keymap.set("n", "<Leader><Leader>n", ":lua FormatPython()<CR>", { noremap = true,})
+-- local function m(a, b, v)
+-- 	vim.keymap.set(a, b, v, { noremap = true })
+-- end
+--
+function FormatPython()
+    -- vim.cmd("w")
+    -- or vim.fn.expand('%:p') --  .. " >/dev/null 2>&1 &" can be added to the back, but silent makes no diff
+    -- silent and defer_fn can be removed to get feedback and for the file to be automatically
+    -- changed (formatted) after pressing enter / <C-c>
+    vim.cmd("silent ! black " .. vim.api.nvim_buf_get_name(0)) -- or vim.fn.expand('%:p')
+    vim.defer_fn(function ()
+        vim.cmd("e")
+    end, 150)
+end
 
 ------ Telescope
 m("n", "<Leader>f", function ()

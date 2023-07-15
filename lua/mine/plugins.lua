@@ -117,6 +117,7 @@ return packer.startup(function(use)
     -- mbbill/undotree
     -- tpope/vim-fugitive
     -- nvim-neo-tree/neo-tree.nvim  /  vim-gitgutter  /  oil.nvim  /  harpoon
+    -- nvim-telescope/telescope-project.nvim
     -- incorporate git stuff later https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua#LL248
 
     --[[ { this setup is for "lazy"
