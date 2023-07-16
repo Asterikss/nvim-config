@@ -20,3 +20,7 @@ m("i", "qp", "print(\"\")<left><left>")
 m("i", "<c-q>p", "print()<left>")
 
 m("n", "<Leader><Leader>o", "<cmd>lua FormatPython()<CR>")
+-- https://github.com/EgZvor/vim-black
+-- https://github.com/averms/black-nvim/tree/master
+-- https://github.com/mhartington/formatter.nvim
+-- https://github.com/VonHeikemen/lsp-zero.nvi

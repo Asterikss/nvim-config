@@ -1,5 +1,5 @@
 local function m(a, b, v)
-	vim.keymap.set(a, b, v, { noremap = true })
+    vim.keymap.set(a, b, v, { noremap = true })
 end
 
 m("n", "<Space>", "<Nop>")
@@ -7,16 +7,16 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 if not vim.fn.has('wsl') then
-	m("n", "<Leader>ve", "<cmd>e ~/AppData/Local/nvim/init.vim<CR>")
-	m("n", "<Leader>vr", "<cmd>source ~/AppData/Local/nvim/init.vim<CR>")
-	m("n", "<Leader><Leader>s", "<cmd>w C:/Users/lono8/Desktop/.txt<Left><Left><Left><Left>")
-	m("n", "<C-z>", "<Nop>")
-	m("i", "<C-z>", "<Nop>")
-	m("t", "<C-z>", "<Nop>")
-	m("v", "<C-z>", "<Nop>")
+    m("n", "<Leader>ve", "<cmd>e ~/AppData/Local/nvim/init.vim<CR>")
+    m("n", "<Leader>vr", "<cmd>source ~/AppData/Local/nvim/init.vim<CR>")
+    m("n", "<Leader><Leader>s", "<cmd>w C:/Users/lono8/Desktop/.txt<Left><Left><Left><Left>")
+    m("n", "<C-z>", "<Nop>")
+    m("i", "<C-z>", "<Nop>")
+    m("t", "<C-z>", "<Nop>")
+    m("v", "<C-z>", "<Nop>")
 else
-	m("n", "<Leader>ve", "<cmd>e ~/.config/nvim/init.lua<CR>")
-	m("n", "<Leader>vr", "<cmd>source ~/.config/nvim/init.lua<CR>")
+    m("n", "<Leader>ve", "<cmd>e ~/.config/nvim/init.lua<CR>")
+    m("n", "<Leader>vr", "<cmd>source ~/.config/nvim/init.lua<CR>")
 end
 
 
@@ -59,9 +59,9 @@ m("n", "gO", "O<Esc>j")
 -- <A-k> <A-j> does not work. Maby alt first, then...
 
 -- --windows--
-m("n", "<Down>",  "<c-w>-")
-m("n", "<Up>",    "<c-w>+")
-m("n", "<Left>",  "<c-w>>")
+m("n", "<Down>", "<c-w>-")
+m("n", "<Up>", "<c-w>+")
+m("n", "<Left>", "<c-w>>")
 m("n", "<Right>", "<c-w><")
 
 
@@ -79,15 +79,15 @@ m("i", "<C-a>", "<Esc>I")
 m("x", "J", "<cmd>m '>+1<CR>gv=gv")
 m("x", "K", "<cmd>m '<-2<CR>gv=gv")
 
-m("x", "p", "\"_dP")	 -- Without trashing the clippboard
-m("x", "<A-p>", "p")	 -- There might be a better way
+m("x", "p", "\"_dP") -- Without trashing the clippboard
+m("x", "<A-p>", "p") -- There might be a better way
 
 m("n", "<Leader>y", "\"ay")
 m("v", "<Leader>y", "\"ay")
-m("n", "<Leader>p", "\"aP")	--  <- old p here. Changes the clippboard
-m("v", "<Leader>p", "\"aP")	-- not sure know how change that
+m("n", "<Leader>p", "\"aP") --  <- old p here. Changes the clippboard
+m("v", "<Leader>p", "\"aP") -- not sure know how change that
 
-m("n", "<A-d>", "\"_d")		-- Without trashing the clippboard
+m("n", "<A-d>", "\"_d")     -- Without trashing the clippboard
 m("v", "<A-d>", "\"_d")
 
 m("n", "<Leader><Leader>d", "ddO<Esc>")
@@ -154,21 +154,31 @@ function FormatPython()
     -- silent and defer_fn can be removed to get feedback and for the file to be automatically
     -- changed (formatted) after pressing enter / <C-c>
     vim.cmd("silent ! black " .. vim.api.nvim_buf_get_name(0)) -- or vim.fn.expand('%:p')
-    vim.defer_fn(function ()
+    vim.defer_fn(function()
         vim.cmd("e")
     end, 150)
 end
 
+-- or ~
+-- function Format()
+--     if vim.bo.filetype == 'rust' then
+--         vim.cmd('RustFmt')
+--     else
+--         vim.cmd('CocCommand prettier.forceFormatDocument')
+--     end
+-- end
+-- map("", "<Leader>f", "<cmd>:lua require('utils').format<CR>")
+
 ------ Telescope
-m("n", "<Leader>f", function ()
-	require("telescope.builtin").find_files(require('telescope.themes').get_dropdown {
-		previewer = false})
+m("n", "<Leader>f", function()
+    require("telescope.builtin").find_files(require('telescope.themes').get_dropdown {
+        previewer = false })
 end)
-m("n", "<Leader>/", function ()
-	require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
-		windblend = 10,
-		previewer = false,
-	})
+m("n", "<Leader>/", function()
+    require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
+        windblend = 10,
+        previewer = false,
+    })
 end)
 m("n", "<Leader><Leader>f", require("telescope.builtin").find_files)
 m("n", "<Leader>b", require("telescope.builtin").buffers)
@@ -186,8 +196,8 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 
 -- :Telescope builtin
 -- m("n", "<Leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false}))<CR>")
--- :Telescope grep_string search=abcd -- fuzzy find over results 
--- :Telescope find_files cwd=~/.config/ smth or /code 
+-- :Telescope grep_string search=abcd -- fuzzy find over results
+-- :Telescope find_files cwd=~/.config/ smth or /code
 
 -- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes
 -- https://github.com/nvim-telescope/telescope.nvim#default-mappings or use ? in normal mode inside Telescope
