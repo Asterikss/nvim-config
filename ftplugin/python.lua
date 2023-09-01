@@ -18,8 +18,9 @@ end
 m("n", "<Leader><A-y>", "YI#<Space><Esc>p")
 m("i", "qp", "print(\"\")<left><left>")
 m("i", "<c-q>p", "print()<left>")
+m("i", "qfp", 'print(f"}")<left><left><left>')
 
-m("n", "<Leader><Leader>o", "<cmd>lua FormatPython()<CR>")
+-- m("n", "<Leader><Leader>o", "<cmd>lua FormatPython()<CR>")
 -- https://github.com/EgZvor/vim-black
 -- https://github.com/averms/black-nvim/tree/master
 -- https://github.com/mhartington/formatter.nvim
