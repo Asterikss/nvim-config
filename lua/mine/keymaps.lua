@@ -20,7 +20,6 @@ else
 end
 
 
-
 m("i", "kj", "<Esc>")
 
 m("v", "y", "myy`y") -- keeps the position of the cursor after v yank
@@ -40,17 +39,16 @@ m("n", "<Leader><Leader>q", "gqap")
 m("v", "<Leader><Leader>q", "gq")
 
 m("n", "n", "nzz") -- :h zw
-m("n", "n", "nzz")
-
+-- m("n", "n", "nzz")
 
 -- --terminal--
-m("t", "<Ecs>", "<C-/><C-n>")
-m("t", "<A-[>", "<Esc>")
-m("t", "<A-l>", "<C-/><C-n>gt")
-m("t", "<A-h>", "<C-/><C-n>gT")
-m("t", "<C-h>", "<C-/><C-n><C-w>h")
-m("t", "<C-k>", "<C-/><C-n><C-w>k")
-m("t", "<C-u>", "<C-/><C-n><C-u>")
+-- m("t", "<Ecs>", "<C-/><C-n>")
+-- m("t", "<A-[>", "<Esc>")
+-- m("t", "<A-l>", "<C-/><C-n>gt")
+-- m("t", "<A-h>", "<C-/><C-n>gT")
+-- m("t", "<C-h>", "<C-/><C-n><C-w>h")
+-- m("t", "<C-k>", "<C-/><C-n><C-w>k")
+-- m("t", "<C-u>", "<C-/><C-n><C-u>")
 
 m("n", "<C-t>", ":tabnew ") -- <C-t> has something to do with TagStack
 
@@ -85,7 +83,7 @@ m("x", "<A-p>", "p") -- There might be a better way
 m("n", "<Leader>y", "\"ay")
 m("v", "<Leader>y", "\"ay")
 m("n", "<Leader>p", "\"aP") --  <- old p here. Changes the clippboard
-m("v", "<Leader>p", "\"aP") -- not sure know how change that
+m("v", "<Leader>p", "\"aP") -- not sure know how change that (with nvim_feedkeys)
 
 m("n", "<A-d>", "\"_d")     -- Without trashing the clippboard
 m("v", "<A-d>", "\"_d")
@@ -113,12 +111,12 @@ m("n", "cc", "C")
 m("n", "Y", "yy")
 m("n", "yy", "y$")
 
-m("i", "q[", " {}<Left><CR><Esc>O")
-
-m("n", "<a-w>", "ZQ")
-
+m("i", "q[", "{}<Left><CR><Esc>O")
 
 m("n", "J", "mzJ'z")
+
+-- m("n", "<a-w>", "ZQ") used for exiting <Leader>q
+
 
 -- m("n", "<A-j>", ":tabm -1<CR>")
 -- m("n", "<A-k>", ":tabm +1<CR>")
@@ -126,53 +124,69 @@ m("n", "J", "mzJ'z")
 -- Enable spel checking, z=
 -- map <leader>s :getlocal spell! spelllang=en_us<CR>
 
+-- m("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+
 -- for future reference
 -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gdt", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>", opts)
 -- m("n", "ggt", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>")
 m("n", "gd", "<cmd>vsp | lua vim.lsp.buf.definition()<CR>")
 
--- m("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+m("n", "<Leader><Leader>Q", "q")
 
--- function FormatPython()
---     -- vim.cmd("w")
---     -- or vim.fn.expand('%:p') --  .. " >/dev/null 2>&1 &" can be added to the back, but silent makes no diff
---     vim.cmd("silent ! black " .. vim.api.nvim_buf_get_name(0)) -- or vim.fn.expand('%:p')
---     vim.defer_fn(function ()
---         vim.cmd("e")
---     end, 150)
--- end
+-- could change it in the plugin itself
+function Comm()
+    vim.api.nvim_feedkeys("gcc", "m", true)
+end
 
--- m("n", "<Leader><Leader>n", ":lua FormatPython()")
--- vim.keymap.set("n", "<Leader><Leader>n", ":lua FormatPython()<CR>", { noremap = true,})
--- local function m(a, b, v)
--- 	vim.keymap.set(a, b, v, { noremap = true })
--- end
---
+function CommV()
+    vim.api.nvim_feedkeys("gc", "m", true)
+end
+-- :h Q Repeat the last recorded register [count] times.
+m("n", "q", "<cmd>lua Comm()<CR>")
+m("x", "q", "<cmd>lua CommV()<CR>")
+
+function FormatFile()
+    local file_type = vim.bo.filetype
+    if file_type == "python" then
+        FormatPython()
+    end
+    -- if file_type == 'rust' then
+    --     vim.cmd('RustFmt')
+    -- else
+end
+
 function FormatPython()
-    -- vim.cmd("w")
+    vim.cmd("w")
     -- or vim.fn.expand('%:p') --  .. " >/dev/null 2>&1 &" can be added to the back, but silent makes no diff
     -- silent and defer_fn can be removed to get feedback and for the file to be automatically
     -- changed (formatted) after pressing enter / <C-c>
-    vim.cmd("silent ! black " .. vim.api.nvim_buf_get_name(0)) -- or vim.fn.expand('%:p')
-    vim.defer_fn(function()
-        vim.cmd("e")
-    end, 150)
+    -- vim.cmd("silent ! black " .. vim.api.nvim_buf_get_name(0)) -- or vim.fn.expand('%:p')
+    vim.cmd("! black " .. vim.api.nvim_buf_get_name(0))
+    -- vim.defer_fn(function()
+    --     vim.cmd("e")
+    -- end, 150)
 end
 
--- or ~
--- function Format()
---     if vim.bo.filetype == 'rust' then
---         vim.cmd('RustFmt')
---     else
---         vim.cmd('CocCommand prettier.forceFormatDocument')
---     end
--- end
--- map("", "<Leader>f", "<cmd>:lua require('utils').format<CR>")
+m("n", "<Leader>o", "<cmd>lua FormatFile()<CR>")
+
+function CommBandP()
+    vim.api.nvim_feedkeys("ygvo\x1bo\x1bpgvgc", "m", true)
+    -- local last_selected_line = vim.fn.line("'>") is flawed
+end
+
+m("x", "<Leader>o", "<cmd>lua CommBandP()<cr>")
+
+function CommentPrint()
+    vim.api.nvim_feedkeys(":g/print/s/^/#/\r", "m", true)
+end
+
+m("x", "<Leader>cp", "<cmd>lua CommentPrint()<cr>")
 
 ------ Telescope
 m("n", "<Leader>f", function()
     require("telescope.builtin").find_files(require('telescope.themes').get_dropdown {
-        previewer = false })
+        previewer = false
+    })
 end)
 m("n", "<Leader>/", function()
     require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
