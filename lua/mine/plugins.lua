@@ -3,6 +3,7 @@ local fn = vim.fn
 -- Automaticly install packer
 local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 
+
 if fn.empty(fn.glob(install_path)) > 0 then
 	fn.system({
 		"git",
@@ -26,11 +27,12 @@ end
 -- ]]
 
 -- Use a proteceted call so there is no error during the first use
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then
-	print "\"require packer failed\""
-	return
-end
+local packer = require("packer")
+-- local status_ok, packer = pcall(require, "packer")
+-- if not status_ok then
+-- 	print "\"require packer failed\""
+-- 	return
+-- end
 
 
 return packer.startup(function(use)
@@ -51,8 +53,8 @@ return packer.startup(function(use)
 
 	-- LSP
 	use "neovim/nvim-lspconfig"
-	use "williamboman/mason-lspconfig.nvim"
 	use "williamboman/mason.nvim"
+	use "williamboman/mason-lspconfig.nvim"
 
     -- Useful status updates for LSP
     -- NOTE for "lazy": `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -74,7 +76,8 @@ return packer.startup(function(use)
 	-- Snippets
 	use {
         "L3MON4D3/LuaSnip",
-        require = { { "rafamadriz/friendly-snippets"  } },
+        -- require = { { "rafamadriz/friendly-snippets"  } },
+        require = { "rafamadriz/friendly-snippets" },
     }
 	-- use "rafamadriz/friendly-snippets"
 
@@ -99,6 +102,16 @@ return packer.startup(function(use)
 		-- 	requires = "nvim-treesitter/nvim-treesitter",
 		-- })
 	}
+
+    use "ThePrimeagen/harpoon" -- plenary
+
+    -- use {
+        -- "ThePrimeagen/harpoon",
+        -- requires = { 'nvim-lua/plenary.nvim'}
+        -- requires = 'nvim-lua/plenary.nvim',
+
+
+    -- }
 
     -- Unless you are still migrating, remove the deprecated commands from v1.x. run :Neotree
     -- vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])

@@ -1,0 +1,5 @@
+vim.keymap.set("n", "<Leader><A-y>", "YI//<Space><Esc>p", { noremap = true })
+vim.keymap.set("i", "qp", 'println!("{}");<left><left><left><left>', { noremap = true })
+vim.keymap.set("i", "<a-q>p", 'println!("");<left><left><left>', { noremap = true })
+vim.keymap.set("i", "qfp", 'println!("}");<left><left><left><left>', { noremap = true })
+vim.keymap.set("i", "q[", " {}<Left><CR><Esc>O", { noremap = true })

@@ -18,7 +18,7 @@ local on_attach = function(_ --[[ _client ,]], bufnr)
     nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
     nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-    nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+    nmap('<A-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
 
     -- Lesser used LSP functionality
@@ -34,8 +34,6 @@ local on_attach = function(_ --[[ _client ,]], bufnr)
     end, { desc = 'Format current buffer with LSP' })
 
 
-
-    --
 end
 
 local servers = {
@@ -52,6 +50,7 @@ local servers = {
     pyright = {},
 
     rust_analyzer = {},
+    -- https://www.reddit.com/r/neovim/comments/10eqz79/rustanalyzer_only_works_if_i_write_save_the/
 
     taplo = {},
 

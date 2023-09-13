@@ -30,7 +30,8 @@ m("v", ";", ":")
 m("n", ":", ";")
 
 m("n", "x", "\"_x") -- Prevent x from overwriting y's
-m("n", "X", "\"_X")
+-- m("n", "X", "\"_X")
+m("x", "x", "\"_x")
 
 m("v", ">", ">gv")
 m("v", "<", "<gv")
@@ -39,16 +40,16 @@ m("n", "<Leader><Leader>q", "gqap")
 m("v", "<Leader><Leader>q", "gq")
 
 m("n", "n", "nzz") -- :h zw
--- m("n", "n", "nzz")
+m("n", "N", "Nzz")
 
 -- --terminal--
--- m("t", "<Ecs>", "<C-/><C-n>")
+m("t", "<Esc>", "<C-\\><C-n>")
+-- m("t", "<A-l>", "<C-\\><C-N>gt")
+-- m("t", "<A-h>", "<C-\\><C-N>gT")
+m("t", "<C-u>", "<C-\\><C-N><C-u>")
 -- m("t", "<A-[>", "<Esc>")
--- m("t", "<A-l>", "<C-/><C-n>gt")
--- m("t", "<A-h>", "<C-/><C-n>gT")
 -- m("t", "<C-h>", "<C-/><C-n><C-w>h")
 -- m("t", "<C-k>", "<C-/><C-n><C-w>k")
--- m("t", "<C-u>", "<C-/><C-n><C-u>")
 
 m("n", "<C-t>", ":tabnew ") -- <C-t> has something to do with TagStack
 
@@ -63,13 +64,15 @@ m("n", "<Left>", "<c-w>>")
 m("n", "<Right>", "<c-w><")
 
 
-m("n", "<C-h>", "<C-w>h")
-m("n", "<C-j>", "<C-w>j")
-m("n", "<C-k>", "<C-w>k")
-m("n", "<C-l>", "<C-w>l")
+-- m("n", "<C-h>", "<C-w>h")
+-- m("n", "<C-j>", "<C-w>j")
+-- m("n", "<C-k>", "<C-w>k")
+-- m("n", "<C-l>", "<C-w>l")
 
 m("n", "<A-h>", "gT")
 m("n", "<A-l>", "gt")
+m("i", "<A-h>", "<Esc>gT")
+m("i", "<A-l>", "<Esc>gt")
 
 m("i", "<C-e>", "<Esc>A")
 m("i", "<C-a>", "<Esc>I")
@@ -88,15 +91,16 @@ m("v", "<Leader>p", "\"aP") -- not sure know how change that (with nvim_feedkeys
 m("n", "<A-d>", "\"_d")     -- Without trashing the clippboard
 m("v", "<A-d>", "\"_d")
 
-m("n", "<Leader><Leader>d", "ddO<Esc>")
+m("n", "<Leader><Leader>d", "ddO<Esc>") -- might remove that
 
 m("n", "<Leader>l", "<cmd>Lex 25<CR>")
 m("n", "<Leader><Leader>l", "<cmd>Tex<CR>")
 
-m("n", "<Leader>a", "g'\"")
+-- m("n", "<Leader>a", "g'\"") -- harpoon uses that keemap
 
-m("n", "<Leader>o", "o<C-w>")
-m("n", "<Leader>O", "O<C-w>")
+
+-- m("n", "<Leader>o", "o<C-w>")
+-- m("n", "<Leader>O", "O<C-w>") 
 
 m("n", "<c-d>", "<c-d>zz")
 m("n", "<c-u>", "<c-u>zz")
@@ -111,9 +115,8 @@ m("n", "cc", "C")
 m("n", "Y", "yy")
 m("n", "yy", "y$")
 
-m("i", "q[", "{}<Left><CR><Esc>O")
-
 m("n", "J", "mzJ'z")
+
 
 -- m("n", "<a-w>", "ZQ") used for exiting <Leader>q
 
@@ -131,31 +134,32 @@ m("n", "J", "mzJ'z")
 -- m("n", "ggt", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>")
 m("n", "gd", "<cmd>vsp | lua vim.lsp.buf.definition()<CR>")
 
-m("n", "<Leader><Leader>Q", "q")
+m("n", "<Leader><Leader>Q", "q") -- I wanted q to do smth else. In case I want to use it
 
--- could change it in the plugin itself
-function Comm()
+function Comm() -- could change it in the plugin itself
     vim.api.nvim_feedkeys("gcc", "m", true)
 end
 
 function CommV()
     vim.api.nvim_feedkeys("gc", "m", true)
 end
--- :h Q Repeat the last recorded register [count] times.
+
 m("n", "q", "<cmd>lua Comm()<CR>")
 m("x", "q", "<cmd>lua CommV()<CR>")
 
 function FormatFile()
     local file_type = vim.bo.filetype
+    vim.cmd("w")
     if file_type == "python" then
-        FormatPython()
+        -- FormatPython()
+        vim.cmd("! black " .. vim.api.nvim_buf_get_name(0))
+    elseif file_type == 'rust' then
+        vim.cmd("! rustfmt " .. vim.api.nvim_buf_get_name(0))
+        -- vim.cmd('RustFmt') Does not work and I dont want to install rust-lang/rust.vim to fix it
     end
-    -- if file_type == 'rust' then
-    --     vim.cmd('RustFmt')
-    -- else
 end
 
-function FormatPython()
+--[[ function FormatPython()
     vim.cmd("w")
     -- or vim.fn.expand('%:p') --  .. " >/dev/null 2>&1 &" can be added to the back, but silent makes no diff
     -- silent and defer_fn can be removed to get feedback and for the file to be automatically
@@ -165,22 +169,68 @@ function FormatPython()
     -- vim.defer_fn(function()
     --     vim.cmd("e")
     -- end, 150)
-end
+end ]]
 
+-- m("n", "<Leader>o", "<cmd>lua FormatFile()<CR>")
 m("n", "<Leader>o", "<cmd>lua FormatFile()<CR>")
 
-function CommBandP()
+-- TODO: reformat the functions so that they are anonymous functions
+
+function CommBandP() -- Comment Block and Paste it
     vim.api.nvim_feedkeys("ygvo\x1bo\x1bpgvgc", "m", true)
     -- local last_selected_line = vim.fn.line("'>") is flawed
 end
 
 m("x", "<Leader>o", "<cmd>lua CommBandP()<cr>")
 
-function CommentPrint()
+function CommentPrint() -- maby I don't need nvim_feedkeys
     vim.api.nvim_feedkeys(":g/print/s/^/#/\r", "m", true)
 end
 
 m("x", "<Leader>cp", "<cmd>lua CommentPrint()<cr>")
+
+
+m("n", "<Leader>x", '<cmd>wa<CR><cmd>qa<CR>')
+m("n", "<Leader><Leader>x", '<cmd>wa<CR><cmd>mks!<CR><cmd>qa<CR>')
+
+------ Harpoon
+m("n", "<Leader><Leader>m", function ()
+    vim.api.nvim_feedkeys(';lua require("harpoon.cmd-ui").toggle_quick_menu()\racargo run\rp .', "m", true)
+end)
+m("n", "<Leader>a", '<cmd>lua require("harpoon.mark").add_file()<CR>')
+m("n", "<C-h>", '<cmd>lua require("harpoon.ui").nav_file(1)<CR>')
+m("n", "<C-j>", '<cmd>lua require("harpoon.ui").nav_file(2)<CR>')
+m("n", "<C-k>", '<cmd>lua require("harpoon.ui").nav_file(3)<CR>')
+m("n", "<C-m>", '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>')
+m("n", "<Leader>m", '<cmd>lua require("harpoon.cmd-ui").toggle_quick_menu()<CR>')
+m("n", "<C-n>", function ()
+    if vim.bo.buftype == "terminal" then
+        vim.api.nvim_feedkeys(';bprev\r', "m", true)
+    else
+        vim.api.nvim_feedkeys(';lua require("harpoon.term").gotoTerminal(1)\r', "m", true)
+    end
+end)
+
+m("n", "<Leader>1", function ()
+    vim.api.nvim_feedkeys(';lua require("harpoon.term").gotoTerminal(1)\r;lua require("harpoon.term").sendCommand(1, 1)\ra\r', "m", true)
+end)
+m("n", "<Leader>2", function ()
+    vim.api.nvim_feedkeys(';lua require("harpoon.term").gotoTerminal(1)\r;lua require("harpoon.term").sendCommand(1, 2)\ra\r', "m", true)
+end)
+
+m("t", "<C-h>", '<cmd>lua require("harpoon.ui").nav_file(1)<CR>')
+m("t", "<C-j>", '<cmd>lua require("harpoon.ui").nav_file(2)<CR>')
+m("t", "<C-k>", '<cmd>lua require("harpoon.ui").nav_file(3)<CR>')
+m("t", "<C-n>", '<cmd>bprev<CR>')
+m("t", "<A-k>", "<C-\\><C-N>k")
+m("t", "<Leader>1", function ()
+    vim.api.nvim_feedkeys("\x1b;lua require('harpoon.term').sendCommand(1, 1)\ra\r", "m", true)
+end)
+m("t", "<Leader>2", function ()
+    vim.api.nvim_feedkeys("\x1b;lua require('harpoon.term').sendCommand(1, 2)\ra\r", "m", true)
+end)
+-- m("t", "<Leader>m", '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>')
+
 
 ------ Telescope
 m("n", "<Leader>f", function()
@@ -194,6 +244,7 @@ m("n", "<Leader>/", function()
         previewer = false,
     })
 end)
+
 m("n", "<Leader><Leader>f", require("telescope.builtin").find_files)
 m("n", "<Leader>b", require("telescope.builtin").buffers)
 m("n", "<Leader>gg", require("telescope.builtin").live_grep)
