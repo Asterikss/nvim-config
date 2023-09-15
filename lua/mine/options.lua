@@ -26,10 +26,11 @@ o.shortmess:append "IW"                    -- disable nvim intro
 
 -- status line stuff
 o.ruler = false    -- no ruler - e.g. 17,26-49	TOP
-o.cmdheight = 1
+o.cmdheight = 0
 o.showmode = false -- no --Insert--
 o.laststatus = 0
-o.showcmdloc = "last"
+o.showcmdloc = "tabline"
+-- o.showcmdloc = "last"
 
 -- tab stuff (I hate python)
 o.smarttab = true
