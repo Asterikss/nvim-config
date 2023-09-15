@@ -9,6 +9,7 @@ vim.keymap.set("n", "<Leader><A-y>", "YI#<Space><Esc>p", { noremap = true })
 vim.keymap.set("i", "qp", "print()<left>", { noremap = true })
 vim.keymap.set("i", "<a-q>p", 'print("")<left><left>', { noremap = true })
 vim.keymap.set("i", "qfp", 'print(f"}")<left><left><left>', { noremap = true })
+vim.keymap.set("i", ";", ':<CR>', { noremap = true })
 
 -- https://github.com/EgZvor/vim-black
 -- https://github.com/averms/black-nvim/tree/master
