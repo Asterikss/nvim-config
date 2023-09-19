@@ -5,11 +5,11 @@
 -- I am usually working with only one file type during one session
 -- vim.api.keymap.set() - https://www.reddit.com/r/neovim/comments/uuh8xw/noob_vimkeymapset_vs_vimapinvim_set_keymap_key/
 
-vim.keymap.set("n", "<Leader><A-y>", "YI#<Space><Esc>p", { noremap = true })
-vim.keymap.set("i", "qp", "print()<left>", { noremap = true })
-vim.keymap.set("i", "<a-q>p", 'print("")<left><left>', { noremap = true })
-vim.keymap.set("i", "qfp", 'print(f"}")<left><left><left>', { noremap = true })
-vim.keymap.set("i", ";", ':<CR>', { noremap = true })
+vim.api.nvim_buf_set_keymap(0, "n", "<Leader><A-y>", "YI#<Space><Esc>p", { noremap = true })
+vim.api.nvim_buf_set_keymap(0, "i", "qp", "print()<left>", { noremap = true })
+vim.api.nvim_buf_set_keymap(0, "i", "<a-q>p", 'print("")<left><left>', { noremap = true })
+vim.api.nvim_buf_set_keymap(0, "i", "qfp", 'print(f"}")<left><left><left>', { noremap = true })
+vim.api.nvim_buf_set_keymap(0, "i", ";", ':<CR>', { noremap = true })
 
 -- https://github.com/EgZvor/vim-black
 -- https://github.com/averms/black-nvim/tree/master
