@@ -127,16 +127,23 @@ m("n", "gd", "<cmd>vsp | lua vim.lsp.buf.definition()<CR>")
 
 m("n", "<Leader><Leader>Q", "q") -- I wanted q to do smth else. In case I want to use it
 
-function Comm() -- could change it in the plugin itself
+-- function Comm() -- could change it in the plugin itself
+    -- vim.api.nvim_feedkeys("gcc", "m", true)
+-- end
+
+-- function CommV()
+--     vim.api.nvim_feedkeys("gc", "m", true)
+-- end
+
+-- m("n", "q", "<cmd>lua Comm()<CR>")
+m("n", "q", function () -- could change it in the plugin itself
     vim.api.nvim_feedkeys("gcc", "m", true)
-end
+end)
 
-function CommV()
+-- m("x", "q", "<cmd>lua CommV()<CR>")
+m("x", "q", function ()
     vim.api.nvim_feedkeys("gc", "m", true)
-end
-
-m("n", "q", "<cmd>lua Comm()<CR>")
-m("x", "q", "<cmd>lua CommV()<CR>")
+end)
 
 function FormatFile()
     local file_type = vim.bo.filetype
@@ -188,9 +195,10 @@ m("n", "<Leader><Leader>x", '<Esc><cmd>wa<CR><cmd>mks!<CR><cmd>qa<CR>')
 ------ Harpoon + terminal mappings
 m("n", "<Leader><Leader>m", function () -- might change to full path later; also del whole buf not just first line
     if vim.bo.filetype == "python" then
-        vim.api.nvim_feedkeys(';lua require("harpoon.cmd-ui").toggle_quick_menu()\rDap ' .. vim.fn.expand('%:h') .. "/" .. vim.fn.expand('%:t') .. "\x1bq", "m", true)
+        -- vim.api.nvim_feedkeys(';lua require("harpoon.cmd-ui").toggle_quick_menu()\rdapap ' .. vim.fn.expand('%:h') .. "/" .. vim.fn.expand('%:t') .. "\x1bq", "m", true)
+        vim.api.nvim_feedkeys(';lua require("harpoon.cmd-ui").toggle_quick_menu()\rdipap ' .. vim.fn.expand('%:h') .. "/" .. vim.fn.expand('%:t') .. "\x1bq", "m", true)
     else
-        vim.api.nvim_feedkeys(';lua require("harpoon.cmd-ui").toggle_quick_menu()\racargo run\x1bq', "m", true)
+        vim.api.nvim_feedkeys(';lua require("harpoon.cmd-ui").toggle_quick_menu()\rdapacargo run\x1bq', "m", true)
     end
 end)
 m("n", "<Leader>a", '<cmd>lua require("harpoon.mark").add_file()<CR>')
@@ -200,7 +208,8 @@ m("n", "<C-k>", '<cmd>lua require("harpoon.ui").nav_file(3)<CR>')
 -- m("n", "<C-l>", '<cmd>lua require("harpoon.ui").nav_file(3)<CR>')
 m("n", "<A-m>", '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>') -- this is also Enter
 m("n", "<Leader>m", '<cmd>lua require("harpoon.cmd-ui").toggle_quick_menu()<CR>')
-m("n", "<C-n>", function ()
+-- m("n", "<C-n>", function ()
+m("n", "<A-n>", function ()
     if vim.bo.buftype == "terminal" then
         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-^>", true, false, true), "m", true)
     else
@@ -242,7 +251,8 @@ end)
 m("t", "<Esc>", "<C-\\><C-n>")
 m("t", "<C-u>", "<C-\\><C-N><C-u>")
 m("t", "<A-k>", "<C-\\><C-N>k")
-m("t", "<C-n>", function ()
+-- m("t", "<C-n>", function ()
+m("t", "<A-n>", function ()
     vim.api.nvim_feedkeys("\x1b" .. vim.api.nvim_replace_termcodes("<C-^>", true, false, true), "m", true) end)
 
 m("t", "<C-b>", function ()
