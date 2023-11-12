@@ -1,13 +1,12 @@
-require "mine.plugins"
-require "mine.keymaps"
-require "mine.options"
-require "mine.colorscheme"
+require "cfg.plugins"
+require "cfg.keymaps"
+require "cfg.options"
 
-require "mine.conf-plugs.mason"
-require "mine.conf-plugs.cmp"
-require "mine.conf-plugs.snips"
-require "mine.conf-plugs.lsp"
-require "mine.conf-plugs.telescope"
-require "mine.conf-plugs.treesitter"
+require "cfg.cfg_plugins.telescope"
+require "cfg.cfg_plugins.mason"
+require "cfg.cfg_plugins.lsp"
+require "cfg.cfg_plugins.snips"
+require "cfg.cfg_plugins.cmp"
+require "cfg.cfg_plugins.treesitter"
 -- gd works on them
 
