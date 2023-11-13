@@ -27,7 +27,7 @@ m("v", ";", ":")
 
 m("n", ":", ";")
 
-m({"n", "x"}, "x", "\"_x") -- Prevent x from overwriting y's
+m({ "n", "x" }, "x", "\"_x") -- Prevent x from overwriting y's
 
 m("v", ">", ">gv")
 m("v", "<", "<gv")
@@ -87,7 +87,7 @@ m("n", "<Leader><Leader>l", "<cmd>Tex<CR>")
 
 
 -- m("n", "<Leader>o", "o<C-w>")
--- m("n", "<Leader>O", "O<C-w>") 
+-- m("n", "<Leader>O", "O<C-w>")
 
 m("n", "<c-d>", "<c-d>zz")
 m("n", "<c-u>", "<c-u>zz")
@@ -121,27 +121,9 @@ m("n", "J", "mzJ'z")
 -- m("n", "ggt", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>")
 m("n", "gd", "<cmd>vsp | lua vim.lsp.buf.definition()<CR>")
 
-m("n", "<Leader><Leader>Q", "q") -- I wanted q to do smth else. In case I want to use it
+m("n", "<Leader><Leader>Q", "q") -- q is taken for commenting
 
--- function Comm() -- could change it in the plugin itself
-    -- vim.api.nvim_feedkeys("gcc", "m", true)
--- end
-
--- function CommV()
---     vim.api.nvim_feedkeys("gc", "m", true)
--- end
-
--- m("n", "q", "<cmd>lua Comm()<CR>")
-m("n", "q", function () -- could change it in the plugin itself
-    vim.api.nvim_feedkeys("gcc", "m", true)
-end)
-
--- m("x", "q", "<cmd>lua CommV()<CR>")
-m("x", "q", function ()
-    vim.api.nvim_feedkeys("gc", "m", true)
-end)
-
-function FormatFile()
+--[[ function FormatFile()
     local file_type = vim.bo.filetype
     vim.cmd("w")
     if file_type == "python" then
@@ -151,24 +133,26 @@ function FormatFile()
         vim.cmd("! rustfmt " .. vim.api.nvim_buf_get_name(0))
         -- vim.cmd('RustFmt') Does not work and I dont want to install rust-lang/rust.vim to fix it
     end
-end
-
---[[ function FormatPython()
-    vim.cmd("w")
-    -- or vim.fn.expand('%:p') --  .. " >/dev/null 2>&1 &" can be added to the back, but silent makes no diff
-    -- silent and defer_fn can be removed to get feedback and for the file to be automatically
-    -- changed (formatted) after pressing enter / <C-c>
-    -- vim.cmd("silent ! black " .. vim.api.nvim_buf_get_name(0)) -- or vim.fn.expand('%:p')
-    vim.cmd("! black " .. vim.api.nvim_buf_get_name(0))
-    -- vim.defer_fn(function()
-    --     vim.cmd("e")
-    -- end, 150)
 end ]]
-
 -- m("n", "<Leader>o", "<cmd>lua FormatFile()<CR>")
-m("n", "<Leader>o", "<cmd>lua FormatFile()<CR>")
 
--- TODO: reformat the functions so that they are anonymous functions
+
+m("n", "<Leader>o", function ()
+    local file_type = vim.bo.filetype
+    vim.cmd("w")
+    if file_type == "python" then
+        vim.cmd("! black " .. vim.api.nvim_buf_get_name(0))
+    elseif file_type == 'rust' then
+        vim.cmd("! rustfmt " .. vim.api.nvim_buf_get_name(0))
+        -- vim.cmd('RustFmt') Does not work and I dont want to install rust-lang/rust.vim to fix it
+    end
+end)
+-- this with the addition of "silent" before e.g. "! black..." can be used to
+-- supress the need to press <enter> after formatting.
+-- vim.defer_fn(function()
+--     vim.cmd("e")
+-- end, 150)
+
 
 function CommBandP() -- Comment Block and Paste it
     vim.api.nvim_feedkeys("ygvo\x1bo\x1bpgvgc", "m", true)
@@ -189,10 +173,12 @@ m("n", "<Leader><Leader>x", '<Esc><cmd>wa<CR><cmd>mks!<CR><cmd>qa<CR>')
 
 
 ------ Harpoon + terminal mappings
-m("n", "<Leader><Leader>m", function () -- might change to full path later; also del whole buf not just first line
+m("n", "<Leader><Leader>m", function()  -- might change to full path later; also del whole buf not just first line
     if vim.bo.filetype == "python" then
         -- vim.api.nvim_feedkeys(';lua require("harpoon.cmd-ui").toggle_quick_menu()\rdapap ' .. vim.fn.expand('%:h') .. "/" .. vim.fn.expand('%:t') .. "\x1bq", "m", true)
-        vim.api.nvim_feedkeys(';lua require("harpoon.cmd-ui").toggle_quick_menu()\rdipap ' .. vim.fn.expand('%:h') .. "/" .. vim.fn.expand('%:t') .. "\x1bq", "m", true)
+        vim.api.nvim_feedkeys(
+        ';lua require("harpoon.cmd-ui").toggle_quick_menu()\rdipap ' ..
+        vim.fn.expand('%:h') .. "/" .. vim.fn.expand('%:t') .. "\x1bq", "m", true)
     else
         vim.api.nvim_feedkeys(';lua require("harpoon.cmd-ui").toggle_quick_menu()\rdapacargo run\x1bq', "m", true)
     end
@@ -205,7 +191,7 @@ m("n", "<C-k>", '<cmd>lua require("harpoon.ui").nav_file(3)<CR>')
 m("n", "<A-m>", '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>') -- this is also Enter
 m("n", "<Leader>m", '<cmd>lua require("harpoon.cmd-ui").toggle_quick_menu()<CR>')
 -- m("n", "<C-n>", function ()
-m("n", "<A-n>", function ()
+m("n", "<A-n>", function()
     if vim.bo.buftype == "terminal" then
         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-^>", true, false, true), "m", true)
     else
@@ -213,7 +199,7 @@ m("n", "<A-n>", function ()
     end
 end)
 
-m("n", "<C-b>", function ()
+m("n", "<C-b>", function()
     if vim.bo.buftype == "terminal" then
         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-^>", true, false, true), "m", true)
     else
@@ -221,26 +207,40 @@ m("n", "<C-b>", function ()
     end
 end)
 
-m("n", "<A-j>", function ()
+m("n", "<A-j>", function()
     if vim.bo.buftype == "terminal" then
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-^>", true, false, true) ..';lua require("harpoon.term").gotoTerminal(1)\r;lua require("harpoon.term").sendCommand(1, 1)\ra\r', "m", true)
+        vim.api.nvim_feedkeys(
+        vim.api.nvim_replace_termcodes("<C-^>", true, false, true) ..
+        ';lua require("harpoon.term").gotoTerminal(1)\r;lua require("harpoon.term").sendCommand(1, 1)\ra\r', "m", true)
     else
-        vim.api.nvim_feedkeys(';wa\r;lua require("harpoon.term").gotoTerminal(1)\r;lua require("harpoon.term").sendCommand(1, 1)\ra\r', "m", true)
+        vim.api.nvim_feedkeys(
+        ';wa\r;lua require("harpoon.term").gotoTerminal(1)\r;lua require("harpoon.term").sendCommand(1, 1)\ra\r', "m",
+            true)
     end
 end)
-m("i", "<A-j>", function ()
+m("i", "<A-j>", function()
     if vim.bo.buftype == "terminal" then
-        vim.api.nvim_feedkeys('\x1b' .. vim.api.nvim_replace_termcodes("<C-^>", true, false, true) ..';lua require("harpoon.term").gotoTerminal(1)\r;lua require("harpoon.term").sendCommand(1, 1)\ra\r', "m", true)
+        vim.api.nvim_feedkeys(
+        '\x1b' ..
+        vim.api.nvim_replace_termcodes("<C-^>", true, false, true) ..
+        ';lua require("harpoon.term").gotoTerminal(1)\r;lua require("harpoon.term").sendCommand(1, 1)\ra\r', "m", true)
     else
-        vim.api.nvim_feedkeys('\x1b' .. ';wa\r;lua require("harpoon.term").gotoTerminal(1)\r;lua require("harpoon.term").sendCommand(1, 1)\ra\r', "m", true)
+        vim.api.nvim_feedkeys(
+        '\x1b' ..
+        ';wa\r;lua require("harpoon.term").gotoTerminal(1)\r;lua require("harpoon.term").sendCommand(1, 1)\ra\r', "m",
+            true)
     end
 end)
 
-m("n", "<Leader>1", function ()
+m("n", "<Leader>1", function()
     if vim.bo.buftype == "terminal" then
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-^>", true, false, true) ..';lua require("harpoon.term").gotoTerminal(1)\r;lua require("harpoon.term").sendCommand(1, 1)\ra\r', "m", true)
+        vim.api.nvim_feedkeys(
+        vim.api.nvim_replace_termcodes("<C-^>", true, false, true) ..
+        ';lua require("harpoon.term").gotoTerminal(1)\r;lua require("harpoon.term").sendCommand(1, 1)\ra\r', "m", true)
     else
-        vim.api.nvim_feedkeys(';wa\r;lua require("harpoon.term").gotoTerminal(1)\r;lua require("harpoon.term").sendCommand(1, 2)\ra\r', "m", true)
+        vim.api.nvim_feedkeys(
+        ';wa\r;lua require("harpoon.term").gotoTerminal(1)\r;lua require("harpoon.term").sendCommand(1, 2)\ra\r', "m",
+            true)
     end
 end)
 
@@ -248,14 +248,17 @@ m("t", "<Esc>", "<C-\\><C-n>")
 m("t", "<C-u>", "<C-\\><C-N><C-u>")
 m("t", "<A-k>", "<C-\\><C-N>k")
 -- m("t", "<C-n>", function ()
-m("t", "<A-n>", function ()
-    vim.api.nvim_feedkeys("\x1b" .. vim.api.nvim_replace_termcodes("<C-^>", true, false, true), "m", true) end)
+m("t", "<A-n>", function()
+    vim.api.nvim_feedkeys("\x1b" .. vim.api.nvim_replace_termcodes("<C-^>", true, false, true), "m", true)
+end)
 
-m("t", "<C-b>", function ()
-    vim.api.nvim_feedkeys("\x1b" .. vim.api.nvim_replace_termcodes("<C-^>", true, false, true), "m", true) end)
+m("t", "<C-b>", function()
+    vim.api.nvim_feedkeys("\x1b" .. vim.api.nvim_replace_termcodes("<C-^>", true, false, true), "m", true)
+end)
 
-m("t", "<A-j>", function ()
-    vim.api.nvim_feedkeys("\x1b" .. vim.api.nvim_replace_termcodes("<C-^>", true, false, true), "m", true) end)
+m("t", "<A-j>", function()
+    vim.api.nvim_feedkeys("\x1b" .. vim.api.nvim_replace_termcodes("<C-^>", true, false, true), "m", true)
+end)
 -- m("t", "<C-h>", '<cmd>lua require("harpoon.ui").nav_file(1)<CR>')
 -- m("t", "<C-j>", '<cmd>lua require("harpoon.ui").nav_file(2)<CR>')
 -- m("t", "<C-k>", '<cmd>lua require("harpoon.ui").nav_file(3)<CR>')

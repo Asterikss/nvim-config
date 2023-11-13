@@ -34,7 +34,16 @@ require("lazy").setup({
     -- Comments
     {
         'numToStr/Comment.nvim',
-        opts = {},
+        opts = {
+            toggler = {
+                line = 'q',
+                block = 'gbq',
+            },
+            opleader = {
+                line = 'q',
+                block = 'gb',
+            },
+        },
         lazy = false,
     },
     -- LSP

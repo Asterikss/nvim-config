@@ -9,4 +9,3 @@ require "cfg.snips"
 require "cfg.cmp"
 require "cfg.treesitter"
 -- gd works on them
-
