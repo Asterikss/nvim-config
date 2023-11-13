@@ -85,42 +85,11 @@ m("n", "yy", "y$")
 
 m("n", "J", "mzJ'z")
 
--- m("n", "<Leader>y", "\"ay")
--- m("v", "<Leader>y", "\"ay")
--- m("n", "<Leader>p", "\"aP") --  <- old p here. Changes the clippboard
--- m("v", "<Leader>p", "\"aP") -- not sure know how change that (with nvim_feedkeys)
-
--- m("n", "<Leader>a", "g'\"") -- harpoon uses that keemap
-
--- m("n", "<a-w>", "ZQ") used for exiting <Leader>q
-
--- Enable spel checking, z=
--- map <leader>s :getlocal spell! spelllang=en_us<CR>
-
--- m("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-
--- for future reference
--- vim.api.nvim_buf_set_keymap(bufnr, "n", "gdt", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>", opts)
--- m("n", "ggt", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>")
-m("n", "gd", "<cmd>vsp | lua vim.lsp.buf.definition()<CR>")
-
 m("n", "<Leader><Leader>Q", "q") -- q is taken for commenting
 
---[[ function FormatFile()
-    local file_type = vim.bo.filetype
-    vim.cmd("w")
-    if file_type == "python" then
-        -- FormatPython()
-        vim.cmd("! black " .. vim.api.nvim_buf_get_name(0))
-    elseif file_type == 'rust' then
-        vim.cmd("! rustfmt " .. vim.api.nvim_buf_get_name(0))
-        -- vim.cmd('RustFmt') Does not work and I dont want to install rust-lang/rust.vim to fix it
-    end
-end ]]
--- m("n", "<Leader>o", "<cmd>lua FormatFile()<CR>")
+m("n", "gd", "<cmd>vsp | lua vim.lsp.buf.definition()<CR>")
 
-
-m("n", "<Leader>o", function ()
+m("n", "<Leader>o", function () -- Format file
     local file_type = vim.bo.filetype
     vim.cmd("w")
     if file_type == "python" then
@@ -130,15 +99,9 @@ m("n", "<Leader>o", function ()
         -- vim.cmd('RustFmt') Does not work and I dont want to install rust-lang/rust.vim to fix it
     end
 end)
--- this with the addition of "silent" before e.g. "! black..." can be used to
--- supress the need to press <enter> after formatting.
--- vim.defer_fn(function()
---     vim.cmd("e")
--- end, 150)
 
-
-function CommBandP() -- Comment Block and Paste it
-    vim.api.nvim_feedkeys("ygvo\x1bo\x1bpgvgc", "m", true)
+function CommBandP() -- Comment Block and Paste it under
+    vim.api.nvim_feedkeys("ygvo\x1bo\x1bpgvq", "m", true)
     -- local last_selected_line = vim.fn.line("'>") is flawed
 end
 
@@ -174,6 +137,7 @@ m("n", "<C-k>", '<cmd>lua require("harpoon.ui").nav_file(3)<CR>')
 -- m("n", "<C-l>", '<cmd>lua require("harpoon.ui").nav_file(4)<CR>')
 m("n", "<A-m>", '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>') -- this is also Enter
 m("n", "<Leader>m", '<cmd>lua require("harpoon.cmd-ui").toggle_quick_menu()<CR>')
+
 m("n", "<A-n>", function()
     if vim.bo.buftype == "terminal" then
         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-^>", true, false, true), "m", true)
@@ -190,10 +154,10 @@ m("n", "<A-b>", function()
     end
 end)
 
-m("n", "<A-j>", function() -- TODO
+m("n", "<A-j>", function()
     if vim.bo.buftype == "terminal" then
         vim.api.nvim_feedkeys(
-        vim.api.nvim_replace_termcodes("<C-^>", true, false, true) ..
+        vim.api.nvim_replace_termcodes("<c-^>", true, false, true) ..
         ';lua require("harpoon.term").gotoTerminal(1)\r;lua require("harpoon.term").sendCommand(1, 1)\ra\r', "m", true)
     else
         vim.api.nvim_feedkeys(
@@ -201,18 +165,19 @@ m("n", "<A-j>", function() -- TODO
             true)
     end
 end)
+
 m("i", "<A-j>", function()
-    if vim.bo.buftype == "terminal" then
-        vim.api.nvim_feedkeys(
-        '\x1b' ..
-        vim.api.nvim_replace_termcodes("<C-^>", true, false, true) ..
-        ';lua require("harpoon.term").gotoTerminal(1)\r;lua require("harpoon.term").sendCommand(1, 1)\ra\r', "m", true)
-    else
-        vim.api.nvim_feedkeys(
-        '\x1b' ..
-        ';wa\r;lua require("harpoon.term").gotoTerminal(1)\r;lua require("harpoon.term").sendCommand(1, 1)\ra\r', "m",
-            true)
-    end
+    -- if vim.bo.buftype == "terminal" then
+    --     vim.api.nvim_feedkeys(
+    --     '\x1b' ..
+    --     vim.api.nvim_replace_termcodes("<C-^>", true, false, true) ..
+    --     ';lua require("harpoon.term").gotoTerminal(1)\r;lua require("harpoon.term").sendCommand(1, 1)\ra\r', "m", true)
+    -- else
+    vim.api.nvim_feedkeys(
+    '\x1b' ..
+    ';wa\r;lua require("harpoon.term").gotoTerminal(1)\r;lua require("harpoon.term").sendCommand(1, 1)\ra\r', "m",
+        true)
+    -- end
 end)
 
 m("n", "<Leader>1", function() -- TODO
@@ -235,16 +200,15 @@ m("t", "<A-n>", function()
     vim.api.nvim_feedkeys("\x1b" .. vim.api.nvim_replace_termcodes("<C-^>", true, false, true), "m", true)
 end)
 
-m("t", "<A-b>", function() -- TODO. move to second terminal
+m("t", "<A-b>", function()
     vim.api.nvim_feedkeys("\x1b" .. vim.api.nvim_replace_termcodes("<C-^>", true, false, true), "m", true)
 end)
 
-m("t", "<A-j>", function() -- TODO just execute
-    vim.api.nvim_feedkeys("\x1b" .. vim.api.nvim_replace_termcodes("<C-^>", true, false, true), "m", true)
+m("t", "<A-j>", function()
+    vim.api.nvim_feedkeys("\x1b" ..
+    vim.api.nvim_replace_termcodes("<c-^>", true, false, true) ..
+    ';lua require("harpoon.term").gotoTerminal(1)\r;lua require("harpoon.term").sendCommand(1, 1)\ra\r', "m", true)
 end)
--- m("t", "<C-h>", '<cmd>lua require("harpoon.ui").nav_file(1)<CR>')
--- m("t", "<C-j>", '<cmd>lua require("harpoon.ui").nav_file(2)<CR>')
--- m("t", "<C-k>", '<cmd>lua require("harpoon.ui").nav_file(3)<CR>')
 
 
 ------ Telescope
@@ -292,3 +256,30 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 --   \    readfile(proc_version, '', 1), { _, val -> val =~? 'microsoft' }))
 --   \  : v:false
 -- endfunction
+--
+-- for future reference
+-- vim.api.nvim_buf_set_keymap(bufnr, "n", "gdt", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>", opts)
+-- m("n", "gr", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>")
+
+-- m("n", "<Leader>y", "\"ay")
+-- m("v", "<Leader>y", "\"ay")
+-- m("n", "<Leader>p", "\"aP") --  <- old p here. Changes the clippboard
+-- m("v", "<Leader>p", "\"aP") -- not sure know how change that (with nvim_feedkeys)
+
+-- m("n", "<Leader>a", "g'\"") -- harpoon uses that keemap
+
+-- m("n", "<a-w>", "ZQ") used for exiting <Leader>q
+
+-- Enable spel checking, z=
+-- map <leader>s :getlocal spell! spelllang=en_us<CR>
+
+-- m("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+
+
+-- vim.defer_fn(function()
+--     vim.cmd("e")
+-- end, 150)
+-- this can be used in Fromat File keymap with the addition of 
+-- "silent" before e.g. "! black..." It will supress the need 
+-- to press <enter> after formatting.
+
