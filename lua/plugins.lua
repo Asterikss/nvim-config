@@ -103,46 +103,48 @@ require("lazy").setup({
            "nvim-lua/plenary.nvim",
         },
     },
+    -- Git
+    'tpope/vim-fugitive',
 
 }, {})
 
-require('neodev').setup()
+-- require('neodev').setup()
 
+
+-- Unless you are still migrating, remove the deprecated commands from v1.x. run :Neotree
+-- vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 --
---     -- Unless you are still migrating, remove the deprecated commands from v1.x. run :Neotree
---     -- vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
---     --
---     -- use {
---     --     "nvim-neo-tree/neo-tree.nvim",
---     --     branch = "v2.x",
---     --     requires = {
---     --         "nvim-lua/plenary.nvim",
---     --         -- "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
---     --         "MunifTanjim/nui.nvim",
---     --     }
---     -- }
---
---     -- use "tpope/vim-sleuth" Detect tabstop and shiftwidth automatically
---     -- mbbill/undotree
---     -- tpope/vim-fugitive
---     -- nvim-neo-tree/neo-tree.nvim  /  vim-gitgutter  /  oil.nvim  /  harpoon
---     -- nvim-telescope/telescope-project.nvim
---     -- incorporate git stuff later https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua#LL248
---
---     --[[ { this setup is for "lazy"
---             -- Add indentation guides even on blank lines
---             'lukas-reineke/indent-blankline.nvim',
---             -- Enable `lukas-reineke/indent-blankline.nvim`
---             -- See `:help indent_blankline.txt`
---             opts = {
---                     char = '┊',
---                     show_trailing_blankline_indent = false,
---             },
---     }, ]]
---
---
--- 	-- for "nvim-telescope/telescope.nvim"
--- 	-- BurntSushi/ripgrep is required for live_grep and grep_string and is the first priority for find_files
--- 	-- Debian/Ubuntu -> $ curl -LO https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb
--- 	-- $ sudo dpkg -i ripgrep_13.0.0_amd64.deb
--- 	-- Windows -> choco install ripgrep
+-- use {
+--     "nvim-neo-tree/neo-tree.nvim",
+--     branch = "v2.x",
+--     requires = {
+--         "nvim-lua/plenary.nvim",
+--         -- "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+--         "MunifTanjim/nui.nvim",
+--     }
+-- }
+
+-- use "tpope/vim-sleuth" Detect tabstop and shiftwidth automatically
+-- mbbill/undotree
+-- 'tpope/vim-rhubarb',
+-- nvim-neo-tree/neo-tree.nvim  /  vim-gitgutter  /  oil.nvim  /  harpoon
+-- nvim-telescope/telescope-project.nvim
+-- incorporate git stuff later https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua#LL248
+
+--[[ { this setup is for "lazy"
+         -- Add indentation guides even on blank lines
+         'lukas-reineke/indent-blankline.nvim',
+         -- Enable `lukas-reineke/indent-blankline.nvim`
+         -- See `:help indent_blankline.txt`
+         opts = {
+                 char = '┊',
+                 show_trailing_blankline_indent = false,
+         },
+ }, ]]
+
+
+-- for "nvim-telescope/telescope.nvim"
+-- BurntSushi/ripgrep is required for live_grep and grep_string and is the first priority for find_files
+-- Debian/Ubuntu -> $ curl -LO https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb
+-- $ sudo dpkg -i ripgrep_13.0.0_amd64.deb
+-- Windows -> choco install ripgrep
