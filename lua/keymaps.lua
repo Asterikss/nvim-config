@@ -35,26 +35,18 @@ m("v", "<", "<gv")
 m("n", "<Leader><Leader>q", "gqap")
 m("v", "<Leader><Leader>q", "gq")
 
-m("n", "n", "nzz") -- :h zw
+m("n", "n", "nzz")
 m("n", "N", "Nzz")
 
 m("n", "<C-t>", ":tabnew ") -- <C-t> has something to do with TagStack
 
 m("n", "go", "o<Esc>k")
 m("n", "gO", "O<Esc>j")
--- <A-k> <A-j> does not work. Maby alt first, then...
 
--- --windows--
 m("n", "<Down>", "<c-w>-")
 m("n", "<Up>", "<c-w>+")
 m("n", "<Left>", "<c-w>>")
 m("n", "<Right>", "<c-w><")
-
-
--- m("n", "<C-h>", "<C-w>h")
--- m("n", "<C-j>", "<C-w>j")
--- m("n", "<C-k>", "<C-w>k")
--- m("n", "<C-l>", "<C-w>l")
 
 m("n", "<A-h>", "gT")
 m("n", "<A-l>", "gt")
@@ -64,16 +56,11 @@ m("i", "<A-l>", "<Esc>gt")
 m("i", "<C-e>", "<Esc>A")
 m("i", "<C-a>", "<Esc>I")
 
-m("x", "J", "<cmd>m '>+1<CR>gv=gv")
+m("x", "J", "<cmd>m '>+1<CR>gv=gv") -- this is so buggy
 m("x", "K", "<cmd>m '<-2<CR>gv=gv")
 
 m("x", "p", "\"_dP") -- Without trashing the clippboard
-m("x", "<A-p>", "p") -- There might be a better way
-
-m("n", "<Leader>y", "\"ay")
-m("v", "<Leader>y", "\"ay")
-m("n", "<Leader>p", "\"aP") --  <- old p here. Changes the clippboard
-m("v", "<Leader>p", "\"aP") -- not sure know how change that (with nvim_feedkeys)
+m("x", "<A-p>", "p") -- There might be a better mapping
 
 m("n", "<A-d>", "\"_d")     -- Without trashing the clippboard
 m("v", "<A-d>", "\"_d")
@@ -82,12 +69,6 @@ m("n", "<Leader><Leader>d", "ddO<Esc>") -- might remove that
 
 m("n", "<Leader>l", "<cmd>Lex 25<CR>")
 m("n", "<Leader><Leader>l", "<cmd>Tex<CR>")
-
--- m("n", "<Leader>a", "g'\"") -- harpoon uses that keemap
-
-
--- m("n", "<Leader>o", "o<C-w>")
--- m("n", "<Leader>O", "O<C-w>")
 
 m("n", "<c-d>", "<c-d>zz")
 m("n", "<c-u>", "<c-u>zz")
@@ -104,12 +85,14 @@ m("n", "yy", "y$")
 
 m("n", "J", "mzJ'z")
 
+-- m("n", "<Leader>y", "\"ay")
+-- m("v", "<Leader>y", "\"ay")
+-- m("n", "<Leader>p", "\"aP") --  <- old p here. Changes the clippboard
+-- m("v", "<Leader>p", "\"aP") -- not sure know how change that (with nvim_feedkeys)
+
+-- m("n", "<Leader>a", "g'\"") -- harpoon uses that keemap
 
 -- m("n", "<a-w>", "ZQ") used for exiting <Leader>q
-
-
--- m("n", "<A-j>", ":tabm -1<CR>")
--- m("n", "<A-k>", ":tabm +1<CR>")
 
 -- Enable spel checking, z=
 -- map <leader>s :getlocal spell! spelllang=en_us<CR>
@@ -172,8 +155,8 @@ m("n", "<Leader>x", '<Esc><cmd>wa<CR><cmd>qa<CR>') -- maby ctrl x so I can also 
 m("n", "<Leader><Leader>x", '<Esc><cmd>wa<CR><cmd>mks!<CR><cmd>qa<CR>')
 
 
------- Harpoon + terminal mappings
-m("n", "<Leader><Leader>m", function()  -- might change to full path later; also del whole buf not just first line
+------ Harpoon + terminal mappings ------
+m("n", "<Leader><Leader>m", function()
     if vim.bo.filetype == "python" then
         -- vim.api.nvim_feedkeys(';lua require("harpoon.cmd-ui").toggle_quick_menu()\rdapap ' .. vim.fn.expand('%:h') .. "/" .. vim.fn.expand('%:t') .. "\x1bq", "m", true)
         vim.api.nvim_feedkeys(
@@ -183,14 +166,14 @@ m("n", "<Leader><Leader>m", function()  -- might change to full path later; also
         vim.api.nvim_feedkeys(';lua require("harpoon.cmd-ui").toggle_quick_menu()\rdapacargo run\x1bq', "m", true)
     end
 end)
+
 m("n", "<Leader>a", '<cmd>lua require("harpoon.mark").add_file()<CR>')
 m("n", "<C-h>", '<cmd>lua require("harpoon.ui").nav_file(1)<CR>')
 m("n", "<C-j>", '<cmd>lua require("harpoon.ui").nav_file(2)<CR>')
 m("n", "<C-k>", '<cmd>lua require("harpoon.ui").nav_file(3)<CR>')
--- m("n", "<C-l>", '<cmd>lua require("harpoon.ui").nav_file(3)<CR>')
+-- m("n", "<C-l>", '<cmd>lua require("harpoon.ui").nav_file(4)<CR>')
 m("n", "<A-m>", '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>') -- this is also Enter
 m("n", "<Leader>m", '<cmd>lua require("harpoon.cmd-ui").toggle_quick_menu()<CR>')
--- m("n", "<C-n>", function ()
 m("n", "<A-n>", function()
     if vim.bo.buftype == "terminal" then
         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-^>", true, false, true), "m", true)
@@ -199,7 +182,7 @@ m("n", "<A-n>", function()
     end
 end)
 
-m("n", "<C-b>", function()
+m("n", "<A-b>", function()
     if vim.bo.buftype == "terminal" then
         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-^>", true, false, true), "m", true)
     else
@@ -207,7 +190,7 @@ m("n", "<C-b>", function()
     end
 end)
 
-m("n", "<A-j>", function()
+m("n", "<A-j>", function() -- TODO
     if vim.bo.buftype == "terminal" then
         vim.api.nvim_feedkeys(
         vim.api.nvim_replace_termcodes("<C-^>", true, false, true) ..
@@ -232,11 +215,11 @@ m("i", "<A-j>", function()
     end
 end)
 
-m("n", "<Leader>1", function()
+m("n", "<Leader>1", function() -- TODO
     if vim.bo.buftype == "terminal" then
         vim.api.nvim_feedkeys(
         vim.api.nvim_replace_termcodes("<C-^>", true, false, true) ..
-        ';lua require("harpoon.term").gotoTerminal(1)\r;lua require("harpoon.term").sendCommand(1, 1)\ra\r', "m", true)
+        ';lua require("harpoon.term").gotoTerminal(1)\r;lua require("harpoon.term").sendCommand(1, 2)\ra\r', "m", true)
     else
         vim.api.nvim_feedkeys(
         ';wa\r;lua require("harpoon.term").gotoTerminal(1)\r;lua require("harpoon.term").sendCommand(1, 2)\ra\r', "m",
@@ -247,16 +230,16 @@ end)
 m("t", "<Esc>", "<C-\\><C-n>")
 m("t", "<C-u>", "<C-\\><C-N><C-u>")
 m("t", "<A-k>", "<C-\\><C-N>k")
--- m("t", "<C-n>", function ()
+
 m("t", "<A-n>", function()
     vim.api.nvim_feedkeys("\x1b" .. vim.api.nvim_replace_termcodes("<C-^>", true, false, true), "m", true)
 end)
 
-m("t", "<C-b>", function()
+m("t", "<A-b>", function() -- TODO. move to second terminal
     vim.api.nvim_feedkeys("\x1b" .. vim.api.nvim_replace_termcodes("<C-^>", true, false, true), "m", true)
 end)
 
-m("t", "<A-j>", function()
+m("t", "<A-j>", function() -- TODO just execute
     vim.api.nvim_feedkeys("\x1b" .. vim.api.nvim_replace_termcodes("<C-^>", true, false, true), "m", true)
 end)
 -- m("t", "<C-h>", '<cmd>lua require("harpoon.ui").nav_file(1)<CR>')
@@ -284,6 +267,7 @@ m("n", "<Leader>gh", require("telescope.builtin").help_tags)
 m("n", "<Leader>?", require("telescope.builtin").oldfiles)
 m("n", "<Leader>sd", require("telescope.builtin").diagnostics)
 m("n", "<Leader>sw", require("telescope.builtin").grep_string)
+
 
 ----- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
