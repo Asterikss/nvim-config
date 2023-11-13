@@ -2,7 +2,7 @@ local function m(a, b, v)
     vim.keymap.set(a, b, v, { noremap = true })
 end
 
-m("n", "<Space>", "<Nop>")
+m({"n", "v"}, "<Space>", "<Nop>")
 
 if not vim.fn.has('wsl') then
     m("n", "<Leader>ve", "<cmd>e ~/AppData/Local/nvim/init.vim<CR>")
