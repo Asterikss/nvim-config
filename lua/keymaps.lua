@@ -94,28 +94,29 @@ m("n", "<Leader>o", function () -- Format file
     vim.cmd("w")
     if file_type == "python" then
         vim.cmd("! black " .. vim.api.nvim_buf_get_name(0))
-    elseif file_type == 'rust' then
+    elseif file_type == "rust" then
         vim.cmd("! rustfmt " .. vim.api.nvim_buf_get_name(0))
-        -- vim.cmd('RustFmt') Does not work and I dont want to install rust-lang/rust.vim to fix it
+        -- vim.cmd("RustFmt") Does not work and I dont want to install rust-lang/rust.vim to fix it
+    elseif file_type == "cpp" then
+        vim.lsp.buf.format()
     end
 end)
 
-function CommBandP() -- Comment Block and Paste it under
+function CommBandP() -- Comment Block and Paste it under. Works with the cursor on the top ("o" to switch)
     vim.api.nvim_feedkeys("ygvo\x1bo\x1bpgvq", "m", true)
     -- local last_selected_line = vim.fn.line("'>") is flawed
 end
 
 m("x", "<Leader>o", "<cmd>lua CommBandP()<cr>")
 
-function CommentPrint() -- maby I don't need nvim_feedkeys
+function CommentPrint() -- maybe I don't need nvim_feedkeys
     vim.api.nvim_feedkeys(":g/print/s/^/#/\r", "m", true)
 end
 
 m("x", "<Leader>cp", "<cmd>lua CommentPrint()<cr>")
 
-
-m("n", "<Leader>x", '<Esc><cmd>wa<CR><cmd>qa<CR>') -- maby ctrl x so I can also map it in "t" mode
-m("n", "<Leader><Leader>x", '<Esc><cmd>wa<CR><cmd>mks!<CR><cmd>qa<CR>')
+m({"n", "t"}, "X", "<Esc><cmd>wa<CR><cmd>qa<CR>")
+m({"n", "t"}, "<A-X>", "<Esc><cmd>wa<CR><cmd>mks!<CR><cmd>qa<CR>")
 
 
 ------ Harpoon + terminal mappings ------
@@ -138,11 +139,19 @@ m("n", "<C-k>", '<cmd>lua require("harpoon.ui").nav_file(3)<CR>')
 m("n", "<A-m>", '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>') -- this is also Enter
 m("n", "<Leader>m", '<cmd>lua require("harpoon.cmd-ui").toggle_quick_menu()<CR>')
 
-m("n", "<A-n>", function()
+m("n", "<A-n>", function() -- goes to the beginning of the command line. Always in insert mode
     if vim.bo.buftype == "terminal" then
         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-^>", true, false, true), "m", true)
     else
         vim.api.nvim_feedkeys(';lua require("harpoon.term").gotoTerminal(1)\ra', "m", true)
+    end
+end)
+
+m("n", "<A-N>", function() -- does not change the original location of the cursor. Alsways in normal mode
+    if vim.bo.buftype == "terminal" then
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-^>", true, false, true), "m", true)
+    else
+        vim.api.nvim_feedkeys(';lua require("harpoon.term").gotoTerminal(1)\r', "m", true)
     end
 end)
 
@@ -167,20 +176,13 @@ m("n", "<A-j>", function()
 end)
 
 m("i", "<A-j>", function()
-    -- if vim.bo.buftype == "terminal" then
-    --     vim.api.nvim_feedkeys(
-    --     '\x1b' ..
-    --     vim.api.nvim_replace_termcodes("<C-^>", true, false, true) ..
-    --     ';lua require("harpoon.term").gotoTerminal(1)\r;lua require("harpoon.term").sendCommand(1, 1)\ra\r', "m", true)
-    -- else
     vim.api.nvim_feedkeys(
     '\x1b' ..
     ';wa\r;lua require("harpoon.term").gotoTerminal(1)\r;lua require("harpoon.term").sendCommand(1, 1)\ra\r', "m",
         true)
-    -- end
 end)
 
-m("n", "<Leader>1", function() -- TODO
+m("n", "<A-1>", function() -- TODO
     if vim.bo.buftype == "terminal" then
         vim.api.nvim_feedkeys(
         vim.api.nvim_replace_termcodes("<C-^>", true, false, true) ..
@@ -195,6 +197,8 @@ end)
 m("t", "<Esc>", "<C-\\><C-n>")
 m("t", "<C-u>", "<C-\\><C-N><C-u>")
 m("t", "<A-k>", "<C-\\><C-N>k")
+m("t", "<A-h>", "<C-\\><C-N>gT")
+m("t", "<A-l>", "<C-\\><C-N>gt")
 
 m("t", "<A-n>", function()
     vim.api.nvim_feedkeys("\x1b" .. vim.api.nvim_replace_termcodes("<C-^>", true, false, true), "m", true)
@@ -208,6 +212,12 @@ m("t", "<A-j>", function()
     vim.api.nvim_feedkeys("\x1b" ..
     vim.api.nvim_replace_termcodes("<c-^>", true, false, true) ..
     ';lua require("harpoon.term").gotoTerminal(1)\r;lua require("harpoon.term").sendCommand(1, 1)\ra\r', "m", true)
+end)
+
+m("t", "<A-1>", function()
+    vim.api.nvim_feedkeys("\x1b" ..
+    vim.api.nvim_replace_termcodes("<c-^>", true, false, true) ..
+    ';lua require("harpoon.term").gotoTerminal(1)\r;lua require("harpoon.term").sendCommand(1, 2)\ra\r', "m", true)
 end)
 
 
