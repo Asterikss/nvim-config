@@ -103,6 +103,8 @@ require("lazy").setup({
            "nvim-lua/plenary.nvim",
         },
     },
+    -- Yes
+    'eandrju/cellular-automaton.nvim',
     -- Git
     'tpope/vim-fugitive',
     -- Git related signs to the gutter and utilities for managing changes
