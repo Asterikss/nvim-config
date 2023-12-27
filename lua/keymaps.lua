@@ -85,7 +85,7 @@ m("n", "yy", "y$")
 
 -- m("n", "J", "mzJ'z")
 
-m("n", "<Leader>p", "<cmd>pu<CR>")
+m("n", "P", "<cmd>pu<CR>")
 
 m("n", "<Leader><Leader>Q", "q") -- q is taken for commenting
 
