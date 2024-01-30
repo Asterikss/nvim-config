@@ -89,7 +89,8 @@ cmp.setup{
                 -- ['<C-j>'] = cmp.mapping.,  -- possible danger
                 ['<C-Space>'] = cmp.mapping.complete {},
                 ['<C-k>'] = cmp.mapping.confirm {
-                        behavior = cmp.ConfirmBehavior.Replace,
+                        -- behavior = cmp.ConfirmBehavior.Replace,
+                        behavior = cmp.ConfirmBehavior.Insert,
                         select = true,
                 },
                 --[[
@@ -118,7 +119,8 @@ cmp.setup{
         sources = {
                 { name = 'nvim_lsp' },
                 { name = 'luasnip' },
-                { name = 'buffer', keyword_length = 3 },
+                -- { name = 'buffer', keyword_length = 3 },
+                { name = 'buffer'},
                 { name = 'path' },
 
         },
