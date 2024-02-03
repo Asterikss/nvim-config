@@ -56,8 +56,8 @@ m("i", "<A-l>", "<Esc>gt")
 m("i", "<C-e>", "<Esc>A")
 m("i", "<C-a>", "<Esc>I")
 
-m("x", "J", "<cmd>m '>+1<CR>gv=gv") -- this is so buggy
-m("x", "K", "<cmd>m '<-2<CR>gv=gv")
+m("x", "J", ":m '>+1<CR>gv=gv")
+m("x", "K", ":m '<-2<CR>gv=gv")
 
 m("x", "p", "\"_dP") -- Without trashing the clippboard
 m("x", "<A-p>", "p") -- There might be a better mapping
