@@ -40,8 +40,8 @@ o.softtabstop = 4
 o.shiftwidth = 4
 
 -- currently I don't see a difference
-o.autoindent = true
-o.smartindent = true -- default off - better for c style langs
+-- o.autoindent = true
+-- o.smartindent = true -- default off - better for c style langs
 
 -- o.breakindent = true
 -- o.numberwidth = 4
