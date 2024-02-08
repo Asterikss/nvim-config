@@ -145,7 +145,13 @@ require("lazy").setup({
             end,
         },
     },
-
+    {
+        'ggandor/leap.nvim',
+        config = function()
+            require('leap').create_default_mappings()
+            require('leap').opts.case_sensitive = true
+        end,
+    },
 }, {})
 
 -- require('neodev').setup()
