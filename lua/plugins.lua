@@ -152,7 +152,13 @@ require("lazy").setup({
             require('leap').opts.case_sensitive = true
         end,
     },
+    {
+        'windwp/nvim-autopairs',
+        event = "InsertEnter",
+        opts = {} -- this is equalent to setup({}) function
+    },
 }, {})
+-- folke/trouble.nvim
 
 -- require('neodev').setup()
 
