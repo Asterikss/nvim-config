@@ -48,10 +48,8 @@ m("n", "<Up>", "<c-w>+")
 m("n", "<Left>", "<c-w>>")
 m("n", "<Right>", "<c-w><")
 
-m("n", "<A-h>", "gT")
-m("n", "<A-l>", "gt")
-m("i", "<A-h>", "<Esc>gT")
-m("i", "<A-l>", "<Esc>gt")
+m("i", "<C-PageUp>",  "<Esc>gT")
+m("i", "<C-PageDown>",  "<Esc>gt")
 
 m("i", "<C-e>", "<Esc>A")
 m("i", "<C-a>", "<Esc>I")
