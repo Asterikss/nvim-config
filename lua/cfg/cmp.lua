@@ -88,7 +88,8 @@ cmp.setup{
                 ['<C-f>'] = cmp.mapping.scroll_docs(-4),
                 -- ['<C-j>'] = cmp.mapping.,  -- possible danger
                 ['<C-Space>'] = cmp.mapping.complete {},
-                ['<C-k>'] = cmp.mapping.confirm {
+                -- ['<C-k>'] = cmp.mapping.confirm {
+                ['<CR>'] = cmp.mapping.confirm {
                         -- behavior = cmp.ConfirmBehavior.Replace,
                         behavior = cmp.ConfirmBehavior.Insert,
                         select = true,
