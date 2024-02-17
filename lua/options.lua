@@ -32,7 +32,7 @@ o.laststatus = 0
 o.showcmdloc = "tabline"
 -- o.showcmdloc = "last"
 
--- tab stuff (I hate python)
+-- tab stuff
 o.smarttab = true
 o.expandtab = true
 o.tabstop = 4
@@ -40,7 +40,7 @@ o.softtabstop = 4
 o.shiftwidth = 4
 
 -- currently I don't see a difference
--- o.autoindent = true
+o.autoindent = false
 -- o.smartindent = true -- default off - better for c style langs
 
 -- o.breakindent = true
