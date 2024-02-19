@@ -18,7 +18,7 @@ else
 end
 
 
-m("i", "kj", "<Esc>")
+-- m("i", "kj", "<Esc>")
 
 m("v", "y", "myy`y") -- keeps the position of the cursor after v yank
 
