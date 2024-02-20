@@ -51,9 +51,6 @@ m("n", "<Right>", "<c-w><")
 m("i", "<C-PageUp>",  "<Esc>gT")
 m("i", "<C-PageDown>",  "<Esc>gt")
 
-m("i", "<C-e>", "<Esc>A")
-m("i", "<C-a>", "<Esc>I")
-
 m("x", "J", ":m '>+1<CR>gv=gv")
 m("x", "K", ":m '<-2<CR>gv=gv")
 
