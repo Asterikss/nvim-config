@@ -17,9 +17,6 @@ else
     m("n", "<Leader>vr", "<cmd>source ~/.config/nvim/init.lua<CR>")
 end
 
-
--- m("i", "kj", "<Esc>")
-
 m("v", "y", "myy`y") -- keeps the position of the cursor after v yank
 
 m("n", ";", ":")
