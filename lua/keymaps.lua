@@ -54,12 +54,12 @@ m("x", "J", ":m '>+1<CR>gv=gv")
 m("x", "K", ":m '<-2<CR>gv=gv")
 
 m("x", "p", "\"_dP") -- Without trashing the clippboard
-m("x", "<A-p>", "p") -- There might be a better mapping
+-- m("x", "<A-p>", "p") -- There might be a better mapping
 
 m("n", "<A-d>", "\"_d")     -- Without trashing the clippboard
 m("v", "<A-d>", "\"_d")
 
-m("n", "<Leader><Leader>d", "ddO<Esc>") -- might remove that
+-- m("n", "<Leader><Leader>d", "ddO<Esc>") -- might remove that
 
 m("n", "<Leader>l", "<cmd>Lex 25<CR>")
 m("n", "<Leader><Leader>l", "<cmd>Tex<CR>")
@@ -77,6 +77,8 @@ m("n", "cc", "C")
 m("n", "Y", "yy")
 m("n", "yy", "y$")
 
+m("n", "<", "<<")
+m("n", ">", ">>")
 -- m("n", "J", "mzJ'z")
 
 m("n", "P", "<cmd>pu<CR>")
