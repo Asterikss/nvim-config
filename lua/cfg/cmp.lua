@@ -51,7 +51,7 @@ cmp.setup{
 	},
 
     completion = {
-        completeopt = "menu,menuone,noinsert"
+        completeopt = "menu,menuone,noinsert" -- noselect
     },
 
 	formatting = {
@@ -120,8 +120,7 @@ cmp.setup{
         sources = {
                 { name = 'nvim_lsp' },
                 { name = 'luasnip' },
-                -- { name = 'buffer', keyword_length = 3 },
-                { name = 'buffer'},
+                { name = 'buffer'}, -- keyword_length = 3 },
                 { name = 'path' },
 
         },
