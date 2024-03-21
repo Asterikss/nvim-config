@@ -45,10 +45,10 @@ m("n", "<Up>", "<c-w>+")
 m("n", "<Left>", "<c-w>>")
 m("n", "<Right>", "<c-w><")
 
-m("i", "<C-Home>",  "<Esc>gT") -- Zellij for some reason eats Control PageUp
-m("i", "<C-End>",  "<Esc>gt")
-m("n", "<C-Home>",  "gT")
-m("n", "<C-End>",  "gt")
+m("i", "<A-7>",  "<Esc>gT") -- Zellij for some reason eats Control PageUp (booo)
+m("i", "<A-8>",  "<Esc>gt") -- And Control End and Control Home mess with browser pdf viewer
+m("n", "<A-7>",  "gT")
+m("n", "<A-8>",  "gt")
 
 m("x", "J", ":m '>+1<CR>gv=gv")
 m("x", "K", ":m '<-2<CR>gv=gv")
