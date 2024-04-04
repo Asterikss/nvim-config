@@ -83,6 +83,10 @@ m("n", "yy", "y$")
 
 m("n", "<", "<<")
 m("n", ">", ">>")
+
+-- paste under and automatically allign using "="
+m('n', 'p', "<cmd>pu<CR>V'[=")
+
 -- voyager shortcuts
 
 m({"i", "c"}, "", "<C-w>") -- map Control Backspace to Control W
