@@ -95,6 +95,14 @@ m("c", "<Down>", "<C-n>" )
 m("c", "<C-p>", "<Up>" )
 m("c", "<C-n>", "<Down>" )
 
+-- clear all ^M
+m("n", "<Leader><Leader>c", function ()
+    vim.api.nvim_feedkeys(";%s/" ..
+        vim.api.nvim_replace_termcodes("<C-q>", true, false, true) ..
+        vim.api.nvim_replace_termcodes("<C-m>", true, false, true) ..
+        "//g\r" , "m", true)
+end)
+
 -- m("n", "J", "mzJ'z")
 
 m("n", "P", "<cmd>pu<CR>")
