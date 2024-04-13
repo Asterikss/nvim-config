@@ -46,7 +46,7 @@ m("n", "<Left>", "<c-w>>")
 m("n", "<Right>", "<c-w><")
 
 m("i", "<A-7>",  "<Esc>gT") -- Zellij for some reason eats Control PageUp (booo)
-m("i", "<A-8>",  "<Esc>gt") -- And Control End and Control Home mess with browser pdf viewer
+m("i", "<A-8>",  "<Esc>gt") -- And Control End and Control Home are messing with browser pdf viewer
 m("n", "<A-7>",  "gT")
 m("n", "<A-8>",  "gt")
 
