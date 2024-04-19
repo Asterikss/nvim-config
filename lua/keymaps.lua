@@ -140,6 +140,15 @@ m("x", "<Leader>cp", "<cmd>lua CommentPrint()<cr>")
 m({"n", "t"}, "X", "<Esc><cmd>wa<CR><cmd>qa<CR>")
 m({"n", "t"}, "<A-X>", "<Esc><cmd>wa<CR><cmd>mks!<CR><cmd>qa<CR>")
 
+------ fugitive ------
+m("n", "<Leader>hg", function ()
+    if vim.bo.filetype == "fugitive" then
+        vim.cmd("x")
+    else
+        vim.cmd("G")
+    end
+end)
+
 
 ------ Harpoon + terminal mappings ------
 m("n", "<Leader><Leader>m", function()
