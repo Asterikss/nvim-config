@@ -149,6 +149,7 @@ m("n", "<Leader>hg", function ()
     end
 end)
 
+m("n", "<Leader>hw", "<cmd>Gwrite<CR>")
 
 ------ Harpoon + terminal mappings ------
 m("n", "<Leader><Leader>m", function()
