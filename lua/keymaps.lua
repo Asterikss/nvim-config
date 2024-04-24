@@ -151,6 +151,8 @@ end)
 
 m("n", "<Leader>hw", "<cmd>Gwrite<CR>")
 
+m("n", "<Leader>hc", ':G commit -m""<Left>')
+
 ------ Harpoon + terminal mappings ------
 m("n", "<Leader><Leader>m", function()
     if vim.bo.filetype == "python" then
