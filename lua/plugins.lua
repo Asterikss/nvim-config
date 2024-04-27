@@ -157,6 +157,7 @@ require("lazy").setup({
         event = "InsertEnter",
         opts = {} -- this is equalent to setup({}) function
     },
+    "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
 }, {})
 -- folke/trouble.nvim
 
