@@ -60,6 +60,7 @@ local servers = {
 
     clangd = {},
 
+    tsserver = {},
 }
 
 
