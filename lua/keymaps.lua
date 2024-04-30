@@ -86,6 +86,7 @@ m("n", ">", ">>")
 
 -- paste under and automatically allign using "="
 m('n', 'p', "<cmd>pu<CR>V'[=")
+m('n', 'P', "<cmd>pu<CR>")
 
 -- voyager shortcuts
 
