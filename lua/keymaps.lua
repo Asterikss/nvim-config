@@ -106,11 +106,16 @@ end)
 
 -- m("n", "J", "mzJ'z")
 
-m("n", "P", "<cmd>pu<CR>")
 
 m("n", "<Leader><Leader>Q", "q") -- q is taken for commenting
 
 m("n", "gt", "<cmd>vsp | lua vim.lsp.buf.definition()<CR>")
+
+m("n", "gT", function ()
+    vim.cmd("normal! ma")
+    vim.cmd("tabedit %")
+    vim.cmd("normal! `a")
+end)
 
 m("n", "<Leader>o", function () -- Format file
     local file_type = vim.bo.filetype
