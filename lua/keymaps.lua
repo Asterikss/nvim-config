@@ -161,6 +161,9 @@ m("n", "<Leader>hc", ':G commit -m""<Left>')
 
 m("n", "<Leader>hu", "<cmd>G push<CR>")
 
+m({"n", "v"}, "<Leader>ha", "<cmd>Gitsign stage_hunk<CR>")
+
+
 ------ Harpoon + terminal mappings ------
 m("n", "<Leader><Leader>m", function()
     if vim.bo.filetype == "python" then
