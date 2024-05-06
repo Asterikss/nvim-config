@@ -130,12 +130,10 @@ m("n", "<Leader>o", function () -- Format file
     end
 end)
 
-function CommBandP() -- Comment Block and Paste it under. Works with the cursor on the top ("o" to switch)
+m("x", "<Leader>o", function () -- Comment Block and Paste it under. Works with the cursor on the top ("o" to switch)
     vim.api.nvim_feedkeys("ygvo\x1bo\x1bpgvq", "m", true)
     -- local last_selected_line = vim.fn.line("'>") is flawed
-end
-
-m("x", "<Leader>o", "<cmd>lua CommBandP()<cr>")
+end)
 
 function CommentPrint() -- maybe I don't need nvim_feedkeys
     vim.api.nvim_feedkeys(":g/print/s/^/#/\r", "m", true)
