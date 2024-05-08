@@ -142,7 +142,8 @@ end
 m("x", "<Leader>cp", "<cmd>lua CommentPrint()<cr>")
 
 m({"n", "t"}, "X", "<Esc><cmd>wa<CR><cmd>qa<CR>")
-m({"n", "t"}, "<A-X>", "<Esc><cmd>wa<CR><cmd>mks!<CR><cmd>qa<CR>")
+m({"n", "t"}, "<A-X>", "<Esc><cmd>wa<CR><cmd>mks! .dev/Session.vim<CR><cmd>qa<CR>")
+
 
 ------ fugitive ------
 m("n", "<Leader>hg", function ()
