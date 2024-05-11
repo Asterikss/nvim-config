@@ -278,6 +278,14 @@ m("n", "<Leader>/", function()
     })
 end)
 
+m('n', '<leader>sn', function()
+    require("telescope.builtin").find_files({ cwd = vim.fn.stdpath 'config' })
+end)
+
+m('n', '<leader>sb', function()
+    require("telescope.builtin").find_files({ cwd = '/home/lono/notes' })
+end)
+
 m("n", "<Leader><Leader>f", require("telescope.builtin").find_files)
 m("n", "<Leader>b", require("telescope.builtin").buffers)
 m("n", "<Leader>gg", require("telescope.builtin").live_grep)
