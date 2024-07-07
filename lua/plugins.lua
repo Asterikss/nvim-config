@@ -158,6 +158,37 @@ require("lazy").setup({
         opts = {} -- this is equalent to setup({}) function
     },
     "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
+    {
+        'quarto-dev/quarto-nvim',
+        ft = { 'quarto' },
+        dev = false,
+        opts = {
+            lspFeatures = {
+                languages = { 'python' },
+            },
+            codeRunner = {
+                enabled = false,
+                default_method = nil, -- 'molten' or 'slime'
+                -- ft_runners = {}, -- filetype to runner, ie. `{ python = "molten" }`.
+                -- Takes precedence over `default_method`
+                -- never_run = { "yaml" }, -- filetypes which are never sent to a code runner
+            },
+        },
+        dependencies = {
+            -- for language features in code cells
+            {
+                'jmbuhr/otter.nvim',
+                dev = false,
+                dependencies = {
+                    {
+                        'neovim/nvim-lspconfig',
+                        'nvim-treesitter/nvim-treesitter',
+                    },
+                },
+                opts = {},
+            },
+        },
+    },
 }, {})
 -- folke/trouble.nvim
 
