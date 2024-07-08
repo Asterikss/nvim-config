@@ -159,6 +159,18 @@ require("lazy").setup({
     },
     "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
     {
+        'shortcuts/no-neck-pain.nvim',
+        version = '*',
+        opts = {
+            width = 130,
+            buffers = {
+                right = {
+                    enabled = false,
+                },
+            },
+        },
+    },
+    {
         'quarto-dev/quarto-nvim',
         ft = { 'quarto' },
         dev = false,
