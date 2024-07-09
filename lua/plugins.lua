@@ -17,9 +17,9 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	-- Colorschemes
-	"savq/melange",
-	"folke/tokyonight.nvim",
+    -- Colorschemes
+    "savq/melange", -- enabled = false
+    "folke/tokyonight.nvim", -- enabled = false
     {
         'navarasu/onedark.nvim',
         priority = 1000,
@@ -56,8 +56,8 @@ require("lazy").setup({
             'folke/neodev.nvim',
         },
 
-     },
-	-- Completion
+    },
+    -- Completion
     {
         "hrsh7th/nvim-cmp",
         dependencies = {
@@ -75,10 +75,10 @@ require("lazy").setup({
         },
     },
     -- Telescope
-	{
-		"nvim-telescope/telescope.nvim",
-		branch = "0.1.x",
-		dependencies = {
+    {
+        "nvim-telescope/telescope.nvim",
+        branch = "0.1.x",
+        dependencies = {
             "nvim-lua/plenary.nvim",
             {
                 "nvim-telescope/telescope-fzf-native.nvim",
@@ -88,7 +88,7 @@ require("lazy").setup({
                 end,
             },
         },
-	},
+    },
     -- Treesitter 
     {
         'nvim-treesitter/nvim-treesitter',
@@ -96,7 +96,7 @@ require("lazy").setup({
             'nvim-treesitter/nvim-treesitter-textobjects',
         },
         build = ':TSUpdate',
-	},
+    },
     {
         "ThePrimeagen/harpoon",
         dependencies = {
@@ -147,6 +147,7 @@ require("lazy").setup({
     },
     {
         'ggandor/leap.nvim',
+        keys = { "s" },
         config = function()
             require('leap').create_default_mappings()
             require('leap').opts.case_sensitive = true
