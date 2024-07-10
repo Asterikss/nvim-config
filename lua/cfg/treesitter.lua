@@ -1,4 +1,3 @@
--- TODO incremental selection
 -- https://www.youtube.com/watch?v=stqUbv-5u2s&t=66s
 -- require("nvim-treesitter.configs").setup {
   -- A list of parser names, or "all" (the four listed parsers should always be installed)
@@ -51,7 +50,7 @@
 -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
-    ensure_installed = {"python", "rust", "c", "cpp", "lua", "typescript", "tsx", "java"}, -- 'vimdoc', 'vim', 'bash' 
+    ensure_installed = {"python", "rust", "c", "cpp", "lua", "typescript", "tsx", "java", "markdown", "markdown_inline", "vim", "vimdoc", "bash", "yaml"},
 
     -- Autoinstall languages that are not installed
     auto_install = false,
