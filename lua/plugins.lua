@@ -104,7 +104,10 @@ require("lazy").setup({
         },
     },
     -- Yes
-    'eandrju/cellular-automaton.nvim',
+    {
+        'eandrju/cellular-automaton.nvim',
+        cmd = "Cell",
+    },
     -- Git
     'tpope/vim-fugitive',
     -- Git related signs to the gutter and utilities for managing changes
