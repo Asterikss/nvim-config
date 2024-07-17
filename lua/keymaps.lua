@@ -4,19 +4,6 @@ end
 
 m({"n", "v"}, "<Space>", "<Nop>")
 
-if not vim.fn.has('wsl') then
-    m("n", "<Leader>ve", "<cmd>e ~/AppData/Local/nvim/init.vim<CR>")
-    m("n", "<Leader>vr", "<cmd>source ~/AppData/Local/nvim/init.vim<CR>")
-    m("n", "<Leader><Leader>s", "<cmd>w C:/Users/lono8/Desktop/.txt<Left><Left><Left><Left>")
-    m("n", "<C-z>", "<Nop>")
-    m("i", "<C-z>", "<Nop>")
-    m("t", "<C-z>", "<Nop>")
-    m("v", "<C-z>", "<Nop>")
-else
-    m("n", "<Leader>ve", "<cmd>e ~/.config/nvim/init.lua<CR>")
-    m("n", "<Leader>vr", "<cmd>source ~/.config/nvim/init.lua<CR>")
-end
-
 m("v", "y", "myy`y") -- keeps the position of the cursor after v yank
 
 m("n", ";", ":")
