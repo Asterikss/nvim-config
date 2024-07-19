@@ -1,4 +1,3 @@
-vim.api.nvim_buf_set_keymap(0, "n", "<Leader><A-y>", "YI//<Space><Esc>p", { noremap = true })
 -- vim.api.nvim_buf_set_keymap(0, "i", "qp", 'println!("{}");<left><left><left><left>', { noremap = true })
 vim.api.nvim_buf_set_keymap(0, "i", "qp", 'println!("{}", );<left><left>', { noremap = true })
 vim.api.nvim_buf_set_keymap(0, "i", "qqp", 'println!("{} - {}", );<left><left>', { noremap = true })

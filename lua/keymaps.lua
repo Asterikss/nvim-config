@@ -55,6 +55,11 @@ m("n", "<c-d>", "<c-d>zz")
 m("n", "<c-u>", "<c-u>zz")
 
 m("n", "<A-y>", "Yp")
+m("n", "<Leader><A-y>", function () -- comment the line and paste it under
+    vim.cmd('normal! "zyy')
+    vim.cmd("normal gcc")
+    vim.cmd('normal! "zp')
+end)
 
 m("n", "D", "dd")
 m("n", "dd", "D")
