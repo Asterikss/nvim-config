@@ -6,9 +6,7 @@ m({"n", "v"}, "<Space>", "<Nop>")
 
 m("v", "y", "myy`y") -- keeps the position of the cursor after v yank
 
-m("n", ";", ":")
-m("v", ";", ":")
-
+m({"n", "v"}, ";", ":")
 m("n", ":", ";")
 
 m({ "n", "x" }, "x", "\"_x") -- Prevent x from overwriting y's
@@ -16,7 +14,7 @@ m({ "n", "x" }, "x", "\"_x") -- Prevent x from overwriting y's
 m("v", ">", ">gv")
 m("v", "<", "<gv")
 
-m("n", "<Leader><Leader>q", "gqap")
+m("n", "<Leader><Leader>q", "gqap") -- formatting text
 m("v", "<Leader><Leader>q", "gq")
 
 m("n", "n", "nzz")
@@ -54,7 +52,7 @@ m("n", "<Leader><Leader>l", "<cmd>Tex<CR>")
 m("n", "<c-d>", "<c-d>zz")
 m("n", "<c-u>", "<c-u>zz")
 
-m("n", "<A-y>", "Yp")
+m("n", "<A-y>", '"zyy"zp') -- paste line under
 m("n", "<Leader><A-y>", function () -- comment the line and paste it under
     vim.cmd('normal! "zyy')
     vim.cmd("normal gcc")
@@ -72,6 +70,8 @@ m({"n", "x"}, "V", "F")
 
 m("n", "Y", "yy")
 m("n", "yy", "y$")
+
+m("n", "J", "mzJ`z")
 
 m("n", "<", "<<")
 m("n", ">", ">>")
@@ -95,8 +95,6 @@ m("n", "<Leader><Leader>c", function ()
         vim.api.nvim_replace_termcodes("<C-m>", true, false, true) ..
         "//g\r" , "m", true)
 end)
-
--- m("n", "J", "mzJ'z")
 
 
 m("n", "<Leader><Leader>Q", "q") -- q is taken for commenting
