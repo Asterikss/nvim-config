@@ -23,6 +23,7 @@ o.syntax = "on"
 o.fileencoding = "UTF-8"
 o.completeopt = 'menuone,noselect,preview' -- check the behaviour later
 o.shortmess:append "IW"                    -- disable nvim intro
+o.jumpoptions:append "stack"
 
 -- status line stuff
 o.ruler = false    -- no ruler - e.g. 17,26-49	TOP
