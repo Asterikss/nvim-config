@@ -20,7 +20,10 @@ m("v", "<Leader><Leader>q", "gq")
 m("n", "n", "nzz")
 m("n", "N", "Nzz")
 
-m("n", "<C-t>", ":tabnew ") -- <C-t> has something to do with TagStack
+m("n", "<C-j>", "<c-w>j")
+m("n", "<C-k>", "<c-w>k")
+m("n", "<C-l>", "<c-w>l")
+m("n", "<C-h>", "<c-w>h")
 
 m("n", "go", "o<Esc>k")
 m("n", "gO", "O<Esc>j")
