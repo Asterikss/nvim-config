@@ -56,6 +56,11 @@ m("n", "<Leader><A-y>", function () -- comment the line and paste it under
     vim.cmd("normal gcc")
     vim.cmd('normal! "zp')
 end)
+m("x", "<Leader><A-y>", function () -- comment block and paste it under. Works with the cursor on the bottom of the block ("o" to switch)
+    vim.cmd('normal! "zygv')
+    vim.cmd("normal gc")
+    vim.cmd('normal! gv\x1bo\x1b"zp')
+end)
 
 m("n", "D", "dd")
 m("n", "dd", "D")
