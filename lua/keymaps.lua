@@ -155,6 +155,24 @@ m("n", "<Leader>hu", "<cmd>G push<CR>")
 
 m({"n", "v"}, "<Leader>ha", "<cmd>Gitsign stage_hunk<CR>")
 
+------ plugin development ------
+P = function(t)
+    print(vim.inspect(t))
+    return t
+end
+
+RELOAD = function(...)
+    return require("plenary.reload").reload_module(...)
+end
+
+R = function(name, skip_setup)
+    RELOAD(name)
+    if not skip_setup then
+        require(name).setup({})
+    end
+    return require(name)
+end
+
 
 ------ Harpoon + terminal mappings ------
 m("n", "<Leader><Leader>m", function()
