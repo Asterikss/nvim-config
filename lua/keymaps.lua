@@ -84,6 +84,10 @@ m('n', 'p', "<cmd>pu<CR>V'[=")
 m('n', 'P', "<cmd>pu<CR>")
 
 -- voyager shortcuts
+m("n", "t", "yiw")
+m("n", "T", "viw\"_dP")
+m("n", "<A-t>", "yiW")
+m("n", "<A-T>", "viW\"_dP")
 
 m({"i", "c"}, "", "<C-w>") -- map Control Backspace to Control W
 m("c", "<Up>", "<C-p>" )
