@@ -79,9 +79,11 @@ m("n", "J", "mzJ`z")
 m("n", "<", "<<")
 m("n", ">", ">>")
 
--- paste under and automatically allign using "="
-m('n', 'p', "<cmd>pu<CR>V'[=")
-m('n', 'P', "<cmd>pu<CR>")
+m("n", "p", "<cmd>pu<CR>V'[=") -- paste under / over and automatically allign using "=". Also see :h ]p and [P
+m("n", "<A-p>", "<cmd>pu<CR>")
+m("n", "P", "<cmd>pu!<CR>V']=")
+m("n", "<A-P>", "<cmd>pu!<CR>")
+m("x", "p", "\"_dP") -- paste without trashing the clippboard
 
 -- voyager shortcuts
 m("n", "t", "yiw")
