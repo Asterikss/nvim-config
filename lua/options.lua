@@ -11,13 +11,13 @@ o.wrap = false
 o.termguicolors = true -- set t_Co=256  set term=xterm-256color
 o.splitbelow = true
 o.splitright = true
-o.lazyredraw = true -- no redraw while exec macros
+o.lazyredraw = true
 o.wildmenu = true
 o.textwidth = 0
 o.sidescroll = 3
 o.timeoutlen = 700
 o.background = "dark"
-o.clipboard = "unnamedplus" -- Copy paste between nvim and everything else
+o.clipboard = "unnamedplus"
 o.signcolumn = "yes"
 o.syntax = "on"
 o.fileencoding = "UTF-8"
@@ -25,13 +25,11 @@ o.completeopt = 'menuone,noselect,preview' -- check the behaviour later
 o.shortmess:append "IW"                    -- disable nvim intro
 o.jumpoptions:append "stack"
 
--- status line stuff
-o.ruler = false    -- no ruler - e.g. 17,26-49	TOP
+o.ruler = false
 o.cmdheight = 0
-o.showmode = false -- no --Insert--
+o.showmode = false
 o.laststatus = 0
 o.showcmdloc = "tabline"
--- o.showcmdloc = "last"
 
 -- tab stuff
 o.smarttab = true
