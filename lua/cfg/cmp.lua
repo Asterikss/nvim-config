@@ -62,9 +62,10 @@ cmp.setup{
 			-- Source
 			vim_item.menu = ({
 				buffer = "[buf]",
-                path = "[path]",
+                                path = "[path]",
 				nvim_lsp = "[LSP]",
 				luasnip = "[lsnp]",
+                                otter = '[🦦]',
 				-- nvim_lua = "[Lua]",
 				-- latex_symbols = "[LaTeX]",
 			})[entry.source.name]
@@ -99,20 +100,10 @@ cmp.setup{
         sources = {
                 { name = 'nvim_lsp' },
                 { name = 'luasnip' },
-                { name = 'buffer'}, -- keyword_length = 3 },
+                { name = 'buffer'}, -- keyword_length = 3, max_item_count = 3 },
                 { name = 'path' },
-
+                { name = 'treesitter', max_item_count = 3 }, -- keyword_length = 5 },
         },
-        -- sources = cmp.config.sources({
-        --         { name = 'nvim_lsp' },
-        --         { name = 'luasnip' },
-        --         { name = 'path' },
-        --
-        -- }, {
-        --                 { name = 'buffer', keyword_length = 3 },
-        --         }),
-
-
 }
 
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
