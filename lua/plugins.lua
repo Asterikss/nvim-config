@@ -215,7 +215,14 @@ require("lazy").setup({
         config = function(_, opts) require'lsp_signature'.setup(opts) end
     {
         'stevearc/oil.nvim',
-        opts = {},
+        opts = {
+            keymaps = {
+                ['<C-h>'] = false,
+            },
+            view_options = {
+                show_hidden = true,
+            },
+        },
         dependencies = { { "echasnovski/mini.icons", opts = {} } }, -- { "nvim-tree/nvim-web-devicons" }
     }
 }, {})
