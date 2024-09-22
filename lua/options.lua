@@ -37,6 +37,8 @@ o.expandtab = true
 o.tabstop = 4
 o.softtabstop = 4
 o.shiftwidth = 4
+o.autoindent = true
+o.smartindent = true
 
 -- currently I don't see a difference
 o.autoindent = false
