@@ -54,15 +54,15 @@ vim.opt.listchars = {
     -- precedes = "←" -- precedes the window
 }
 
--- o.breakindent = true
--- o.numberwidth = 4
--- o.undofile = true
--- set noswapfile
--- set nobackup
--- set nohidden					-- Unloads abandoned buffers. Still present
--- set path=.,,**				-- Search the dir ur in and recursively all children .Tabf
--- set cursorline
--- set listchars=tab:>\ ,trail:.
+vim.api.nvim_create_autocmd("InsertEnter", {
+  pattern = "*",
+  command = "set nolist"
+})
+
+vim.api.nvim_create_autocmd("InsertLeave", {
+  pattern = "*",
+  command = "set list"
+})
 
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
