@@ -227,6 +227,7 @@ require("lazy").setup({
         },
         dependencies = { { "echasnovski/mini.icons", opts = {} } }, -- { "nvim-tree/nvim-web-devicons" }
     }
+    'sindrets/diffview.nvim'
 }, {})
 -- folke/trouble.nvim
 
