@@ -53,6 +53,7 @@ vim.opt.listchars = {
     -- extends = "→", -- overflowing text
     -- precedes = "←" -- precedes the window
 }
+vim.cmd [[highlight Whitespace ctermbg=Brown ctermfg=Black guibg=Brown guifg=Black]]
 
 vim.api.nvim_create_autocmd("InsertEnter", {
   pattern = "*",
