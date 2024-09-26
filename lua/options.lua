@@ -24,6 +24,7 @@ o.fileencoding = "UTF-8"
 o.completeopt = 'menuone,noselect,preview' -- check the behaviour later
 o.shortmess:append "IW"                    -- disable nvim intro
 o.jumpoptions:append "stack"
+o.inccommand = "split"
 
 o.ruler = false
 o.cmdheight = 0
