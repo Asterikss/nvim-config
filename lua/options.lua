@@ -43,6 +43,15 @@ o.smartindent = true
 -- currently I don't see a difference
 o.autoindent = false
 -- o.smartindent = true -- default off - better for c style langs
+o.list = true
+vim.opt.listchars = {
+    trail = "»", -- trailing spaces ▷ ⦿ ➤ ⊙ •
+    -- space = "·", -- spaces
+    -- eol = "↴", -- end of line
+    -- tab = "»·", -- tabs
+    -- extends = "→", -- overflowing text
+    -- precedes = "←" -- precedes the window
+}
 
 -- o.breakindent = true
 -- o.numberwidth = 4
