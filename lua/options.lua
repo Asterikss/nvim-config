@@ -21,8 +21,8 @@ o.clipboard = "unnamedplus"
 o.signcolumn = "yes"
 o.syntax = "on"
 o.fileencoding = "UTF-8"
-o.completeopt = 'menuone,noselect,preview' -- check the behaviour later
-o.shortmess:append "IW"                    -- disable nvim intro
+o.completeopt = 'menuone,noselect,preview'
+o.shortmess:append "IW" -- disable nvim intro
 o.jumpoptions:append "stack"
 o.inccommand = "split"
 
@@ -32,7 +32,6 @@ o.showmode = false
 o.laststatus = 0
 o.showcmdloc = "tabline"
 
--- tab stuff
 o.smarttab = true
 o.expandtab = true
 o.tabstop = 4
@@ -41,9 +40,6 @@ o.shiftwidth = 4
 o.autoindent = true
 o.smartindent = true
 
--- currently I don't see a difference
-o.autoindent = false
--- o.smartindent = true -- default off - better for c style langs
 o.list = true
 vim.opt.listchars = {
     trail = "»", -- trailing spaces ▷ ⦿ ➤ ⊙ •
