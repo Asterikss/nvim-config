@@ -38,7 +38,7 @@ local servers = {
             workspace = { checkThridParty = false },
             telemetry = { enable = false },
             diagnostics = {
-                globals = { "vim" },
+                globals = { "vim", "describe", "it" },
             },
         },
     },
