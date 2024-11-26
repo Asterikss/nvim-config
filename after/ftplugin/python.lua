@@ -1,3 +1,4 @@
+vim.api.nvim_buf_set_option(0, "tabstop", 4)
 vim.api.nvim_buf_set_keymap(0, "i", "qp", "print()<left>", { noremap = true })
 vim.api.nvim_buf_set_keymap(0, "i", "<a-q>p", 'print("")<left><left>', { noremap = true })
 vim.api.nvim_buf_set_keymap(0, "i", "qfp", 'print(f"{=}")<left><left><left><left>', { noremap = true })
