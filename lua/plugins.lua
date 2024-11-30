@@ -1,5 +1,5 @@
 vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.maplocalleader = ','
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
@@ -53,12 +53,18 @@ require("lazy").setup({
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
             { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
-            {
-                'folke/neodev.nvim', -- require('neodev').setup()
-                enabled = false,
+        },
+    },
+    {
+        "folke/neodev.nvim",  -- require('neodev').setup()
+        enabled = false,
+        opts = { -- https://discourse.nixos.org/t/minimal-but-nice-neovim-configuration/45523/8
+            library = {
+                runtime = false, -- runtime path
+                types = true, -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others
+                plugins = false, -- installed opt or start plugins in packpath
             },
         },
-
     },
     -- Completion
     {
@@ -72,6 +78,7 @@ require("lazy").setup({
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
+            -- "hrsh7th/cmp-cmdline",
 
             -- Adds a number of snippets
             "rafamadriz/friendly-snippets",
@@ -92,7 +99,7 @@ require("lazy").setup({
             },
         },
     },
-    -- Treesitter 
+    -- Treesitter
     {
         'nvim-treesitter/nvim-treesitter',
         dependencies = {
@@ -226,48 +233,18 @@ require("lazy").setup({
             },
         },
         dependencies = { { "echasnovski/mini.icons", opts = {} } }, -- { "nvim-tree/nvim-web-devicons" }
-    }
-    'sindrets/diffview.nvim'
+    },
+    {
+        dir = '/home/lono/cod/projects/kiss-sessions.nvim',
+        name = 'kiss-sessions-L',
+        opts = {},
+    },
+    'sindrets/diffview.nvim',
+    {
+        "lervag/vimtex",
+        lazy = false,
+        init = function()
+            vim.g.vimtex_view_method = "zathura"
+        end
+    },
 }, {})
--- folke/trouble.nvim
-
--- require('neodev').setup()
-
-
--- Unless you are still migrating, remove the deprecated commands from v1.x. run :Neotree
--- vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
---
--- use {
---     "nvim-neo-tree/neo-tree.nvim",
---     branch = "v2.x",
---     requires = {
---         "nvim-lua/plenary.nvim",
---         -- "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
---         "MunifTanjim/nui.nvim",
---     }
--- }
-
--- use "tpope/vim-sleuth" Detect tabstop and shiftwidth automatically
--- mbbill/undotree
--- 'tpope/vim-rhubarb',
--- nvim-neo-tree/neo-tree.nvim  /  vim-gitgutter  /  oil.nvim  /  harpoon
--- nvim-telescope/telescope-project.nvim
--- incorporate git stuff later https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua#LL248
-
---[[ { this setup is for "lazy"
-         -- Add indentation guides even on blank lines
-         'lukas-reineke/indent-blankline.nvim',
-         -- Enable `lukas-reineke/indent-blankline.nvim`
-         -- See `:help indent_blankline.txt`
-         opts = {
-                 char = '┊',
-                 show_trailing_blankline_indent = false,
-         },
- }, ]]
-
-
--- for "nvim-telescope/telescope.nvim"
--- BurntSushi/ripgrep is required for live_grep and grep_string and is the first priority for find_files
--- Debian/Ubuntu -> $ curl -LO https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb
--- $ sudo dpkg -i ripgrep_13.0.0_amd64.deb
--- Windows -> choco install ripgrep
