@@ -8,7 +8,7 @@ o.ignorecase = true
 o.smartcase = true
 o.scrolloff = 8
 o.wrap = false
-o.termguicolors = true -- set t_Co=256  set term=xterm-256color
+o.termguicolors = true
 o.splitbelow = true
 o.splitright = true
 o.lazyredraw = true
@@ -25,6 +25,8 @@ o.completeopt = 'menuone,noselect,preview'
 o.shortmess:append "IW" -- disable nvim intro
 o.jumpoptions:append "stack"
 o.inccommand = "split"
+o.virtualedit = "block"
+-- o.concealcursor = "nc"
 
 o.ruler = false
 o.cmdheight = 0
@@ -34,18 +36,18 @@ o.showcmdloc = "tabline"
 
 o.smarttab = true
 o.expandtab = true
-o.tabstop = 4
-o.softtabstop = 4
-o.shiftwidth = 4
+o.tabstop = 2
+o.softtabstop = 0
+o.shiftwidth = 0
 o.autoindent = true
 o.smartindent = true
 
 o.list = true
 vim.opt.listchars = {
-    trail = "»", -- trailing spaces ▷ ⦿ ➤ ⊙ •
+    trail = "»", -- trailing spaces ▷ ⦿ ➤ ⊙ • ⋙  ⫸  ⇶
+    tab = "⫸•", -- tabs »·
     -- space = "·", -- spaces
     -- eol = "↴", -- end of line
-    -- tab = "»·", -- tabs
     -- extends = "→", -- overflowing text
     -- precedes = "←" -- precedes the window
 }
@@ -61,25 +63,11 @@ vim.api.nvim_create_autocmd("InsertLeave", {
   command = "set list"
 })
 
--- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
+vim.api.nvim_create_autocmd('TextYankPost', { -- :h vim.highlight.on_yank
   callback = function()
     vim.highlight.on_yank({timeout = 90}) -- higroup = 'IncSearch'
   end,
   group = highlight_group,
   pattern = '*',
 })
--- vim.cmd [[ augroup cmdline
---     autocmd!
---     autocmd CmdlineLeave : echo ''
--- augroup end ]]	-- you can use :mess to show them or : and arrows
-
---[[ augroup line_return
-	autocmd!
-	autocmd BufReadPost *
-			\ if line("'\'") > 0 && line("'\'") <= line("$") |
-			\ execute 'normal! g'"zvzz' |
-			\ endif
-	augroup END
-]]
