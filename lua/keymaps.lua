@@ -58,15 +58,12 @@ m('n', '<Leader><A-y>', function() -- comment the line and paste it under
   vim.cmd('normal gcc')
   vim.cmd('normal! "zp')
 end)
-m(
-  'x',
-  '<Leader><A-y>',
-  function() -- comment block and paste it under. Works with the cursor on the bottom of the block ("o" to switch)
-    vim.cmd('normal! "zygv')
-    vim.cmd('normal gc')
-    vim.cmd('normal! gv\x1bo\x1b"zp')
-  end
-)
+-- comment block and paste it under. Works with the cursor on the bottom of the block ("o" to switch)
+m('x', '<Leader><A-y>', function()
+  vim.cmd('normal! "zygv')
+  vim.cmd('normal gc')
+  vim.cmd('normal! gv\x1bo\x1b"zp')
+end)
 
 m('n', 'D', 'dd')
 m('n', 'dd', 'D')
@@ -241,26 +238,23 @@ R = function(name, skip_setup)
 end
 
 ------ Harpoon + terminal mappings ------
-m(
-  'n',
-  '<Leader>m',
-  function() -- pupulate Harpoon Commands based on the current buffer and run the first command in 1st terminal
-    if vim.bo.filetype == 'python' then
-      vim.api.nvim_feedkeys(
-        ';lua require("harpoon.cmd-ui").toggle_quick_menu()\rdipap '
-          .. vim.fn.expand('%:h')
-          .. '/'
-          .. vim.fn.expand('%:t')
-          .. '\x1bq'
-          .. ';wa\r;lua require("harpoon.term").gotoTerminal(1)\r;lua require("harpoon.term").sendCommand(1, 1)\ra\r',
-        'm',
-        true
-      )
-    else
-      vim.api.nvim_feedkeys(';lua require("harpoon.cmd-ui").toggle_quick_menu()\rdapacargo run\x1bq', 'm', true)
-    end
+-- pupulate Harpoon Commands based on the current buffer and run the first command in 1st terminal
+m('n', '<Leader>m', function()
+  if vim.bo.filetype == 'python' then
+    vim.api.nvim_feedkeys(
+      ';lua require("harpoon.cmd-ui").toggle_quick_menu()\rdipap '
+        .. vim.fn.expand('%:h')
+        .. '/'
+        .. vim.fn.expand('%:t')
+        .. '\x1bq'
+        .. ';wa\r;lua require("harpoon.term").gotoTerminal(1)\r;lua require("harpoon.term").sendCommand(1, 1)\ra\r',
+      'm',
+      true
+    )
+  else
+    vim.api.nvim_feedkeys(';lua require("harpoon.cmd-ui").toggle_quick_menu()\rdapacargo run\x1bq', 'm', true)
   end
-)
+end)
 
 m('n', '<Leader>a', '<cmd>lua require("harpoon.mark").add_file()<CR>')
 m('n', 'ą', '<cmd>lua require("harpoon.ui").nav_file(1)<CR>')

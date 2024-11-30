@@ -1,0 +1,6 @@
+indent_type = "Spaces"
+indent_width = 2
+quote_style = "AutoPreferSingle" # AutoPreferDouble, AutoPreferSingle, ForceDouble, ForceSingle
+call_parentheses = "Input" # Always, NoSingleString, NoSingleTable, None, Input
+# no_call_parentheses = true
+# column_width = 120

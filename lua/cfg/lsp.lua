@@ -80,6 +80,7 @@ mason_lspconfig.setup_handlers {
 }
 
 -- should it be here?
+-- https://github.com/nix-community/kickstart-nix.nvim/blob/main/nvim/init.lua
 vim.diagnostic.config({
   virtual_text = false,
   float = {

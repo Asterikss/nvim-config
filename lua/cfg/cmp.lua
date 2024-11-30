@@ -1,34 +1,34 @@
-local cmp = require("cmp")
-local luasnip = require("luasnip")
-require("luasnip.loaders.from_vscode").lazy_load()
+local cmp = require('cmp')
+local luasnip = require('luasnip')
+require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
 local kind_icons = {
-  Text = "t",
-  Method = "m",
-  Function = "f",
-  Constructor = "constr",
-  Field = "",
-  Variable = "var",
-  Class = "cl",
-  Interface = "i",
-  Module = "mod",
-  Property = "ﰠ",
-  Unit = "",
-  Value = "",
-  Enum = "en",
-  Keyword = "",
-  Snippet = "",
-  Color = "",
-  File = "file",
-  Reference = "",
-  Folder = "fold",
-  EnumMember = "",
-  Constant = "",
-  Struct = "",
-  Event = "",
-  Operator = "",
-  TypeParameter = ""
+  Text = 't',
+  Method = 'm',
+  Function = 'f',
+  Constructor = 'constr',
+  Field = '',
+  Variable = 'var',
+  Class = 'cl',
+  Interface = 'i',
+  Module = 'mod',
+  Property = 'ﰠ',
+  Unit = '',
+  Value = '',
+  Enum = 'en',
+  Keyword = '',
+  Snippet = '',
+  Color = '',
+  File = 'file',
+  Reference = '',
+  Folder = 'fold',
+  EnumMember = '',
+  Constant = '',
+  Struct = '',
+  Event = '',
+  Operator = '',
+  TypeParameter = '',
 }
 
 cmp.setup {
@@ -44,7 +44,7 @@ cmp.setup {
   },
 
   view = {
-    entries = "custom" -- can be "custom", "wildmenu" or "native". selection_order = 'near_cursor'
+    entries = 'custom', -- can be "custom", "wildmenu" or "native". selection_order = 'near_cursor'
   },
 
   window = {
@@ -52,7 +52,7 @@ cmp.setup {
   },
 
   completion = {
-    completeopt = "menu,menuone,noinsert" -- noselect
+    completeopt = 'menu,menuone,noinsert', -- noselect
   },
 
   formatting = {
@@ -62,16 +62,16 @@ cmp.setup {
       vim_item.kind = string.format('%s', kind_icons[vim_item.kind])
       -- Source
       vim_item.menu = ({
-        buffer = "[buf]",
-        path = "[path]",
-        nvim_lsp = "[LSP]",
-        luasnip = "[lsnp]",
+        buffer = '[buf]',
+        path = '[path]',
+        nvim_lsp = '[LSP]',
+        luasnip = '[lsnp]',
         otter = '[🦦]',
         -- nvim_lua = "[Lua]",
         -- latex_symbols = "[LaTeX]",
       })[entry.source.name]
       return vim_item
-    end
+    end,
   },
 
   mapping = cmp.mapping.preset.insert {
@@ -81,7 +81,7 @@ cmp.setup {
     ['<C-u>'] = cmp.mapping.scroll_docs(-4),
     ['<C-Space>'] = cmp.mapping.complete {},
     ['<C-y>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Insert,   -- Replace
+      behavior = cmp.ConfirmBehavior.Insert, -- Replace
       select = true,
     },
     -- ['<C-e>'] = cmp.mapping.abort(), --cmp.mapping.close()
@@ -90,15 +90,12 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-    { name = 'buffer' },                         -- keyword_length = 3, max_item_count = 3 },
+    { name = 'buffer' }, -- keyword_length = 3, max_item_count = 3 },
     { name = 'path' },
     { name = 'treesitter', max_item_count = 3 }, -- keyword_length = 5 },
-    { name = 'otter' }
+    { name = 'otter' },
   },
 }
 
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-cmp.event:on(
-  'confirm_done',
-  cmp_autopairs.on_confirm_done()
-)
+cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
