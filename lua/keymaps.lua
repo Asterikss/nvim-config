@@ -9,7 +9,10 @@ m("v", "y", "myy`y") -- keeps the position of the cursor after v yank
 m({"n", "v"}, ";", ":")
 m("n", ":", ";")
 
-m({ "n", "x" }, "x", "\"_x") -- Prevent x from overwriting y's
+m({ "n", "x" }, "x", "\"_x") -- Prevent x from overwriting clippboard
+m("v", "<A-d>", "\"_d")
+m("n", "<A-d>", "\"_dd")
+m("n", "<A-D>", "\"_d")
 
 m("v", ">", ">gv")
 m("v", "<", "<gv")
@@ -34,15 +37,12 @@ m("n", "<Left>", "<c-w>>")
 m("n", "<Right>", "<c-w><")
 
 m("i", "<A-7>",  "<Esc>gT") -- Zellij for some reason eats Control PageUp (booo)
-m("i", "<A-8>",  "<Esc>gt") -- And Control End and Control Home are messing with browser pdf viewer
+m("i", "<A-8>",  "<Esc>gt")
 m("n", "<A-7>",  "gT")
 m("n", "<A-8>",  "gt")
 
 m("x", "J", ":m '>+1<CR>gv=gv")
 m("x", "K", ":m '<-2<CR>gv=gv")
-
-m({"n", "v"}, "<A-D>", "\"_d") -- delete without trashing the clippboard
-m("n", "<A-d>", "\"_dd") -- delete line without trashing the clippboard
 
 m("n", "<Leader>l", "<cmd>Lex 25<CR>")
 m("n", "<Leader><Leader>l", "<cmd>Tex<CR>")
@@ -76,7 +76,7 @@ m("n", "yy", "y$")
 
 m("n", "J", "mzJ`z")
 
-m("n", "<", "<<")
+m("n", "<", "<<") -- delay like there is multiple keymaps that start with "<" and does not even show up in Telescope keymaps
 m("n", ">", ">>")
 
 m("n", "p", "<cmd>pu<CR>V'[=") -- paste under / over and automatically allign using "=". Also see :h ]p and [P
@@ -104,6 +104,10 @@ m("i", "<A-=>", " == ")
 
 m("n", "-", "<CMD>Oil<CR>")
 -- m("n", "-", require('oil').toggle_float)
+
+m({"n", "i"}, "<C-e>", function ()
+    vim.cmd("wa")
+end)
 
 m("i", "<A-'>", function () -- this took me 3 hours
     -- vim.api.nvim_feedkeys('\x1blyla, \x12"\x12"' .. vim.api.nvim_replace_termcodes("<Left>", true, false, true), "m", true) -- \x16 for c-c; 12 for c-r
@@ -222,11 +226,6 @@ m("n", "<Leader>m", function() -- pupulate Harpoon Commands based on the current
 end)
 
 m("n", "<Leader>a", '<cmd>lua require("harpoon.mark").add_file()<CR>')
--- m("n", "<A-1>", '<cmd>lua require("harpoon.ui").nav_file(1)<CR>')
--- m("n", "<A-2>", '<cmd>lua require("harpoon.ui").nav_file(2)<CR>')
--- m("n", "<A-3>", '<cmd>lua require("harpoon.ui").nav_file(3)<CR>')
--- m("n", "<A-4>", '<cmd>lua require("harpoon.ui").nav_file(4)<CR>')
--- m("n", "<A-5>", '<cmd>lua require("harpoon.ui").nav_file(5)<CR>')
 m("n", "ą", '<cmd>lua require("harpoon.ui").nav_file(1)<CR>')
 m("n", "ś", '<cmd>lua require("harpoon.ui").nav_file(2)<CR>')
 m("n", "ę", '<cmd>lua require("harpoon.ui").nav_file(3)<CR>')
@@ -296,20 +295,12 @@ m("n", "<Leader><Leader>1", function() -- TODO that type of thing can be done wi
     end
 end)
 
--- leader leader number to execute command - tylko teminla 1 wtedy
--- albo leader leader c - input terminal (default 1), input command number (default 2)
-
 m("t", "<Esc>", "<C-\\><C-n>")
 m("t", "<C-u>", "<C-\\><C-N><C-u>")
 m("t", "<A-k>", "<C-\\><C-N>k")
 m("t", "<A-7>", "<C-\\><C-N>gT")
 m("t", "<A-8>", "<C-\\><C-N>gt")
 
--- m("t", "<A-1>", '<cmd>lua require("harpoon.ui").nav_file(1)<CR>')
--- m("t", "<A-2>", '<cmd>lua require("harpoon.ui").nav_file(2)<CR>')
--- m("t", "<A-3>", '<cmd>lua require("harpoon.ui").nav_file(3)<CR>')
--- m("t", "<A-4>", '<cmd>lua require("harpoon.ui").nav_file(4)<CR>')
--- m("t", "<A-5>", '<cmd>lua require("harpoon.ui").nav_file(5)<CR>')
 m("t", "ą", '<cmd>lua require("harpoon.ui").nav_file(1)<CR>')
 m("t", "ś", '<cmd>lua require("harpoon.ui").nav_file(2)<CR>')
 m("t", "ę", '<cmd>lua require("harpoon.ui").nav_file(3)<CR>')
@@ -335,7 +326,7 @@ m("t", "<A-j>", function()
     vim.api.nvim_input("a\r") -- vim.cmd("startinsert") and vim.api.nvim_command("startinsert") did not work properly
 end)
 
--- TODO change that
+-- TODO
 -- m("t", "<A-1>", function()
 --     vim.api.nvim_feedkeys("\x1b" ..
 --     vim.api.nvim_replace_termcodes("<c-^>", true, false, true) ..
@@ -349,11 +340,6 @@ m("n", "<Leader>f", function()
         previewer = false
     })
 end)
--- m({"n", "t"}, "ś", function()
---     require("telescope.builtin").find_files(require('telescope.themes').get_dropdown {
---         previewer = false
---     })
--- end)
 
 m("n", "<Leader>/", function()
     require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
@@ -371,11 +357,11 @@ m('n', '<leader>sn', function()
 end)
 
 
-m('n', '<A-ł>', function() -- used to be leader N
+m('n', '<Ł>', function()
     require("telescope.builtin").find_files({ cwd = '.dev/' })
 end)
-m('t', 'ł', "<CMD>e .dev/notes.txt<CR>") -- used to be leader n
-m('n', 'ł', function () -- m('t', 'ł', "<CMD>e .dev/notes.txt<CR>")
+m('t', 'ł', "<CMD>e .dev/notes.txt<CR>")
+m('n', 'ł', function ()
     if vim.fn.expand('%') ~= '.dev/notes.txt' then
         vim.cmd('e .dev/notes.txt')
     else
