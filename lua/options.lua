@@ -26,7 +26,13 @@ o.shortmess:append 'IW' -- disable nvim intro
 o.jumpoptions:append 'stack'
 o.inccommand = 'split'
 o.virtualedit = 'block'
+o.spelllang = { 'en', 'pl' }
+-- o.spell = true
+-- o.colorcolumn = '100'
+-- o.undofile = true
 -- o.concealcursor = "nc"
+-- o.textwidth = 80
+-- o.formatoptions:append('t')
 
 o.ruler = false
 o.cmdheight = 0
