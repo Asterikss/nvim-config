@@ -1,4 +1,7 @@
-local on_attach = function(_ --[[ _client ,]], bufnr)
+local on_attach = function(
+  _ --[[ _client ,]],
+  bufnr
+)
   local nmap = function(keys, func, desc)
     if desc then
       desc = 'LSP: ' .. desc
@@ -29,16 +32,15 @@ local on_attach = function(_ --[[ _client ,]], bufnr)
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
-
 end
 
 local servers = {
   lua_ls = {
-     Lua = {
+    Lua = {
       workspace = { checkThridParty = false },
       telemetry = { enable = false },
       diagnostics = {
-          globals = { "vim", "describe", "it" },
+        globals = { 'vim', 'describe', 'it' },
       },
     },
   },
@@ -56,7 +58,6 @@ local servers = {
   tsserver = {},
 }
 
-
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
@@ -65,7 +66,7 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 local mason_lspconfig = require('mason-lspconfig')
 
 mason_lspconfig.setup {
-    ensure_installed = vim.tbl_keys(servers),
+  ensure_installed = vim.tbl_keys(servers),
 }
 
 mason_lspconfig.setup_handlers {
@@ -79,15 +80,13 @@ mason_lspconfig.setup_handlers {
   end,
 }
 
--- should it be here?
--- https://github.com/nix-community/kickstart-nix.nvim/blob/main/nvim/init.lua
 vim.diagnostic.config({
   virtual_text = false,
   float = {
-    style = "minimal",
-    border = "rounded",
-    header = "",
-    prefix = "",
+    style = 'minimal',
+    border = 'rounded',
+    header = '',
+    prefix = '',
   },
 })
 

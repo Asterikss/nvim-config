@@ -99,3 +99,10 @@ cmp.setup {
 
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+
+cmp_autopairs.get_rules('"')[1].not_filetypes = { 'typescript', 'lua' }
+cmp_autopairs.get_rules("'")[1].not_filetypes = { 'typescript', 'lua' }
+-- require("nvim-autopairs").get_rules('"')[1].key_map = '"'
+-- require("nvim-autopairs").get_rules('"')[1].start_pair = "'"
+-- require("nvim-autopairs").get_rules('"')[1].end_pair = "'"
+-- lua print(vim.inspect(require('nvim-autopairs').get_rules('"')))
